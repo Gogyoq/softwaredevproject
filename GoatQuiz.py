@@ -7,6 +7,7 @@ import pygame
 
 pygame.init()
 import webbrowser
+from time import sleep
 
 #Window Size and colors are delcared here
 size = width, height = 1024, 768
@@ -72,12 +73,18 @@ while(mainMenu == True):
             pygame.quit()
     
     if startButton.draw() == False:
-        startButton = Button(384,570,startButtonImg)
         screen.blit(goatQuizTitle,(240, 64))
 
     else:
         print("Start")
-        startButton = Button(384,570,startButtonDownImg)
+        screen.fill(navy)
+        screen.blit(goatQuizTitle,(240, 64))
+        screen.blit(startButtonDownImg,(384,570))
+        pygame.display.flip()
+        sleep(.1)
+        screen.blit(startButtonImg,(384,570))
+        pygame.display.flip()
+        sleep(.1)
         startClicked = True
         goatQuizSlide = 240
         startButtonSlide = 384

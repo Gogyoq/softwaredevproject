@@ -10,7 +10,7 @@ import webbrowser
 
 #Window Size and colors are delcared here
 size = width, height = 1024, 768
-center = (512,384)
+center = (256,384)
 white = (255,255,255)
 gray = (211,211,211)
 darkGray = (105,105,105)
@@ -28,6 +28,8 @@ height = screen.get_height()
 #Sprites are loaded here
 startSprite = pygame.image.load(r'T:\BDH-ICS3C1-1\aida4421\Python\GoatTest\Sprites\StartButton.png')
 startSprite = pygame.transform.scale(startSprite, (512,512))
+goatQuizTitle = pygame.image.load(r'T:\BDH-ICS3C1-1\aida4421\Python\GoatTest\Sprites\GoatQuizTitle.png')
+goatQuizTitle = pygame.transform.scale(goatQuizTitle, (544, 512))
 
 
 
@@ -42,6 +44,7 @@ while(running == True):
             running = False
     
     screen.blit(startSprite,(center))
+    screen.blit(goatQuizTitle,(240, 64))
     
     pygame.display.update()
             

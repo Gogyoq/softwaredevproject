@@ -5,11 +5,13 @@
 
 import pygame
 
-pygame.init()
 import webbrowser
 from time import sleep
 
-#Window Size and colors are delcared here
+pygame.init()
+pygame.font.init()
+
+#Various Variables used for the pygame window are declared here
 size = width, height = 1024, 768
 center = (256,384)
 white = (255,255,255)
@@ -18,6 +20,8 @@ darkGray = (105,105,105)
 blue = (0,0,255)
 black = (0,0,0)
 navy = (21,76,121)
+defFont = pygame.font.Font(r'C:\Users\gamer\Desktop\Genie\Python Project\Fonts\munro.ttf', 60)
+defFontQuestion = pygame.font.Font(r'C:\Users\gamer\Desktop\Genie\Python Project\Fonts\munro.ttf', 100)
 
 #Pygame window is loaded hereS
 #Along with width height and mouse variables
@@ -28,12 +32,27 @@ height = screen.get_height()
 startClicked = False
 
 #Sprites are loaded here
+#main menu stuff is loaded here
 startButtonImg = pygame.image.load(r'C:\Users\gamer\Desktop\Genie\Python Project\Sprites\StartButton.png')
 startButtonImg = pygame.transform.scale(startButtonImg, (272,96))
 goatQuizTitle = pygame.image.load(r'C:\Users\gamer\Desktop\Genie\Python Project\Sprites\GoatQuizTitle.png')
 goatQuizTitle = pygame.transform.scale(goatQuizTitle, (544, 512))
 startButtonDownImg = pygame.image.load(r'C:\Users\gamer\Desktop\Genie\Python Project\Sprites\StartButtonDown.png')
 startButtonDownImg = pygame.transform.scale(startButtonDownImg, (272,96))
+#quiz buttons are loaded here
+button1 = pygame.image.load(r'C:\Users\gamer\Desktop\Genie\Python Project\Sprites\Button1.png')
+button1 = pygame.transform.scale(button1,(80,80))
+button2 = pygame.image.load(r'C:\Users\gamer\Desktop\Genie\Python Project\Sprites\Button2.png')
+button2 = pygame.transform.scale(button2,(80,80))
+button3 = pygame.image.load(r'C:\Users\gamer\Desktop\Genie\Python Project\Sprites\Button3.png')
+button3 = pygame.transform.scale(button3,(80,80))
+button4 = pygame.image.load(r'C:\Users\gamer\Desktop\Genie\Python Project\Sprites\Button4.png')
+button4 = pygame.transform.scale(button4,(80,80))
+button5 = pygame.image.load(r'C:\Users\gamer\Desktop\Genie\Python Project\Sprites\Button5.png')
+button5 = pygame.transform.scale(button5,(80,80))
+button6 = pygame.image.load(r'C:\Users\gamer\Desktop\Genie\Python Project\Sprites\Button6.png')
+button6 = pygame.transform.scale(button6,(80,80))
+
 #button class
 class Button():
     def __init__(self, x, y, image):
@@ -112,6 +131,7 @@ while(mainMenu == True):
     clock.tick(60)
     pygame.display.flip()
 
+text = defFontQuestion.render("How Much Ram?", False, black)
 running = True
 while running == True:
     
@@ -120,6 +140,14 @@ while running == True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:  
             running = False
+            
+    screen.blit(text,(100, 20))
+    screen.blit(button1,(100,150))
+    screen.blit(button2,(100,250))
+    screen.blit(button3,(100,350))
+    screen.blit(button4,(100,450))
+    screen.blit(button5,(100,560))
+    screen.blit(button6,(100,650))
             
     clock.tick(60)
     pygame.display.flip()

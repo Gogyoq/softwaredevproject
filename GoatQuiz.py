@@ -21,7 +21,7 @@ blue = (0,0,255)
 black = (0,0,0)
 navy = (21,76,121)
 defFont = pygame.font.Font(r'C:\Users\gamer\Desktop\Genie\Python Project\Fonts\munro.ttf', 60)
-defFontQuestion = pygame.font.Font(r'C:\Users\gamer\Desktop\Genie\Python Project\Fonts\munro.ttf', 100)
+defFontQuestion = pygame.font.Font(r'C:\Users\gamer\Desktop\Genie\Python Project\Fonts\munro.ttf', 60)
 
 #Pygame window is loaded hereS
 #Along with width height and mouse variables
@@ -52,6 +52,19 @@ button5 = pygame.image.load(r'C:\Users\gamer\Desktop\Genie\Python Project\Sprite
 button5 = pygame.transform.scale(button5,(80,80))
 button6 = pygame.image.load(r'C:\Users\gamer\Desktop\Genie\Python Project\Sprites\Button6.png')
 button6 = pygame.transform.scale(button6,(80,80))
+#Pressed down version of each button
+button1Down = pygame.image.load(r'C:\Users\gamer\Desktop\Genie\Python Project\Sprites\Button1Down.png')
+button1Down = pygame.transform.scale(button1Down,(80,80))
+button2Down = pygame.image.load(r'C:\Users\gamer\Desktop\Genie\Python Project\Sprites\Button2Down.png')
+button2Down = pygame.transform.scale(button2Down,(80,80))
+button3Down = pygame.image.load(r'C:\Users\gamer\Desktop\Genie\Python Project\Sprites\Button3Down.png')
+button3Down = pygame.transform.scale(button3Down,(80,80))
+button4Down = pygame.image.load(r'C:\Users\gamer\Desktop\Genie\Python Project\Sprites\Button4Down.png')
+button4Down = pygame.transform.scale(button4Down,(80,80))
+button5Down = pygame.image.load(r'C:\Users\gamer\Desktop\Genie\Python Project\Sprites\Button5Down.png')
+button5Down = pygame.transform.scale(button5Down,(80,80))
+button6Down = pygame.image.load(r'C:\Users\gamer\Desktop\Genie\Python Project\Sprites\Button6Down.png')
+button6Down= pygame.transform.scale(button6Down,(80,80))
 
 #button class
 class Button():
@@ -131,7 +144,7 @@ while(mainMenu == True):
     clock.tick(60)
     pygame.display.flip()
 
-text = defFontQuestion.render("How Much Ram?", False, black)
+text = defFontQuestion.render("Describe your personality with a food", False, white)
 running = True
 while running == True:
     
@@ -140,14 +153,14 @@ while running == True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:  
             running = False
-            
-    screen.blit(text,(100, 20))
-    screen.blit(button1,(100,150))
-    screen.blit(button2,(100,250))
-    screen.blit(button3,(100,350))
-    screen.blit(button4,(100,450))
-    screen.blit(button5,(100,560))
-    screen.blit(button6,(100,650))
+    
+    screen.blit(text,(50, 50))
+    screen.blit(button1,(50,200))
+    screen.blit(button2,(50,290))
+    screen.blit(button3,(50,380))
+    screen.blit(button4,(50,470))
+    screen.blit(button5,(50,560))
+    screen.blit(button6,(50,650))
             
     clock.tick(60)
     pygame.display.flip()

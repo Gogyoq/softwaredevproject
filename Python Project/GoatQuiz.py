@@ -22,8 +22,8 @@ darkGray = (105,105,105)
 blue = (0,0,255)
 black = (0,0,0)
 navy = (21,76,121)
-defFont = pygame.font.Font(r'C:\Users\gamer\Desktop\Genie\Python Project\Fonts\munro.ttf', 60)
-defFontQuestion = pygame.font.Font(r'C:\Users\gamer\Desktop\Genie\Python Project\Fonts\munro.ttf', 60)
+defFont = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
+defFontQuestion = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
 
 #Pygame window is loaded hereS
 #Along with width height and mouse variables

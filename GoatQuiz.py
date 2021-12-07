@@ -1,4 +1,4 @@
-#Author: Aidan Kooiman
+#Author: Aidan Kooiman, Izaan sd, Robert Connors
 #Date: 11/26/2021
 #FileName: GoatQuiz
 #Description: A personality quiz that assigns you one of twelve goats at the end

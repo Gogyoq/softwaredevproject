@@ -31,7 +31,8 @@ screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Goat Quiz")
 width = screen.get_width()
 height = screen.get_height()
-startClicked = False
+buttonClicked = False
+#startClicked = False - deprecated
 
 #Getting current directory
 cwd = os.getcwd()
@@ -99,6 +100,7 @@ class Button():
 startButton = Button(384,570,startButtonImg)
 
 clock = pygame.time.Clock()
+
 #Start of game loop
 mainMenu = True
 while(mainMenu == True):
@@ -122,7 +124,7 @@ while(mainMenu == True):
         screen.blit(startButtonImg,(384,570))
         pygame.display.flip()
         sleep(.1)
-        startClicked = True
+        buttonClicked = "Start"
         goatQuizSlide = 240
         startButtonSlide = 384
         while True:
@@ -150,6 +152,8 @@ while(mainMenu == True):
     pygame.display.flip()
 
 text = defFontQuestion.render("Describe your personality with a food", False, white)
+
+
 running = True
 while running == True:
     

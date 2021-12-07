@@ -1,7 +1,7 @@
-#Author: Aidan Kooiman, Izaan sd, Robert Connors
+#Author: Aidan Kooiman, Izaan Syed, Robert Connors, EJM2510 (add him on xbox)
 #Date: 11/26/2021
 #FileName: GoatQuiz
-#Description: A personality quiz that assigns you one of twelve goats at the end
+#Description: A personality quiz that assigns you as one of twelve goats at the end
 
 import pygame
 
@@ -25,7 +25,7 @@ navy = (21,76,121)
 defFont = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
 defFontQuestion = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
 
-#Pygame window is loaded hereS
+#Pygame window is loaded here
 #Along with width height and mouse variables
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Goat Quiz")
@@ -74,23 +74,26 @@ button6Down= pygame.transform.scale(button6Down,(80,80))
 
 #button class
 class Button():
+
     def __init__(self, x, y, image):
         self.image = image
         self.rect = self.image.get_rect()
         self.rect.topleft = (x , y)
-        self.clicked = False
+        global buttonClicked
+        buttonClicked = False
     
     def draw(self):
+        global buttonClicked
         action = False
         #get mouse position
         pos = pygame.mouse.get_pos()
         #check if mouse is on button
         if self.rect.collidepoint(pos):
-            if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
-                self.clicked = True
+            if pygame.mouse.get_pressed()[0] == 1 and buttonClicked == False:
+                buttonClicked = self
                 action = True
             if pygame.mouse.get_pressed()[0] == 0:
-                self.clicked = False
+                buttonClicked = False
         #draw button on screen
         screen.blit(self.image, (self.rect.x, self.rect.y))
         
@@ -115,7 +118,7 @@ while(mainMenu == True):
         screen.blit(goatQuizTitle,(240, 64))
 
     else:
-        print("Start")
+        print("Starting Quiz...")
         screen.fill(navy)
         screen.blit(goatQuizTitle,(240, 64))
         screen.blit(startButtonDownImg,(384,570))

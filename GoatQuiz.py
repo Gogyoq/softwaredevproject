@@ -1,7 +1,7 @@
-#Author: Aidan Kooiman
-#Date: 11/26/2021
-#FileName: GoatQuiz
-#Description: A personality quiz that assigns you one of twelve goats at the end
+# Author: Aidan Kooiman, Izaan Syed, Robert Connors, Evan Miller
+# Date: 11/26/2021
+# FileName: GoatQuiz
+# Description: A personality quiz that assigns you one of twelve goats at the end
 
 import pygame
 
@@ -13,7 +13,7 @@ from time import sleep
 pygame.init()
 pygame.font.init()
 
-#Various Variables used for the pygame window are declared here
+# Various variables used for the pygame window are declared here
 size = width, height = 1024, 768
 center = (256,384)
 white = (255,255,255)
@@ -22,29 +22,36 @@ darkGray = (105,105,105)
 blue = (0,0,255)
 black = (0,0,0)
 navy = (21,76,121)
-defFont = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
-defFontQuestion = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
 
-#Pygame window is loaded hereS
-#Along with width height and mouse variables
+# Pygame window loaded
+# Along with width height and mouse variables
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Goat Quiz")
 width = screen.get_width()
 height = screen.get_height()
 startClicked = False
 
-#Getting current directory
+# Getting current directory
 cwd = os.getcwd()
 print(cwd)
-#Sprites are loaded here
-#main menu stuff is loaded here
+
+# Main menu assets loading
+buttonClickSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\click.mp3"))
+
+
+
+defFont = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
+defFontQuestion = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
+
 startButtonImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\StartButton.png"), "r")
 startButtonImg = pygame.transform.scale(startButtonImg, (272,96))
+
 goatQuizTitle = pygame.image.load(os.path.join(sys.path[0], r"Sprites\GoatQuizTitle.png"), "r")
 goatQuizTitle = pygame.transform.scale(goatQuizTitle, (544, 512))
 startButtonDownImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\StartButtonDown.png"), "r")
 startButtonDownImg = pygame.transform.scale(startButtonDownImg, (272,96))
-#quiz buttons are loaded here
+
+# Quiz buttons initialization
 button1 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button1.png"), "r")
 button1 = pygame.transform.scale(button1,(80,80))
 button2 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button2.png"), "r")
@@ -57,7 +64,8 @@ button5 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button5.png"), "
 button5 = pygame.transform.scale(button5,(80,80))
 button6 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button6.png"), "r")
 button6 = pygame.transform.scale(button6,(80,80))
-#Pressed down version of each button
+
+# Pressed down version of each button
 button1Down = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button1Down.png"), "r")
 button1Down = pygame.transform.scale(button1Down,(80,80))
 button2Down = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button2Down.png"), "r")
@@ -71,7 +79,7 @@ button5Down = pygame.transform.scale(button5Down,(80,80))
 button6Down = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button6Down.png"), "r")
 button6Down= pygame.transform.scale(button6Down,(80,80))
 
-#button class
+# Button Class
 class Button():
     def __init__(self, x, y, image):
         self.image = image
@@ -96,7 +104,7 @@ class Button():
         
         return action
 
-#creating button instances
+# Creating button instances
 startButton = Button(384,570,startButtonImg)
 ansbutton1 = Button(50,200,button1)
 ansbutton2 = Button(50,290,button2)
@@ -105,7 +113,7 @@ ansbutton4 = Button(50,470,button4)
 ansbutton5 = Button(50,560,button5)
 ansbutton6 = Button(50,650,button6)
 
-#Question Class
+# Question class
 class Questions():
     def question1(text, ans1, goat1, ans2, goat2, ans3, goat3, ans4, goat4, ans5, goat5, ans6, goat6):
         #Rendering text
@@ -335,7 +343,8 @@ class Questions():
                 boxerGoat = boxerGoat + 1
 
 clock = pygame.time.Clock()
-#Start of game loop
+
+# <-- Start of game loop --> 
 mainMenu = True
 while(mainMenu == True):
     
@@ -349,7 +358,8 @@ while(mainMenu == True):
         screen.blit(goatQuizTitle,(240, 64))
 
     else:
-        print("Start")
+        print("Starting Quiz")
+        pygame.mixer.Sound.play(buttonClickSound)
         screen.fill(navy)
         screen.blit(goatQuizTitle,(240, 64))
         screen.blit(startButtonDownImg,(384,570))
@@ -398,4 +408,5 @@ while running == True:
     clock.tick(60)
     pygame.display.flip()
 
+print("Quiz Finished")
 pygame.quit()

@@ -114,9 +114,10 @@ ansbutton4 = Button(50,470,button4)
 ansbutton5 = Button(50,560,button5)
 ansbutton6 = Button(50,650,button6)
 
+    
 # Question class
 class Questions():
-    def question1(text, ans1, goat1, ans2, goat2, ans3, goat3, ans4, goat4, ans5, goat5, ans6, goat6):
+    def question(text, ans1, goat1, ans2, goat2, ans3, goat3, ans4, goat4, ans5, goat5, ans6, goat6):
         #Rendering text
         questionText = defFont.render(text, True, white)
         ans1Text = defFont.render(ans1, True, white)
@@ -134,7 +135,20 @@ class Questions():
         screen.blit(ans5Text,(140,560))
         screen.blit(ans6Text,(140,650))
         
-        #Turning goats into integers
+        #Goat integers
+        global happyGoat
+        global sadGoat
+        global tropicalGoat
+        global anxiousGoat
+        global gamerGoat
+        global angryGoat
+        global healthyGoat
+        global spiderGoat
+        global nomadGoat
+        global armyGoat
+        global musicalGoat
+        global boxerGoat
+        
         happyGoat = 0
         sadGoat = 0
         tropicalGoat = 0
@@ -147,7 +161,7 @@ class Questions():
         armyGoat = 0
         musicalGoat = 0
         boxerGoat = 0
-
+        
         #Drawing buttons
         if ansbutton1.draw() == True:
             print("Button1")
@@ -163,29 +177,40 @@ class Questions():
             sleep(.1)
             #Goat tally
             if goat1 == "HappyGoat":
-                happyGoat = happyGoat + 1
+                return "HappyGoat"
             elif goat1 == "SadGoat":
                 sadGoat = sadGoat + 1
+                return sadGoat
             elif goat1 == "TropicalGoat":
                 tropicalGoat = tropicalGoat + 1
+                return tropicalGoat
             elif goat1 == "AnxiousGoat":
                 anxiousGoat = anxiousGoat + 1
+                return anxiousGoat
             elif goat1 == "GamerGoat":
                 gamerGoat = gamerGoat + 1
+                return gamerGoat
             elif goat1 == "AngryGoat":
                 angryGoat = angryGoat + 1
+                return armyGoat
             elif goat1 == "HealthyGoat":
                 healthyGoat = healthyGoat + 1
+                return healthyGoat
             elif goat1 == "SpiderGoat":
                 spiderGoat = spiderGoat + 1
+                return spiderGoat
             elif goat1 == "NomadGoat":
                 nomadGoat = nomadGoat + 1
+                return nomadGoat
             elif goat1 == "ArmyGoat":
                 armyGoat = armyGoat + 1
+                return armyGoat
             elif goat1 == "MusicalGoat":
                 musicalGoat = musicalGoat + 1
+                return musicalGoat
             elif goat1 == "BoxerGoat":
                 boxerGoat = boxerGoat + 1
+                return boxerGoat
                 
         if ansbutton2.draw() == True:
             print("Button2")
@@ -202,28 +227,40 @@ class Questions():
             #Goat tally
             if goat2 == "HappyGoat":
                 happyGoat = happyGoat + 1
+                return happyGoat
             elif goat2 == "SadGoat":
                 sadGoat = sadGoat + 1
+                return sadGoat
             elif goat2 == "TropicalGoat":
                 tropicalGoat = tropicalGoat + 1
+                return tropicalGoat
             elif goat2 == "AnxiousGoat":
                 anxiousGoat = anxiousGoat + 1
+                return anxiousGoat
             elif goat2 == "GamerGoat":
                 gamerGoat = gamerGoat + 1
+                return gamerGoat
             elif goat2 == "AngryGoat":
                 angryGoat = angryGoat + 1
+                return armyGoat
             elif goat2 == "HealthyGoat":
                 healthyGoat = healthyGoat + 1
+                return healthyGoat
             elif goat2 == "SpiderGoat":
                 spiderGoat = spiderGoat + 1
+                return spiderGoat
             elif goat2 == "NomadGoat":
                 nomadGoat = nomadGoat + 1
+                return nomadGoat
             elif goat2 == "ArmyGoat":
                 armyGoat = armyGoat + 1
+                return armyGoat
             elif goat2 == "MusicalGoat":
                 musicalGoat = musicalGoat + 1
+                return musicalGoat
             elif goat2 == "BoxerGoat":
                 boxerGoat = boxerGoat + 1
+                return boxerGoat
         if ansbutton3.draw() == True:
             print("Button3")
             #button goes down when pressed
@@ -239,28 +276,40 @@ class Questions():
             #Goat tally
             if goat3 == "HappyGoat":
                 happyGoat = happyGoat + 1
+                return happyGoat
             elif goat3 == "SadGoat":
                 sadGoat = sadGoat + 1
+                return sadGoat
             elif goat3 == "TropicalGoat":
                 tropicalGoat = tropicalGoat + 1
+                return tropicalGoat
             elif goat3 == "AnxiousGoat":
                 anxiousGoat = anxiousGoat + 1
+                return anxiousGoat
             elif goat3 == "GamerGoat":
                 gamerGoat = gamerGoat + 1
+                return gamerGoat
             elif goat3 == "AngryGoat":
                 angryGoat = angryGoat + 1
+                return armyGoat
             elif goat3 == "HealthyGoat":
                 healthyGoat = healthyGoat + 1
+                return healthyGoat
             elif goat3 == "SpiderGoat":
                 spiderGoat = spiderGoat + 1
+                return spiderGoat
             elif goat3 == "NomadGoat":
                 nomadGoat = nomadGoat + 1
+                return nomadGoat
             elif goat3 == "ArmyGoat":
                 armyGoat = armyGoat + 1
+                return armyGoat
             elif goat3 == "MusicalGoat":
                 musicalGoat = musicalGoat + 1
+                return musicalGoat
             elif goat3 == "BoxerGoat":
                 boxerGoat = boxerGoat + 1
+                return boxerGoat
         if ansbutton4.draw() == True:
             print("Button4")
             #button goes down when pressed
@@ -276,28 +325,40 @@ class Questions():
             #Goat tally
             if goat4 == "HappyGoat":
                 happyGoat = happyGoat + 1
+                return happyGoat
             elif goat4 == "SadGoat":
                 sadGoat = sadGoat + 1
+                return sadGoat
             elif goat4 == "TropicalGoat":
                 tropicalGoat = tropicalGoat + 1
+                return tropicalGoat
             elif goat4 == "AnxiousGoat":
                 anxiousGoat = anxiousGoat + 1
+                return anxiousGoat
             elif goat4 == "GamerGoat":
                 gamerGoat = gamerGoat + 1
+                return gamerGoat
             elif goat4 == "AngryGoat":
                 angryGoat = angryGoat + 1
+                return armyGoat
             elif goat4 == "HealthyGoat":
                 healthyGoat = healthyGoat + 1
+                return healthyGoat
             elif goat4 == "SpiderGoat":
                 spiderGoat = spiderGoat + 1
+                return spiderGoat
             elif goat4 == "NomadGoat":
                 nomadGoat = nomadGoat + 1
+                return nomadGoat
             elif goat4 == "ArmyGoat":
                 armyGoat = armyGoat + 1
+                return armyGoat
             elif goat4 == "MusicalGoat":
                 musicalGoat = musicalGoat + 1
+                return musicalGoat
             elif goat4 == "BoxerGoat":
                 boxerGoat = boxerGoat + 1
+                return boxerGoat
         if ansbutton5.draw() == True:
             print("Button5")
             #button goes down when pressed
@@ -313,28 +374,40 @@ class Questions():
             #Goat tally
             if goat5 == "HappyGoat":
                 happyGoat = happyGoat + 1
+                return happyGoat
             elif goat5 == "SadGoat":
                 sadGoat = sadGoat + 1
+                return sadGoat
             elif goat5 == "TropicalGoat":
                 tropicalGoat = tropicalGoat + 1
+                return tropicalGoat
             elif goat5 == "AnxiousGoat":
                 anxiousGoat = anxiousGoat + 1
+                return anxiousGoat
             elif goat5 == "GamerGoat":
                 gamerGoat = gamerGoat + 1
+                return gamerGoat
             elif goat5 == "AngryGoat":
                 angryGoat = angryGoat + 1
+                return armyGoat
             elif goat5 == "HealthyGoat":
                 healthyGoat = healthyGoat + 1
+                return healthyGoat
             elif goat5 == "SpiderGoat":
                 spiderGoat = spiderGoat + 1
+                return spiderGoat
             elif goat5 == "NomadGoat":
                 nomadGoat = nomadGoat + 1
+                return nomadGoat
             elif goat5 == "ArmyGoat":
                 armyGoat = armyGoat + 1
+                return armyGoat
             elif goat5 == "MusicalGoat":
                 musicalGoat = musicalGoat + 1
+                return musicalGoat
             elif goat5 == "BoxerGoat":
                 boxerGoat = boxerGoat + 1
+                return boxerGoat
         if ansbutton6.draw() == True:
             print("Button6")
             #button goes down when pressed
@@ -350,29 +423,42 @@ class Questions():
             #Goat tally
             if goat6 == "HappyGoat":
                 happyGoat = happyGoat + 1
+                return happyGoat
             elif goat6 == "SadGoat":
                 sadGoat = sadGoat + 1
+                return sadGoat
             elif goat6 == "TropicalGoat":
                 tropicalGoat = tropicalGoat + 1
+                return tropicalGoat
             elif goat6 == "AnxiousGoat":
                 anxiousGoat = anxiousGoat + 1
+                return anxiousGoat
             elif goat6 == "GamerGoat":
                 gamerGoat = gamerGoat + 1
+                return gamerGoat
             elif goat6 == "AngryGoat":
                 angryGoat = angryGoat + 1
+                return armyGoat
             elif goat6 == "HealthyGoat":
                 healthyGoat = healthyGoat + 1
+                return healthyGoat
             elif goat6 == "SpiderGoat":
                 spiderGoat = spiderGoat + 1
+                return spiderGoat
             elif goat6 == "NomadGoat":
                 nomadGoat = nomadGoat + 1
+                return nomadGoat
             elif goat6 == "ArmyGoat":
                 armyGoat = armyGoat + 1
+                return armyGoat
             elif goat6 == "MusicalGoat":
                 musicalGoat = musicalGoat + 1
+                return musicalGoat
             elif goat6 == "BoxerGoat":
                 boxerGoat = boxerGoat + 1
-
+                return boxerGoat
+            
+            
 clock = pygame.time.Clock()
 
 # <-- Start of game loop --> 
@@ -435,8 +521,11 @@ while running == True:
         if event.type == pygame.QUIT:  
             running = False
     
-    Questions.question1("Describe your personality with a food", "Steak", "BoxerGoat", "Lucky Charms", "HappyGoat", "Pineapple", "TropicalGoat", "Coffee", "AnxiousGoat", "Hot Dogs", "SpiderGoat", "McDonalds", "ArmyGoat")
+    goatResponse = Questions.question("Describe your personality with a food", "Steak", "BoxerGoat", "Lucky Charms", "HappyGoat", "Pineapple", "TropicalGoat", "Coffee", "AnxiousGoat", "Hot Dogs", "SpiderGoat", "McDonalds", "ArmyGoat")
     
+    print(goatResponse)
+    
+    Questions.question("Favourite type of drink", "G-Fuel", "GamerGoat", "Pop", "HappyGoat", "Water", "HealthyGoat", "Tea", "AnxiousGoat", "Energy Drink", "BoxerGoat", "Milk", "ArmyGoat")
     clock.tick(60)
     pygame.display.flip()
 

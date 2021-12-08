@@ -44,7 +44,14 @@ goatQuizTitle = pygame.image.load(os.path.join(sys.path[0], r"Sprites\GoatQuizTi
 goatQuizTitle = pygame.transform.scale(goatQuizTitle, (544, 512))
 startButtonDownImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\StartButtonDown.png"), "r")
 startButtonDownImg = pygame.transform.scale(startButtonDownImg, (272,96))
-#quiz buttons are loaded here
+
+# quiz buttons are loaded here
+
+# def buttoninit(button,directory,scale):
+#     button = pygame.image.load(os.path.join(sys.path[0], directory), "r")
+#     button = pygame.transform.scale(button,(scale,scale))
+# buttoninit("button1",r"Sprites\Button1.png",80)
+
 button1 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button1.png"), "r")
 button1 = pygame.transform.scale(button1,(80,80))
 button2 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button2.png"), "r")
@@ -57,6 +64,7 @@ button5 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button5.png"), "
 button5 = pygame.transform.scale(button5,(80,80))
 button6 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button6.png"), "r")
 button6 = pygame.transform.scale(button6,(80,80))
+
 #Pressed down version of each button
 button1Down = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button1Down.png"), "r")
 button1Down = pygame.transform.scale(button1Down,(80,80))

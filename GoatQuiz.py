@@ -1,7 +1,7 @@
-#Author: Aidan Kooiman, Izaan Syed, Robert Connors, EJM2510 (add him on xbox)
+#Author: Aidan Kooiman
 #Date: 11/26/2021
 #FileName: GoatQuiz
-#Description: A personality quiz that assigns you as one of twelve goats at the end
+#Description: A personality quiz that assigns you one of twelve goats at the end
 
 import pygame
 
@@ -25,14 +25,13 @@ navy = (21,76,121)
 defFont = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
 defFontQuestion = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
 
-#Pygame window is loaded here
+#Pygame window is loaded hereS
 #Along with width height and mouse variables
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Goat Quiz")
 width = screen.get_width()
 height = screen.get_height()
-buttonClicked = False
-#startClicked = False - deprecated
+startClicked = False
 
 #Getting current directory
 cwd = os.getcwd()
@@ -74,26 +73,23 @@ button6Down= pygame.transform.scale(button6Down,(80,80))
 
 #button class
 class Button():
-
     def __init__(self, x, y, image):
         self.image = image
         self.rect = self.image.get_rect()
         self.rect.topleft = (x , y)
-        global buttonClicked
-        buttonClicked = False
+        self.clicked = False
     
     def draw(self):
-        global buttonClicked
         action = False
         #get mouse position
         pos = pygame.mouse.get_pos()
         #check if mouse is on button
         if self.rect.collidepoint(pos):
-            if pygame.mouse.get_pressed()[0] == 1 and buttonClicked == False:
-                buttonClicked = self
+            if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
+                self.clicked = True
                 action = True
             if pygame.mouse.get_pressed()[0] == 0:
-                buttonClicked = False
+                self.clicked = False
         #draw button on screen
         screen.blit(self.image, (self.rect.x, self.rect.y))
         
@@ -102,8 +98,28 @@ class Button():
 #creating button instances
 startButton = Button(384,570,startButtonImg)
 
-clock = pygame.time.Clock()
+#Question Class
+class Questions():
+    def question1(self, text, ans1, goat1, ans2, goat2, ans3, goat3, ans4, goat4, ans5, goat5, ans6, goat6):
+        #Loading question text onto screen
+        self.text = text
+        screen.blit(text,(50, 50))
+        
+        #loading buttons onto screen
+        screen.blit(button2,(50,290))
+        screen.blit(button3,(50,380))
+        screen.blit(button4,(50,470))
+        screen.blit(button5,(50,560))
+        screen.blit(button6,(50,650))
+        #Creating answer button instances
+        ansbutton1 = Button(50,200,button1)
+        ansbutton2 = Button(50,290,button2)
+        ansbutton3 = Button(50,380,button3)
+        ansbutton4 = Button(50,470,button4)
+        ansbutton5 = Button(50,560,button5)
+        ansbutton6 = Button(50,650,button6)
 
+clock = pygame.time.Clock()
 #Start of game loop
 mainMenu = True
 while(mainMenu == True):
@@ -118,7 +134,7 @@ while(mainMenu == True):
         screen.blit(goatQuizTitle,(240, 64))
 
     else:
-        print("Starting Quiz...")
+        print("Start")
         screen.fill(navy)
         screen.blit(goatQuizTitle,(240, 64))
         screen.blit(startButtonDownImg,(384,570))
@@ -127,7 +143,6 @@ while(mainMenu == True):
         screen.blit(startButtonImg,(384,570))
         pygame.display.flip()
         sleep(.1)
-        buttonClicked = "Start"
         goatQuizSlide = 240
         startButtonSlide = 384
         while True:
@@ -154,9 +169,7 @@ while(mainMenu == True):
     clock.tick(60)
     pygame.display.flip()
 
-text = defFontQuestion.render("Describe your personality with a food", False, white)
-
-
+textone = defFontQuestion.render("Describe your personality with a food", False, white)
 running = True
 while running == True:
     
@@ -166,13 +179,6 @@ while running == True:
         if event.type == pygame.QUIT:  
             running = False
     
-    screen.blit(text,(50, 50))
-    screen.blit(button1,(50,200))
-    screen.blit(button2,(50,290))
-    screen.blit(button3,(50,380))
-    screen.blit(button4,(50,470))
-    screen.blit(button5,(50,560))
-    screen.blit(button6,(50,650))
             
     clock.tick(60)
     pygame.display.flip()

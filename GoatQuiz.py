@@ -100,9 +100,8 @@ startButton = Button(384,570,startButtonImg)
 
 #Question Class
 class Questions():
-    def question1(self, text, ans1, goat1, ans2, goat2, ans3, goat3, ans4, goat4, ans5, goat5, ans6, goat6):
+    def question1(text, ans1, goat1, ans2, goat2, ans3, goat3, ans4, goat4, ans5, goat5, ans6, goat6):
         #Rendering text
-        self.text = text
         questionText = defFont.render(text, True, white)
         ans1Text = defFont.render(ans1, True, white)
         ans2Text = defFont.render(ans2, True, white)
@@ -149,6 +148,12 @@ class Questions():
         #Drawing buttons
         if ansbutton1.draw() == True:
             print("Button1")
+            #button goes down when pressed
+            pygame.draw.rect(screen,navy,pygame.Rect(50,200,80,80))
+            screen.blit(button1Down,(50,200))
+            pygame.display.flip()
+            sleep(.1)
+            #Goat tally
             if goat1 == "HappyGoat":
                 happyGoat = happyGoat + 1
             elif goat1 == "SadGoat":
@@ -173,8 +178,15 @@ class Questions():
                 musicalGoat = musicalGoat + 1
             elif goat1 == "BoxerGoat":
                 boxerGoat = boxerGoat + 1
+                
         if ansbutton2.draw() == True:
             print("Button2")
+            #button goes down when pressed
+            pygame.draw.rect(screen,navy,pygame.Rect(50,200,80,80))
+            screen.blit(button2Down,(50,200))
+            pygame.display.flip()
+            sleep(.1)
+            #Goat tally
             if goat2 == "HappyGoat":
                 happyGoat = happyGoat + 1
             elif goat2 == "SadGoat":
@@ -201,6 +213,12 @@ class Questions():
                 boxerGoat = boxerGoat + 1
         if ansbutton3.draw() == True:
             print("Button3")
+            #button goes down when pressed
+            pygame.draw.rect(screen,navy,pygame.Rect(50,200,80,80))
+            screen.blit(button3Down,(50,200))
+            pygame.display.flip()
+            sleep(.1)
+            #Goat tally
             if goat3 == "HappyGoat":
                 happyGoat = happyGoat + 1
             elif goat3 == "SadGoat":
@@ -227,6 +245,12 @@ class Questions():
                 boxerGoat = boxerGoat + 1
         if ansbutton4.draw() == True:
             print("Button4")
+            #button goes down when pressed
+            pygame.draw.rect(screen,navy,pygame.Rect(50,200,80,80))
+            screen.blit(button4Down,(50,200))
+            pygame.display.flip()
+            sleep(.1)
+            #Goat tally
             if goat4 == "HappyGoat":
                 happyGoat = happyGoat + 1
             elif goat4 == "SadGoat":
@@ -253,6 +277,12 @@ class Questions():
                 boxerGoat = boxerGoat + 1
         if ansbutton5.draw() == True:
             print("Button5")
+            #button goes down when pressed
+            pygame.draw.rect(screen,navy,pygame.Rect(50,200,80,80))
+            screen.blit(button5Down,(50,200))
+            pygame.display.flip()
+            sleep(.1)
+            #Goat tally
             if goat5 == "HappyGoat":
                 happyGoat = happyGoat + 1
             elif goat5 == "SadGoat":
@@ -279,6 +309,12 @@ class Questions():
                 boxerGoat = boxerGoat + 1
         if ansbutton6.draw() == True:
             print("Button6")
+            #button goes down when pressed
+            pygame.draw.rect(screen,navy,pygame.Rect(50,200,80,80))
+            screen.blit(button6Down,(50,200))
+            pygame.display.flip()
+            sleep(.1)
+            #Goat tally
             if goat6 == "HappyGoat":
                 happyGoat = happyGoat + 1
             elif goat6 == "SadGoat":
@@ -363,7 +399,7 @@ while running == True:
         if event.type == pygame.QUIT:  
             running = False
     
-    Questions.question1()
+    Questions.question1("Describe your personality with a food", "Steak", "BoxerGoat", "Lucky Charms", "HappyGoat", "Pineapple", "TropicalGoat", "Coffee", "AnxiousGoat", "Hot Dogs", "SpiderGoat", "McDonalds", "ArmyGoat")
     
     clock.tick(60)
     pygame.display.flip()

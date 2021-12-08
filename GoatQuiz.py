@@ -41,18 +41,13 @@ defFontQuestion = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf")
 
 startButtonImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\StartButton.png"), "r")
 startButtonImg = pygame.transform.scale(startButtonImg, (272,96))
+
 goatQuizTitle = pygame.image.load(os.path.join(sys.path[0], r"Sprites\GoatQuizTitle.png"), "r")
 goatQuizTitle = pygame.transform.scale(goatQuizTitle, (544, 512))
 startButtonDownImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\StartButtonDown.png"), "r")
 startButtonDownImg = pygame.transform.scale(startButtonDownImg, (272,96))
 
 # Quiz buttons initialization
-
-# def buttoninit(button,directory,scale):
-#     button = pygame.image.load(os.path.join(sys.path[0], directory), "r")
-#     button = pygame.transform.scale(button,(scale,scale))
-# buttoninit("button1",r"Sprites\Button1.png",80)
-
 button1 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button1.png"), "r")
 button1 = pygame.transform.scale(button1,(80,80))
 button2 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button2.png"), "r")

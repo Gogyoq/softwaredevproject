@@ -36,6 +36,10 @@ cwd = os.getcwd()
 print(cwd)
 
 # Main menu assets loading
+buttonClickSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\click.mp3"))
+
+
+
 defFont = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
 defFontQuestion = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
 
@@ -141,6 +145,7 @@ while(mainMenu == True):
 
     else:
         print("Starting Quiz")
+        pygame.mixer.Sound.play(buttonClickSound)
         screen.fill(navy)
         screen.blit(goatQuizTitle,(240, 64))
         screen.blit(startButtonDownImg,(384,570))

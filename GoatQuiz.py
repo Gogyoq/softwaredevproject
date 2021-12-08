@@ -101,10 +101,38 @@ startButton = Button(384,570,startButtonImg)
 #Question Class
 class Questions():
     def question1(self, text, ans1, goat1, ans2, goat2, ans3, goat3, ans4, goat4, ans5, goat5, ans6, goat6):
-        #Loading question text onto screen
+        #Rendering text
         self.text = text
-        screen.blit(text,(50, 50))
+        questionText = defFont.render(text, True, white)
+        ans1Text = defFont.render(ans1, True, white)
+        ans2Text = defFont.render(ans2, True, white)
+        ans3Text = defFont.render(ans3, True, white)
+        ans4Text = defFont.render(ans4, True, white)
+        ans5Text = defFont.render(ans5, True, white)
+        ans6Text = defFont.render(ans6, True, white)
+        #Displaying it on screen
+        screen.blit(questionText,(50,50))
+        screen.blit(ans1Text,(140,200))
+        screen.blit(ans2Text,(140,290))
+        screen.blit(ans3Text,(140,380))
+        screen.blit(ans4Text,(140,470))
+        screen.blit(ans5Text,(140,560))
+        screen.blit(ans6Text,(140,650))
         
+        #Turning goats into integers
+        happyGoat = 0
+        sadGoat = 0
+        tropicalGoat = 0
+        anxiousGoat = 0
+        gamerGoat = 0
+        angryGoat = 0
+        healthyGoat = 0
+        spiderGoat = 0
+        nomadGoat = 0
+        armyGoat = 0
+        musicalGoat = 0
+        boxerGoat = 0
+
         #loading buttons onto screen
         screen.blit(button2,(50,290))
         screen.blit(button3,(50,380))
@@ -118,6 +146,163 @@ class Questions():
         ansbutton4 = Button(50,470,button4)
         ansbutton5 = Button(50,560,button5)
         ansbutton6 = Button(50,650,button6)
+        #Drawing buttons
+        if ansbutton1.draw() == True:
+            print("Button1")
+            if goat1 == "HappyGoat":
+                happyGoat = happyGoat + 1
+            elif goat1 == "SadGoat":
+                sadGoat = sadGoat + 1
+            elif goat1 == "TropicalGoat":
+                tropicalGoat = tropicalGoat + 1
+            elif goat1 == "AnxiousGoat":
+                anxiousGoat = anxiousGoat + 1
+            elif goat1 == "GamerGoat":
+                gamerGoat = gamerGoat + 1
+            elif goat1 == "AngryGoat":
+                angryGoat = angryGoat + 1
+            elif goat1 == "HealthyGoat":
+                healthyGoat = healthyGoat + 1
+            elif goat1 == "SpiderGoat":
+                spiderGoat = spiderGoat + 1
+            elif goat1 == "NomadGoat":
+                nomadGoat = nomadGoat + 1
+            elif goat1 == "ArmyGoat":
+                armyGoat = armyGoat + 1
+            elif goat1 == "MusicalGoat":
+                musicalGoat = musicalGoat + 1
+            elif goat1 == "BoxerGoat":
+                boxerGoat = boxerGoat + 1
+        if ansbutton2.draw() == True:
+            print("Button2")
+            if goat2 == "HappyGoat":
+                happyGoat = happyGoat + 1
+            elif goat2 == "SadGoat":
+                sadGoat = sadGoat + 1
+            elif goat2 == "TropicalGoat":
+                tropicalGoat = tropicalGoat + 1
+            elif goat2 == "AnxiousGoat":
+                anxiousGoat = anxiousGoat + 1
+            elif goat2 == "GamerGoat":
+                gamerGoat = gamerGoat + 1
+            elif goat2 == "AngryGoat":
+                angryGoat = angryGoat + 1
+            elif goat2 == "HealthyGoat":
+                healthyGoat = healthyGoat + 1
+            elif goat2 == "SpiderGoat":
+                spiderGoat = spiderGoat + 1
+            elif goat2 == "NomadGoat":
+                nomadGoat = nomadGoat + 1
+            elif goat2 == "ArmyGoat":
+                armyGoat = armyGoat + 1
+            elif goat2 == "MusicalGoat":
+                musicalGoat = musicalGoat + 1
+            elif goat2 == "BoxerGoat":
+                boxerGoat = boxerGoat + 1
+        if ansbutton3.draw() == True:
+            print("Button3")
+            if goat3 == "HappyGoat":
+                happyGoat = happyGoat + 1
+            elif goat3 == "SadGoat":
+                sadGoat = sadGoat + 1
+            elif goat3 == "TropicalGoat":
+                tropicalGoat = tropicalGoat + 1
+            elif goat3 == "AnxiousGoat":
+                anxiousGoat = anxiousGoat + 1
+            elif goat3 == "GamerGoat":
+                gamerGoat = gamerGoat + 1
+            elif goat3 == "AngryGoat":
+                angryGoat = angryGoat + 1
+            elif goat3 == "HealthyGoat":
+                healthyGoat = healthyGoat + 1
+            elif goat3 == "SpiderGoat":
+                spiderGoat = spiderGoat + 1
+            elif goat3 == "NomadGoat":
+                nomadGoat = nomadGoat + 1
+            elif goat3 == "ArmyGoat":
+                armyGoat = armyGoat + 1
+            elif goat3 == "MusicalGoat":
+                musicalGoat = musicalGoat + 1
+            elif goat3 == "BoxerGoat":
+                boxerGoat = boxerGoat + 1
+        if ansbutton4.draw() == True:
+            print("Button4")
+            if goat4 == "HappyGoat":
+                happyGoat = happyGoat + 1
+            elif goat4 == "SadGoat":
+                sadGoat = sadGoat + 1
+            elif goat4 == "TropicalGoat":
+                tropicalGoat = tropicalGoat + 1
+            elif goat4 == "AnxiousGoat":
+                anxiousGoat = anxiousGoat + 1
+            elif goat4 == "GamerGoat":
+                gamerGoat = gamerGoat + 1
+            elif goat4 == "AngryGoat":
+                angryGoat = angryGoat + 1
+            elif goat4 == "HealthyGoat":
+                healthyGoat = healthyGoat + 1
+            elif goat4 == "SpiderGoat":
+                spiderGoat = spiderGoat + 1
+            elif goat4 == "NomadGoat":
+                nomadGoat = nomadGoat + 1
+            elif goat4 == "ArmyGoat":
+                armyGoat = armyGoat + 1
+            elif goat4 == "MusicalGoat":
+                musicalGoat = musicalGoat + 1
+            elif goat4 == "BoxerGoat":
+                boxerGoat = boxerGoat + 1
+        if ansbutton5.draw() == True:
+            print("Button5")
+            if goat5 == "HappyGoat":
+                happyGoat = happyGoat + 1
+            elif goat5 == "SadGoat":
+                sadGoat = sadGoat + 1
+            elif goat5 == "TropicalGoat":
+                tropicalGoat = tropicalGoat + 1
+            elif goat5 == "AnxiousGoat":
+                anxiousGoat = anxiousGoat + 1
+            elif goat5 == "GamerGoat":
+                gamerGoat = gamerGoat + 1
+            elif goat5 == "AngryGoat":
+                angryGoat = angryGoat + 1
+            elif goat5 == "HealthyGoat":
+                healthyGoat = healthyGoat + 1
+            elif goat5 == "SpiderGoat":
+                spiderGoat = spiderGoat + 1
+            elif goat5 == "NomadGoat":
+                nomadGoat = nomadGoat + 1
+            elif goat5 == "ArmyGoat":
+                armyGoat = armyGoat + 1
+            elif goat5 == "MusicalGoat":
+                musicalGoat = musicalGoat + 1
+            elif goat5 == "BoxerGoat":
+                boxerGoat = boxerGoat + 1
+        if ansbutton6.draw() == True:
+            print("Button6")
+            if goat6 == "HappyGoat":
+                happyGoat = happyGoat + 1
+            elif goat6 == "SadGoat":
+                sadGoat = sadGoat + 1
+            elif goat6 == "TropicalGoat":
+                tropicalGoat = tropicalGoat + 1
+            elif goat6 == "AnxiousGoat":
+                anxiousGoat = anxiousGoat + 1
+            elif goat6 == "GamerGoat":
+                gamerGoat = gamerGoat + 1
+            elif goat6 == "AngryGoat":
+                angryGoat = angryGoat + 1
+            elif goat6 == "HealthyGoat":
+                healthyGoat = healthyGoat + 1
+            elif goat6 == "SpiderGoat":
+                spiderGoat = spiderGoat + 1
+            elif goat6 == "NomadGoat":
+                nomadGoat = nomadGoat + 1
+            elif goat6 == "ArmyGoat":
+                armyGoat = armyGoat + 1
+            elif goat6 == "MusicalGoat":
+                musicalGoat = musicalGoat + 1
+            elif goat6 == "BoxerGoat":
+                boxerGoat = boxerGoat + 1
 
 clock = pygame.time.Clock()
 #Start of game loop
@@ -169,7 +354,6 @@ while(mainMenu == True):
     clock.tick(60)
     pygame.display.flip()
 
-textone = defFontQuestion.render("Describe your personality with a food", False, white)
 running = True
 while running == True:
     
@@ -179,7 +363,8 @@ while running == True:
         if event.type == pygame.QUIT:  
             running = False
     
-            
+    Questions.question1()
+    
     clock.tick(60)
     pygame.display.flip()
 

@@ -36,9 +36,8 @@ cwd = os.getcwd()
 print(cwd)
 
 # Main menu assets loading
-buttonClickSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\click.mp3"))
-
-
+startSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\scream.mp3"))
+clickSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\click.mp3"))
 
 defFont = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
 defFontQuestion = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
@@ -48,6 +47,7 @@ startButtonImg = pygame.transform.scale(startButtonImg, (272,96))
 
 goatQuizTitle = pygame.image.load(os.path.join(sys.path[0], r"Sprites\GoatQuizTitle.png"), "r")
 goatQuizTitle = pygame.transform.scale(goatQuizTitle, (544, 512))
+
 startButtonDownImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\StartButtonDown.png"), "r")
 startButtonDownImg = pygame.transform.scale(startButtonDownImg, (272,96))
 
@@ -96,6 +96,7 @@ class Button():
             if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
                 self.clicked = True
                 action = True
+                pygame.mixer.Sound.play(clickSound)
             if pygame.mouse.get_pressed()[0] == 0:
                 self.clicked = False
                 action = False
@@ -389,7 +390,8 @@ while(mainMenu == True):
 
     else:
         print("Starting Quiz")
-        pygame.mixer.Sound.play(buttonClickSound)
+        pygame.mixer.Sound.play(clickSound)
+        pygame.mixer.Sound.play(startSound)
         screen.fill(navy)
         screen.blit(goatQuizTitle,(240, 64))
         screen.blit(startButtonDownImg,(384,570))

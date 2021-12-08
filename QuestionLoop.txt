@@ -1,0 +1,47 @@
+while(True):
+        
+        for event in pygame.event.get():
+                if event.type == pygame.QUIT:  
+                    pygame.quit()
+        
+        goatResponse = Questions.question("Describe your personality with a food", "Steak", "BoxerGoat", "Lucky Charms", "HappyGoat", "Pineapple", "TropicalGoat", "Coffee", "AnxiousGoat", "Hot Dogs", "SpiderGoat", "McDonalds", "ArmyGoat")
+        
+        if goatResponse == "HappyGoat":
+            happyGoat = happyGoat + 1
+            break
+        elif goatResponse == "SadGoat":
+            sadGoat = sadGoat + 1
+            break
+        elif goatResponse == "TropicalGoat":
+            tropicalGoat = tropicalGoat + 1
+            break
+        elif goatResponse == "AnxiousGoat":
+            anxiousGoat = anxiousGoat + 1
+            break
+        elif goatResponse == "GamerGoat":
+            gamerGoat = gamerGoat + 1
+            break
+        elif goatResponse == "AngryGoat":
+            angryGoat = angryGoat + 1
+            break
+        elif goatResponse == "HealthyGoat":
+            healthyGoat = healthyGoat + 1
+            break
+        elif goatResponse == "SpiderGoat":
+            spiderGoat = spiderGoat + 1
+            break
+        elif goatResponse == "NomadGoat":
+            nomadGoat = nomadGoat + 1
+            break
+        elif goatResponse == "ArmyGoat":
+            armyGoat = armyGoat + 1
+            break
+        elif goatResponse == "MusicalGoat":
+            musicalGoat = musicalGoat + 1
+            break
+        elif goatResponse == "BoxerGoat":
+            boxerGoat = boxerGoat + 1
+            break
+
+        clock.tick(60)
+        pygame.display.flip()

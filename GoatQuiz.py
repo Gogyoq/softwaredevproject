@@ -2,6 +2,7 @@
 # Date: 11/26/2021
 # FileName: GoatQuiz
 # Description: A personality quiz that assigns you one of twelve goats at the end
+# Prerequesites: OpenCV, pygame
 
 import pygame
 
@@ -9,6 +10,7 @@ import os
 import sys
 import webbrowser
 from time import sleep
+import cv2
 
 pygame.init()
 pygame.font.init()
@@ -34,6 +36,35 @@ startClicked = False
 # Getting current directory
 cwd = os.getcwd()
 print(cwd)
+
+import pygame
+import cv2
+
+def playvideo(path):
+    pygame.
+    video = cv2.VideoCapture(path)
+    success, video_image = video.read()
+    fps = video.get(cv2.CAP_PROP_FPS)
+
+    window = pygame.display.set_mode(video_image.shape[1::-1])
+    clock = pygame.time.Clock()
+
+    run = success
+    while run:
+        clock.tick(fps)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+        
+        success, video_image = video.read()
+        if success:
+            video_surf = pygame.image.frombuffer(
+                video_image.tobytes(), video_image.shape[1::-1], "BGR")
+        else:
+            run = False
+        window.blit(video_surf, (0, 0))
+        pygame.display.flip()
+# playvideo(os.path.join(sys.path[0], r"Videos\swiftgoatvideo.mp4")))
 
 # Main menu assets loading
 startSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\scream.mp3"))
@@ -77,7 +108,7 @@ button4Down = pygame.transform.scale(button4Down,(80,80))
 button5Down = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button5Down.png"), "r")
 button5Down = pygame.transform.scale(button5Down,(80,80))
 button6Down = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button6Down.png"), "r")
-button6Down= pygame.transform.scale(button6Down,(80,80))
+button6Down = pygame.transform.scale(button6Down,(80,80))
 
 # Button Class
 class Button():

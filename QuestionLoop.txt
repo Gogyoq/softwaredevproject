@@ -1,10 +1,12 @@
 while(True):
         
+        screen.fill(navy)
+        
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:  
                     pygame.quit()
         
-        goatResponse = Questions.question("Describe your personality with a food", "Steak", "BoxerGoat", "Lucky Charms", "HappyGoat", "Pineapple", "TropicalGoat", "Coffee", "AnxiousGoat", "Hot Dogs", "SpiderGoat", "McDonalds", "ArmyGoat")
+        goatResponse = Questions.question()
         
         if goatResponse == "HappyGoat":
             happyGoat = happyGoat + 1

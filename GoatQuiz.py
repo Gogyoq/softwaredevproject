@@ -151,8 +151,13 @@ class Questions():
         if ansbutton1.draw() == True:
             print("Button1")
             #button goes down when pressed
-            pygame.draw.rect(screen,navy,pygame.Rect(50,200,80,80))
+            pygame.draw.rect(screen,navy,pygame.Rect(50,200,80,560))
             screen.blit(button1Down,(50,200))
+            screen.blit(button2,(50,290))
+            screen.blit(button3,(50,380))
+            screen.blit(button4,(50,470))
+            screen.blit(button5,(50,560))
+            screen.blit(button6,(50,650))
             pygame.display.flip()
             sleep(.1)
             #Goat tally
@@ -184,8 +189,13 @@ class Questions():
         if ansbutton2.draw() == True:
             print("Button2")
             #button goes down when pressed
-            pygame.draw.rect(screen,navy,pygame.Rect(50,290,80,80))
+            pygame.draw.rect(screen,navy,pygame.Rect(50,290,80,560))
             screen.blit(button2Down,(50,290))
+            screen.blit(button1,(50,200))
+            screen.blit(button3,(50,380))
+            screen.blit(button4,(50,470))
+            screen.blit(button5,(50,560))
+            screen.blit(button6,(50,650))
             pygame.display.flip()
             sleep(.1)
             #Goat tally
@@ -216,8 +226,13 @@ class Questions():
         if ansbutton3.draw() == True:
             print("Button3")
             #button goes down when pressed
-            pygame.draw.rect(screen,navy,pygame.Rect(50,380,80,80))
+            pygame.draw.rect(screen,navy,pygame.Rect(50,380,80,560))
             screen.blit(button3Down,(50,380))
+            screen.blit(button1,(50,200))
+            screen.blit(button2,(50,290))
+            screen.blit(button4,(50,470))
+            screen.blit(button5,(50,560))
+            screen.blit(button6,(50,650))
             pygame.display.flip()
             sleep(.1)
             #Goat tally
@@ -248,8 +263,13 @@ class Questions():
         if ansbutton4.draw() == True:
             print("Button4")
             #button goes down when pressed
-            pygame.draw.rect(screen,navy,pygame.Rect(50,470,80,80))
+            pygame.draw.rect(screen,navy,pygame.Rect(50,470,80,560))
             screen.blit(button4Down,(50,470))
+            screen.blit(button1,(50,200))
+            screen.blit(button2,(50,290))
+            screen.blit(button3,(50,380))
+            screen.blit(button5,(50,560))
+            screen.blit(button6,(50,650))
             pygame.display.flip()
             sleep(.1)
             #Goat tally
@@ -280,8 +300,13 @@ class Questions():
         if ansbutton5.draw() == True:
             print("Button5")
             #button goes down when pressed
-            pygame.draw.rect(screen,navy,pygame.Rect(50,560,80,80))
+            pygame.draw.rect(screen,navy,pygame.Rect(50,560,80,560))
             screen.blit(button5Down,(50,560))
+            screen.blit(button1,(50,200))
+            screen.blit(button2,(50,290))
+            screen.blit(button3,(50,380))
+            screen.blit(button4,(50,470))
+            screen.blit(button6,(50,650))
             pygame.display.flip()
             sleep(.1)
             #Goat tally
@@ -312,8 +337,13 @@ class Questions():
         if ansbutton6.draw() == True:
             print("Button6")
             #button goes down when pressed
-            pygame.draw.rect(screen,navy,pygame.Rect(50,650,80,80))
+            pygame.draw.rect(screen,navy,pygame.Rect(50,650,80,560))
             screen.blit(button6Down,(50,650))
+            screen.blit(button1,(50,200))
+            screen.blit(button2,(50,290))
+            screen.blit(button3,(50,380))
+            screen.blit(button4,(50,470))
+            screen.blit(button5,(50,560))
             pygame.display.flip()
             sleep(.1)
             #Goat tally

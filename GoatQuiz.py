@@ -69,17 +69,12 @@ def playvideo(pathVideo):
         window.blit(video_surf, (0, 0))
         pygame.display.flip()
 
-# sound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\swiftgoat.mp3"))
-# pygame.mixer.Sound.play(sound)
-
 # playvideo(os.path.join(sys.path[0], r"Videos\swiftgoatvideo.mp4"))
 
 # <-- Main menu assets loading -->
-
-#THE TRY THING WASNT WORKING SO I REMOVED IT
-startSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\scream.mp3"))
-clickSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\yoshi.mp3"))
-demolitionSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\demolition.mp3"))
+startSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\scream.wav"))
+clickSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\yoshi.wav"))
+demolitionSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\demolition.wav"))
 
 defFont = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
 defFontQuestion = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
@@ -136,6 +131,7 @@ goatGuySlide = -210
 loopOnce = 1
 goatQuizSlide2 = 64
 startButtonSlide2 = 570
+
 # Button Class
 class Button():
     def __init__(self, x, y, image):
@@ -455,7 +451,8 @@ while(mainMenu == True):
         screen.blit(startButtonImg,(384,570))
         pygame.display.flip()
         sleep(.1)
-            
+
+    # Easter Egg       
     if titleButtonCounter == 1:
         while loopOnce <= 45:
             
@@ -482,7 +479,7 @@ while(mainMenu == True):
         screen.blit(goatGuy1Text,(150,483))
     elif titleButtonCounter == 2:
         screen.blit(goatGuyNormal,(-70,483))
-        goatGuy2Text = defFont.render("Im warning you, dont press it!", True, white)
+        goatGuy2Text = defFont.render("I'm warning you, dont press it!", True, white)
         screen.blit(goatGuy2Text,(150,483))
     elif titleButtonCounter == 3:
         screen.blit(goatGuyNormal,(-70,483))
@@ -600,7 +597,6 @@ while(mainMenu == True):
     if titleButtonCounter < 10:
         if startButton.draw() == True:
             print("Starting Quiz")
-            pygame.mixer.Sound.play(clickSound)
             pygame.mixer.Sound.play(startSound)
             screen.fill(navy)
             screen.blit(goatQuizTitle,(240, 64))

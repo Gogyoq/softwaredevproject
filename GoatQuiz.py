@@ -75,6 +75,7 @@ def playvideo(pathVideo):
 # playvideo(os.path.join(sys.path[0], r"Videos\swiftgoatvideo.mp4"))
 
 # <-- Main menu assets loading -->
+backgroundMusic = pygame.mixer.music.load(os.path.join(sys.path[0], r"Sounds\swiftgoat.mp3"))
 
 startSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\scream.mp3"))
 clickSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\yoshi.mp3"))
@@ -422,6 +423,9 @@ clock = pygame.time.Clock()
 
 # <-- Start of game loop --> 
 mainMenu = True
+pygame.mixer.music.set_volume(0.2)
+pygame.mixer.music.play(-1)
+
 while(mainMenu == True):
     
     screen.fill(navy)

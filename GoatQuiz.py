@@ -4,13 +4,21 @@
 # Description: A personality quiz that assigns you one of twelve goats at the end
 # Prerequesites: OpenCV, pygame
 
-import pygame
-
 import os
 import sys
-import webbrowser
 from time import sleep
-import cv2
+
+try:
+    import pygame
+except:
+    print("pygame Not Installed! Please run prerequesite batch file to install.")
+    exit()
+
+try:
+    import cv2
+except:
+    print("openCV Not Installed! Please run prerequesite batch file to install.")
+    exit()
 
 pygame.init()
 pygame.font.init()
@@ -33,15 +41,12 @@ width = screen.get_width()
 height = screen.get_height()
 startClicked = False
 
-# Getting current directory
-cwd = os.getcwd()
-print(cwd)
+# # Getting current directory
+# cwd = os.getcwd()
+# print(cwd)
 
-import pygame
-import cv2
-
-def playvideo(path):
-    video = cv2.VideoCapture(path)
+def playvideo(pathVideo):
+    video = cv2.VideoCapture(pathVideo)
     success, video_image = video.read()
     fps = video.get(cv2.CAP_PROP_FPS)
 
@@ -63,11 +68,16 @@ def playvideo(path):
             run = False
         window.blit(video_surf, (0, 0))
         pygame.display.flip()
-# playvideo(os.path.join(sys.path[0], r"Videos\swiftgoatvideo.mp4")))
 
-# Main menu assets loading
-startSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\scream.mp3"))
-clickSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\click.mp3"))
+# sound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\swiftgoat.mp3"))
+# pygame.mixer.Sound.play(sound)
+
+# playvideo(os.path.join(sys.path[0], r"Videos\swiftgoatvideo.mp4"))
+
+# <-- Main menu assets loading -->
+
+#startSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\scream.mp3"))
+#clickSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\click.mp3"))
 
 defFont = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
 defFontQuestion = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
@@ -119,18 +129,18 @@ class Button():
     
     def draw(self):
         action = False
-        #get mouse position
+        # Get mouse position
         pos = pygame.mouse.get_pos()
-        #check if mouse is on button
+        # Check if mouse is on button
         if self.rect.collidepoint(pos):
             if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
                 self.clicked = True
                 action = True
-                pygame.mixer.Sound.play(clickSound)
+                #pygame.mixer.Sound.play(clickSound)
             if pygame.mouse.get_pressed()[0] == 0:
                 self.clicked = False
                 action = False
-        #draw button on screen
+        # Draw button on screen
         screen.blit(self.image, (self.rect.x, self.rect.y))
         
         return action
@@ -144,7 +154,7 @@ ansbutton4 = Button(50,470,button4)
 ansbutton5 = Button(50,560,button5)
 ansbutton6 = Button(50,650,button6)
 
-#Declaring Goat integers
+# Declaring Goat integers
 happyGoat = 0
 sadGoat = 0
 tropicalGoat = 0
@@ -161,7 +171,7 @@ boxerGoat = 0
 # Question class
 class Questions():
     def question(text, ans1, goat1, ans2, goat2, ans3, goat3, ans4, goat4, ans5, goat5, ans6, goat6):
-        #Rendering text
+        # Rendering text
         questionText = defFont.render(text, True, white)
         ans1Text = defFont.render(ans1, True, white)
         ans2Text = defFont.render(ans2, True, white)
@@ -169,7 +179,7 @@ class Questions():
         ans4Text = defFont.render(ans4, True, white)
         ans5Text = defFont.render(ans5, True, white)
         ans6Text = defFont.render(ans6, True, white)
-        #Displaying it on screen
+        # Displaying it on screen
         screen.blit(questionText,(50,50))
         screen.blit(ans1Text,(140,200))
         screen.blit(ans2Text,(140,290))
@@ -178,10 +188,10 @@ class Questions():
         screen.blit(ans5Text,(140,560))
         screen.blit(ans6Text,(140,650))
         
-        #Drawing buttons
+        # Drawing buttons
         if ansbutton1.draw() == True:
             print("Button1")
-            #button goes down when pressed
+            # Button goes down when pressed
             pygame.draw.rect(screen,navy,pygame.Rect(50,200,80,560))
             screen.blit(button1Down,(50,200))
             screen.blit(button2,(50,290))
@@ -191,7 +201,7 @@ class Questions():
             screen.blit(button6,(50,650))
             pygame.display.flip()
             sleep(.1)
-            #Goat tally
+            # Goat tally
             if goat1 == "HappyGoat":
                 return "HappyGoat"
             elif goat1 == "SadGoat":
@@ -254,6 +264,7 @@ class Questions():
                 return "MusicalGoat"
             elif goat2 == "BoxerGoat":
                 return "BoxerGoat"
+
         if ansbutton3.draw() == True:
             print("Button3")
             #button goes down when pressed
@@ -291,6 +302,7 @@ class Questions():
                 return "MusicalGoat"
             elif goat3 == "BoxerGoat":
                 return "BoxerGoat"
+
         if ansbutton4.draw() == True:
             print("Button4")
             #button goes down when pressed
@@ -328,6 +340,7 @@ class Questions():
                 return "MusicalGoat"
             elif goat4 == "BoxerGoat":
                 return "BoxerGoat"
+
         if ansbutton5.draw() == True:
             print("Button5")
             #button goes down when pressed
@@ -365,6 +378,7 @@ class Questions():
                 return "MusicalGoat"
             elif goat5 == "BoxerGoat":
                 return "BoxerGoat"
+
         if ansbutton6.draw() == True:
             print("Button6")
             #button goes down when pressed
@@ -421,8 +435,8 @@ while(mainMenu == True):
 
     else:
         print("Starting Quiz")
-        pygame.mixer.Sound.play(clickSound)
-        pygame.mixer.Sound.play(startSound)
+        #pygame.mixer.Sound.play(clickSound)
+        #pygame.mixer.Sound.play(startSound)
         screen.fill(navy)
         screen.blit(goatQuizTitle,(240, 64))
         screen.blit(startButtonDownImg,(384,570))
@@ -478,40 +492,40 @@ while running == True:
         goatResponse = Questions.question("Describe your personality with a food", "Steak", "BoxerGoat", "Lucky Charms", "HappyGoat", "Pineapple", "TropicalGoat", "Coffee", "AnxiousGoat", "Hot Dogs", "SpiderGoat", "McDonalds", "ArmyGoat")
         
         if goatResponse == "HappyGoat":
-            happyGoat = happyGoat + 1
+            happyGoat += 1
             break
         elif goatResponse == "SadGoat":
-            sadGoat = sadGoat + 1
+            sadGoat += 1
             break
         elif goatResponse == "TropicalGoat":
-            tropicalGoat = tropicalGoat + 1
+            tropicalGoat += 1
             break
         elif goatResponse == "AnxiousGoat":
-            anxiousGoat = anxiousGoat + 1
+            anxiousGoat += 1
             break
         elif goatResponse == "GamerGoat":
-            gamerGoat = gamerGoat + 1
+            gamerGoat += 1
             break
         elif goatResponse == "AngryGoat":
-            angryGoat = angryGoat + 1
+            angryGoat += 1
             break
         elif goatResponse == "HealthyGoat":
-            healthyGoat = healthyGoat + 1
+            healthyGoat += 1
             break
         elif goatResponse == "SpiderGoat":
-            spiderGoat = spiderGoat + 1
+            spiderGoat += 1
             break
         elif goatResponse == "NomadGoat":
-            nomadGoat = nomadGoat + 1
+            nomadGoat += 1
             break
         elif goatResponse == "ArmyGoat":
-            armyGoat = armyGoat + 1
+            armyGoat += 1
             break
         elif goatResponse == "MusicalGoat":
-            musicalGoat = musicalGoat + 1
+            musicalGoat += 1
             break
         elif goatResponse == "BoxerGoat":
-            boxerGoat = boxerGoat + 1
+            boxerGoat += 1
             break
 
         clock.tick(60)
@@ -529,40 +543,40 @@ while running == True:
         goatResponse = Questions.question("Favourite type of drink", "G-Fuel", "GamerGoat", "Pop", "HappyGoat", "Water", "HealthyGoat", "Tea", "AnxiousGoat", "Energy Drink", "BoxerGoat", "Milk", "ArmyGoat")
         
         if goatResponse == "HappyGoat":
-            happyGoat = happyGoat + 1
+            happyGoat += 1
             break
         elif goatResponse == "SadGoat":
-            sadGoat = sadGoat + 1
+            sadGoat += 1
             break
         elif goatResponse == "TropicalGoat":
-            tropicalGoat = tropicalGoat + 1
+            tropicalGoat += 1
             break
         elif goatResponse == "AnxiousGoat":
-            anxiousGoat = anxiousGoat + 1
+            anxiousGoat += 1
             break
         elif goatResponse == "GamerGoat":
-            gamerGoat = gamerGoat + 1
+            gamerGoat += 1
             break
         elif goatResponse == "AngryGoat":
-            angryGoat = angryGoat + 1
+            angryGoat += 1
             break
         elif goatResponse == "HealthyGoat":
-            healthyGoat = healthyGoat + 1
+            healthyGoat += 1
             break
         elif goatResponse == "SpiderGoat":
-            spiderGoat = spiderGoat + 1
+            spiderGoat += 1
             break
         elif goatResponse == "NomadGoat":
-            nomadGoat = nomadGoat + 1
+            nomadGoat += 1
             break
         elif goatResponse == "ArmyGoat":
-            armyGoat = armyGoat + 1
+            armyGoat += 1
             break
         elif goatResponse == "MusicalGoat":
-            musicalGoat = musicalGoat + 1
+            musicalGoat += 1
             break
         elif goatResponse == "BoxerGoat":
-            boxerGoat = boxerGoat + 1
+            boxerGoat += 1
             break
 
         clock.tick(60)
@@ -580,40 +594,40 @@ while running == True:
         goatResponse = Questions.question("Favourite school subject", "Math", "HappyGoat", "Gym", "BoxerGoat", "English", "AnxiousGoat", "Lunch", "GamerGoat", "Science", "SpiderGoat", "History", "NomadGoat")
         
         if goatResponse == "HappyGoat":
-            happyGoat = happyGoat + 1
+            happyGoat += 1
             break
         elif goatResponse == "SadGoat":
-            sadGoat = sadGoat + 1
+            sadGoat += 1
             break
         elif goatResponse == "TropicalGoat":
-            tropicalGoat = tropicalGoat + 1
+            tropicalGoat += 1
             break
         elif goatResponse == "AnxiousGoat":
-            anxiousGoat = anxiousGoat + 1
+            anxiousGoat += 1
             break
         elif goatResponse == "GamerGoat":
-            gamerGoat = gamerGoat + 1
+            gamerGoat += 1
             break
         elif goatResponse == "AngryGoat":
-            angryGoat = angryGoat + 1
+            angryGoat += 1
             break
         elif goatResponse == "HealthyGoat":
-            healthyGoat = healthyGoat + 1
+            healthyGoat += 1
             break
         elif goatResponse == "SpiderGoat":
-            spiderGoat = spiderGoat + 1
+            spiderGoat += 1
             break
         elif goatResponse == "NomadGoat":
-            nomadGoat = nomadGoat + 1
+            nomadGoat += 1
             break
         elif goatResponse == "ArmyGoat":
-            armyGoat = armyGoat + 1
+            armyGoat += 1
             break
         elif goatResponse == "MusicalGoat":
-            musicalGoat = musicalGoat + 1
+            musicalGoat += 1
             break
         elif goatResponse == "BoxerGoat":
-            boxerGoat = boxerGoat + 1
+            boxerGoat += 1
             break
 
         clock.tick(60)
@@ -631,40 +645,40 @@ while running == True:
         goatResponse = Questions.question("What is your state of mind?", "Crazy", "AngryGoat", "Tired", "AnxiousGoat", "Bored", "NomadGoat", "Social", "HealthyGoat", "Fear", "ArmyGoat", "Depressed", "SadGoat")
         
         if goatResponse == "HappyGoat":
-            happyGoat = happyGoat + 1
+            happyGoat += 1
             break
         elif goatResponse == "SadGoat":
-            sadGoat = sadGoat + 1
+            sadGoat += 1
             break
         elif goatResponse == "TropicalGoat":
-            tropicalGoat = tropicalGoat + 1
+            tropicalGoat += 1
             break
         elif goatResponse == "AnxiousGoat":
-            anxiousGoat = anxiousGoat + 1
+            anxiousGoat += 1
             break
         elif goatResponse == "GamerGoat":
-            gamerGoat = gamerGoat + 1
+            gamerGoat += 1
             break
         elif goatResponse == "AngryGoat":
-            angryGoat = angryGoat + 1
+            angryGoat += 1
             break
         elif goatResponse == "HealthyGoat":
-            healthyGoat = healthyGoat + 1
+            healthyGoat += 1
             break
         elif goatResponse == "SpiderGoat":
-            spiderGoat = spiderGoat + 1
+            spiderGoat += 1
             break
         elif goatResponse == "NomadGoat":
-            nomadGoat = nomadGoat + 1
+            nomadGoat += 1
             break
         elif goatResponse == "ArmyGoat":
-            armyGoat = armyGoat + 1
+            armyGoat += 1
             break
         elif goatResponse == "MusicalGoat":
-            musicalGoat = musicalGoat + 1
+            musicalGoat += 1
             break
         elif goatResponse == "BoxerGoat":
-            boxerGoat = boxerGoat + 1
+            boxerGoat += 1
             break
 
         clock.tick(60)

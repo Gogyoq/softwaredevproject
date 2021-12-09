@@ -76,8 +76,10 @@ def playvideo(pathVideo):
 
 # <-- Main menu assets loading -->
 
+#THE TRY THING WASNT WORKING SO I REMOVED IT
 startSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\scream.mp3"))
 clickSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\yoshi.mp3"))
+demolitionSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\demolition.mp3"))
 
 defFont = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
 defFontQuestion = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
@@ -537,6 +539,7 @@ while(mainMenu == True):
         screen.blit(startButtonImg,(384,570))
         pygame.display.flip()
         sleep(2)
+        pygame.mixer.Sound.play(demolitionSound)
         while True:
                 
             screen.fill(navy)

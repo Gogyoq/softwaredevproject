@@ -118,6 +118,8 @@ button5Down = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button5Down.
 button5Down = pygame.transform.scale(button5Down,(80,80))
 button6Down = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button6Down.png"), "r")
 button6Down = pygame.transform.scale(button6Down,(80,80))
+goatQuizTitleDown = pygame.image.load(os.path.join(sys.path[0], r"Sprites\GoatQuizTitleDown.png"), "r")
+goatQuizTitleDown = pygame.transform.scale(goatQuizTitleDown,(544,512))
 
 # Button Class
 class Button():
@@ -153,6 +155,7 @@ ansbutton3 = Button(50,380,button3)
 ansbutton4 = Button(50,470,button4)
 ansbutton5 = Button(50,560,button5)
 ansbutton6 = Button(50,650,button6)
+titleButton = Button(240,64,goatQuizTitle)
 
 # Declaring Goat integers
 happyGoat = 0
@@ -430,10 +433,15 @@ while(mainMenu == True):
         if event.type == pygame.QUIT:  
             pygame.quit()
     
-    if startButton.draw() == False:
-        screen.blit(goatQuizTitle,(240, 64))
-
-    else:
+    if titleButton.draw() == True:
+        screen.fill(navy)
+        screen.blit(goatQuizTitleDown,(240, 64))
+        screen.blit(startButtonImg,(384,570))
+        pygame.display.flip()
+        sleep(.1)
+        
+    
+    if startButton.draw() == True:
         print("Starting Quiz")
         pygame.mixer.Sound.play(clickSound)
         pygame.mixer.Sound.play(startSound)

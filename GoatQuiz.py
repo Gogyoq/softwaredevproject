@@ -76,51 +76,51 @@ def playvideo(pathVideo):
 
 # <-- Main menu assets loading -->
 
-startSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\scream.mp3"))
-clickSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\yoshi.mp3"))
+try:
+    backgroundMusic = pygame.mixer.music.load(os.path.join(sys.path[0], r"Sounds\swiftgoat.mp3"))
 
-defFont = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
-defFontQuestion = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
-defFontGoatGuy = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 40)
+    startSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\scream.mp3"))
+    clickSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\yoshi.mp3"))
 
-startButtonImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\StartButton.png"), "r")
-startButtonImg = pygame.transform.scale(startButtonImg, (272,96))
+    defFont = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
+    defFontQuestion = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
 
-goatQuizTitle = pygame.image.load(os.path.join(sys.path[0], r"Sprites\GoatQuizTitle.png"), "r")
-goatQuizTitle = pygame.transform.scale(goatQuizTitle, (544, 512))
+    startButtonImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\StartButton.png"), "r")
+    startButtonImg = pygame.transform.scale(startButtonImg, (272,96))
 
-startButtonDownImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\StartButtonDown.png"), "r")
-startButtonDownImg = pygame.transform.scale(startButtonDownImg, (272,96))
+    goatQuizTitle = pygame.image.load(os.path.join(sys.path[0], r"Sprites\GoatQuizTitle.png"), "r")
+    goatQuizTitle = pygame.transform.scale(goatQuizTitle, (544, 512))
 
-# Quiz buttons images initialization
-button1 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button1.png"), "r")
-button1 = pygame.transform.scale(button1,(80,80))
-button2 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button2.png"), "r")
-button2 = pygame.transform.scale(button2,(80,80))
-button3 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button3.png"), "r")
-button3 = pygame.transform.scale(button3,(80,80))
-button4 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button4.png"), "r")
-button4 = pygame.transform.scale(button4,(80,80))
-button5 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button5.png"), "r")
-button5 = pygame.transform.scale(button5,(80,80))
-button6 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button6.png"), "r")
-button6 = pygame.transform.scale(button6,(80,80))
+    startButtonDownImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\StartButtonDown.png"), "r")
+    startButtonDownImg = pygame.transform.scale(startButtonDownImg, (272,96))
 
-# Pressed down version of each button
-button1Down = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button1Down.png"), "r")
-button1Down = pygame.transform.scale(button1Down,(80,80))
-button2Down = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button2Down.png"), "r")
-button2Down = pygame.transform.scale(button2Down,(80,80))
-button3Down = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button3Down.png"), "r")
-button3Down = pygame.transform.scale(button3Down,(80,80))
-button4Down = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button4Down.png"), "r")
-button4Down = pygame.transform.scale(button4Down,(80,80))
-button5Down = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button5Down.png"), "r")
-button5Down = pygame.transform.scale(button5Down,(80,80))
-button6Down = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button6Down.png"), "r")
-button6Down = pygame.transform.scale(button6Down,(80,80))
-goatQuizTitleDown = pygame.image.load(os.path.join(sys.path[0], r"Sprites\GoatQuizTitleDown.png"), "r")
-goatQuizTitleDown = pygame.transform.scale(goatQuizTitleDown,(544,512))
+    button1 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button1.png"), "r")
+    button1 = pygame.transform.scale(button1,(80,80))
+    button2 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button2.png"), "r")
+    button2 = pygame.transform.scale(button2,(80,80))
+    button3 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button3.png"), "r")
+    button3 = pygame.transform.scale(button3,(80,80))
+    button4 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button4.png"), "r")
+    button4 = pygame.transform.scale(button4,(80,80))
+    button5 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button5.png"), "r")
+    button5 = pygame.transform.scale(button5,(80,80))
+    button6 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button6.png"), "r")
+    button6 = pygame.transform.scale(button6,(80,80))
+
+    button1Down = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button1Down.png"), "r")
+    button1Down = pygame.transform.scale(button1Down,(80,80))
+    button2Down = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button2Down.png"), "r")
+    button2Down = pygame.transform.scale(button2Down,(80,80))
+    button3Down = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button3Down.png"), "r")
+    button3Down = pygame.transform.scale(button3Down,(80,80))
+    button4Down = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button4Down.png"), "r")
+    button4Down = pygame.transform.scale(button4Down,(80,80))
+    button5Down = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button5Down.png"), "r")
+    button5Down = pygame.transform.scale(button5Down,(80,80))
+    button6Down = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button6Down.png"), "r")
+    button6Down = pygame.transform.scale(button6Down,(80,80))
+except:
+    print("Program files are unable to be loaded. Please reinstall.")
 
 #Goat Guy Images and variables
 goatGuyNormal = pygame.image.load(os.path.join(sys.path[0], r"Sprites\GoatGuyNormal.png"), "r")
@@ -134,6 +134,7 @@ goatGuySlide = -210
 loopOnce = 1
 goatQuizSlide2 = 64
 startButtonSlide2 = 570
+
 # Button Class
 class Button():
     def __init__(self, x, y, image):
@@ -438,6 +439,9 @@ clock = pygame.time.Clock()
 
 # <-- Start of game loop --> 
 mainMenu = True
+pygame.mixer.music.set_volume(0.2)
+pygame.mixer.music.play(-1)
+
 while(mainMenu == True):
     
     screen.fill(navy)

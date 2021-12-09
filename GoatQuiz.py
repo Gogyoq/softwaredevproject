@@ -645,6 +645,7 @@ while running == True:
         if event.type == pygame.QUIT:  
             running = False
     
+    #I CANT CREATE A FUNCTION OUT OF THIS SINCE IT MODIFIES VARIBLES IN THE MAIN PROGRAM. ITS MORE WORK TO MAKE THE FUNCTION THEN TOO JUST COPY AND PASTE THIS
     #Question1
     while(True):
         

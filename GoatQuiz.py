@@ -78,7 +78,7 @@ def playvideo(pathVideo):
 
 #THE TRY THING WASNT WORKING SO I REMOVED IT
 startSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\scream.mp3"))
-clickSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\yoshi.mp3"))
+clickSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\button.wav"))
 demolitionSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\demolition.mp3"))
 
 defFont = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
@@ -185,6 +185,20 @@ nomadGoat = 0
 armyGoat = 0
 musicalGoat = 0
 boxerGoat = 0
+
+#Declaring goat strings
+happyGoatString = "HappyGoat"
+sadGoatString = "SadGoat"
+tropicalGoatString = "TropicalGoat"
+anxiousGoatString = "AnxiousGoat"
+gamerGoatString = "GamerGoat"
+angryGoatString = "AngryGoat"
+healthyGoatString = "HealthyGoat"
+spiderGoatString = "SpiderGoat"
+nomadGoatString = "NomadGoat"
+armyGoatString = "ArmyGoat"
+musicalGoatString = "MusicalGoat"
+boxerGoatString = "BoxerGoat"
     
 # Question class
 class Questions():
@@ -655,7 +669,7 @@ while running == True:
                 if event.type == pygame.QUIT:  
                     pygame.quit()
         
-        goatResponse = Questions.question("Describe your personality with a food", "Steak", "BoxerGoat", "Lucky Charms", "HappyGoat", "Pineapple", "TropicalGoat", "Coffee", "AnxiousGoat", "Hot Dogs", "SpiderGoat", "McDonalds", "ArmyGoat")
+        goatResponse = Questions.question("Describe Your Personality With a Food", "Steak", "BoxerGoat", "Lucky Charms", "HappyGoat", "Pineapple", "TropicalGoat", "Coffee", "AnxiousGoat", "Hot Dogs", "SpiderGoat", "McDonalds", "ArmyGoat")
         
         if goatResponse == "HappyGoat":
             happyGoat += 1
@@ -706,7 +720,7 @@ while running == True:
                 if event.type == pygame.QUIT:  
                     pygame.quit()
         
-        goatResponse = Questions.question("Favourite type of drink", "G-Fuel", "GamerGoat", "Pop", "HappyGoat", "Water", "HealthyGoat", "Tea", "AnxiousGoat", "Energy Drink", "BoxerGoat", "Milk", "ArmyGoat")
+        goatResponse = Questions.question("Favourite Type of Drink", "G-Fuel", gamerGoatString, "Pop", happyGoatString, "Water", healthyGoatString, "Tea", anxiousGoatString, "Energy Drink", boxerGoatString, "Milk", armyGoatString)
         
         if goatResponse == "HappyGoat":
             happyGoat += 1
@@ -757,7 +771,7 @@ while running == True:
                 if event.type == pygame.QUIT:  
                     pygame.quit()
         
-        goatResponse = Questions.question("Favourite school subject", "Math", "HappyGoat", "Gym", "BoxerGoat", "English", "AnxiousGoat", "Lunch", "GamerGoat", "Science", "SpiderGoat", "History", "NomadGoat")
+        goatResponse = Questions.question("Favourite School Subject", "Math", happyGoatString, "Gym", boxerGoatString, "English", anxiousGoatString, "Lunch", gamerGoatString, "Science", spiderGoatString, "History", nomadGoatString)
         
         if goatResponse == "HappyGoat":
             happyGoat += 1
@@ -808,7 +822,7 @@ while running == True:
                 if event.type == pygame.QUIT:  
                     pygame.quit()
         
-        goatResponse = Questions.question("What is your state of mind?", "Crazy", "AngryGoat", "Tired", "AnxiousGoat", "Bored", "NomadGoat", "Social", "HealthyGoat", "Fear", "ArmyGoat", "Depressed", "SadGoat")
+        goatResponse = Questions.question("What is Your State of Mind?", "Crazy", angryGoatString, "Tired", anxiousGoatString, "Bored", nomadGoatString, "Social", healthyGoatString, "Fear", armyGoatString, "Depressed", sadGoatString)
         
         if goatResponse == "HappyGoat":
             happyGoat += 1
@@ -849,7 +863,211 @@ while running == True:
 
         clock.tick(60)
         pygame.display.flip()
+    
+    #Question5
+    while(True):
+            
+        screen.fill(navy)
         
+        for event in pygame.event.get():
+                if event.type == pygame.QUIT:  
+                    pygame.quit()
+        
+        goatResponse = Questions.question("What's Your Dream Holiday Destination", "Disney", happyGoatString, "Cuba", angryGoatString, "Nowhere", nomadGoatString, "Japan", musicalGoatString, "Dominican Republic", tropicalGoatString, "Ohio", sadGoatString)
+        
+        if goatResponse == "HappyGoat":
+            happyGoat += 1
+            break
+        elif goatResponse == "SadGoat":
+            sadGoat += 1
+            break
+        elif goatResponse == "TropicalGoat":
+            tropicalGoat += 1
+            break
+        elif goatResponse == "AnxiousGoat":
+            anxiousGoat += 1
+            break
+        elif goatResponse == "GamerGoat":
+            gamerGoat += 1
+            break
+        elif goatResponse == "AngryGoat":
+            angryGoat += 1
+            break
+        elif goatResponse == "HealthyGoat":
+            healthyGoat += 1
+            break
+        elif goatResponse == "SpiderGoat":
+            spiderGoat += 1
+            break
+        elif goatResponse == "NomadGoat":
+            nomadGoat += 1
+            break
+        elif goatResponse == "ArmyGoat":
+            armyGoat += 1
+            break
+        elif goatResponse == "MusicalGoat":
+            musicalGoat += 1
+            break
+        elif goatResponse == "BoxerGoat":
+            boxerGoat += 1
+            break
+
+        clock.tick(60)
+        pygame.display.flip()
+    
+    #Question6
+    while(True):
+            
+        screen.fill(navy)
+        
+        for event in pygame.event.get():
+                if event.type == pygame.QUIT:  
+                    pygame.quit()
+        
+        goatResponse = Questions.question("Where Would Your Dream House be?", "Mountains", armyGoatString, "City", spiderGoatString, "Forest", musicalGoatString, "Desert", nomadGoatString, "Beach House", tropicalGoatString, "Space", gamerGoatString)
+        
+        if goatResponse == "HappyGoat":
+            happyGoat += 1
+            break
+        elif goatResponse == "SadGoat":
+            sadGoat += 1
+            break
+        elif goatResponse == "TropicalGoat":
+            tropicalGoat += 1
+            break
+        elif goatResponse == "AnxiousGoat":
+            anxiousGoat += 1
+            break
+        elif goatResponse == "GamerGoat":
+            gamerGoat += 1
+            break
+        elif goatResponse == "AngryGoat":
+            angryGoat += 1
+            break
+        elif goatResponse == "HealthyGoat":
+            healthyGoat += 1
+            break
+        elif goatResponse == "SpiderGoat":
+            spiderGoat += 1
+            break
+        elif goatResponse == "NomadGoat":
+            nomadGoat += 1
+            break
+        elif goatResponse == "ArmyGoat":
+            armyGoat += 1
+            break
+        elif goatResponse == "MusicalGoat":
+            musicalGoat += 1
+            break
+        elif goatResponse == "BoxerGoat":
+            boxerGoat += 1
+            break
+
+        clock.tick(60)
+        pygame.display.flip()
+    
+    #Question7
+    while(True):
+            
+        screen.fill(navy)
+        
+        for event in pygame.event.get():
+                if event.type == pygame.QUIT:  
+                    pygame.quit()
+        
+        goatResponse = Questions.question("What's Your Favourite Movie Genre", "Action", boxerGoatString, "Rom-Com", angryGoatString, "Sci-Fi", sadGoatString, "Thriller", tropicalGoatString, "Comedy", gamerGoatString, "Musical", musicalGoatString)
+        
+        if goatResponse == "HappyGoat":
+            happyGoat += 1
+            break
+        elif goatResponse == "SadGoat":
+            sadGoat += 1
+            break
+        elif goatResponse == "TropicalGoat":
+            tropicalGoat += 1
+            break
+        elif goatResponse == "AnxiousGoat":
+            anxiousGoat += 1
+            break
+        elif goatResponse == "GamerGoat":
+            gamerGoat += 1
+            break
+        elif goatResponse == "AngryGoat":
+            angryGoat += 1
+            break
+        elif goatResponse == "HealthyGoat":
+            healthyGoat += 1
+            break
+        elif goatResponse == "SpiderGoat":
+            spiderGoat += 1
+            break
+        elif goatResponse == "NomadGoat":
+            nomadGoat += 1
+            break
+        elif goatResponse == "ArmyGoat":
+            armyGoat += 1
+            break
+        elif goatResponse == "MusicalGoat":
+            musicalGoat += 1
+            break
+        elif goatResponse == "BoxerGoat":
+            boxerGoat += 1
+            break
+
+        clock.tick(60)
+        pygame.display.flip()
+    
+    #Question8
+    while(True):
+            
+        screen.fill(navy)
+        
+        for event in pygame.event.get():
+                if event.type == pygame.QUIT:  
+                    pygame.quit()
+        
+        goatResponse = Questions.question("Favourite Music Genre", "Rap", sadGoatString, "Rock", spiderGoatString, "Hip-Hop", healthyGoatString, "EDM", anxiousGoatString, "Country", angryGoatString, "Classical", tropicalGoatString)
+        
+        if goatResponse == "HappyGoat":
+            happyGoat += 1
+            break
+        elif goatResponse == "SadGoat":
+            sadGoat += 1
+            break
+        elif goatResponse == "TropicalGoat":
+            tropicalGoat += 1
+            break
+        elif goatResponse == "AnxiousGoat":
+            anxiousGoat += 1
+            break
+        elif goatResponse == "GamerGoat":
+            gamerGoat += 1
+            break
+        elif goatResponse == "AngryGoat":
+            angryGoat += 1
+            break
+        elif goatResponse == "HealthyGoat":
+            healthyGoat += 1
+            break
+        elif goatResponse == "SpiderGoat":
+            spiderGoat += 1
+            break
+        elif goatResponse == "NomadGoat":
+            nomadGoat += 1
+            break
+        elif goatResponse == "ArmyGoat":
+            armyGoat += 1
+            break
+        elif goatResponse == "MusicalGoat":
+            musicalGoat += 1
+            break
+        elif goatResponse == "BoxerGoat":
+            boxerGoat += 1
+            break
+
+        clock.tick(60)
+        pygame.display.flip()
+    
     clock.tick(60)
     pygame.display.flip()
 

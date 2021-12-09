@@ -81,6 +81,7 @@ clickSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\yoshi.mp3"))
 
 defFont = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
 defFontQuestion = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
+defFontGoatGuy = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 40)
 
 startButtonImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\StartButton.png"), "r")
 startButtonImg = pygame.transform.scale(startButtonImg, (272,96))
@@ -91,7 +92,7 @@ goatQuizTitle = pygame.transform.scale(goatQuizTitle, (544, 512))
 startButtonDownImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\StartButtonDown.png"), "r")
 startButtonDownImg = pygame.transform.scale(startButtonDownImg, (272,96))
 
-# Quiz buttons initialization
+# Quiz buttons images initialization
 button1 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button1.png"), "r")
 button1 = pygame.transform.scale(button1,(80,80))
 button2 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button2.png"), "r")
@@ -121,6 +122,18 @@ button6Down = pygame.transform.scale(button6Down,(80,80))
 goatQuizTitleDown = pygame.image.load(os.path.join(sys.path[0], r"Sprites\GoatQuizTitleDown.png"), "r")
 goatQuizTitleDown = pygame.transform.scale(goatQuizTitleDown,(544,512))
 
+#Goat Guy Images and variables
+goatGuyNormal = pygame.image.load(os.path.join(sys.path[0], r"Sprites\GoatGuyNormal.png"), "r")
+goatGuyNormal = pygame.transform.scale(goatGuyNormal,(320,320))
+goatGuyShocked = pygame.image.load(os.path.join(sys.path[0], r"Sprites\GoatGuyShocked.png"), "r")
+goatGuyShocked = pygame.transform.scale(goatGuyShocked,(320,320))
+goatGuyAngry = pygame.image.load(os.path.join(sys.path[0], r"Sprites\GoatGuyAngry.png"), "r")
+goatGuyAngry = pygame.transform.scale(goatGuyAngry,(320,320))
+titleButtonCounter = 0
+goatGuySlide = -210
+loopOnce = 1
+goatQuizSlide2 = 64
+startButtonSlide2 = 570
 # Button Class
 class Button():
     def __init__(self, x, y, image):
@@ -434,47 +447,188 @@ while(mainMenu == True):
             pygame.quit()
     
     if titleButton.draw() == True:
+        titleButtonCounter = titleButtonCounter + 1
         screen.fill(navy)
         screen.blit(goatQuizTitleDown,(240, 64))
         screen.blit(startButtonImg,(384,570))
         pygame.display.flip()
         sleep(.1)
-        
-    
-    if startButton.draw() == True:
-        print("Starting Quiz")
-        pygame.mixer.Sound.play(clickSound)
-        pygame.mixer.Sound.play(startSound)
-        screen.fill(navy)
-        screen.blit(goatQuizTitle,(240, 64))
-        screen.blit(startButtonDownImg,(384,570))
-        pygame.display.flip()
-        sleep(.1)
-        screen.blit(startButtonImg,(384,570))
-        pygame.display.flip()
-        sleep(.1)
-        goatQuizSlide = 240
-        startButtonSlide = 384
-        while True:
+            
+    if titleButtonCounter == 1:
+        while loopOnce <= 45:
             
             screen.fill(navy)
+            screen.blit(startButtonImg,(384,570))
+            screen.blit(goatQuizTitle,(240, 64))
             
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:  
                     False
                     
-            goatQuizSlide = goatQuizSlide + 8
-            screen.blit(goatQuizTitle,(goatQuizSlide, 64))
+            goatGuySlide = goatGuySlide + 3
+            screen.blit(goatGuyNormal,(goatGuySlide, 483))
             
-            startButtonSlide = startButtonSlide - 8
-            screen.blit(startButtonImg,(startButtonSlide, 570))
+            if goatGuySlide > -70:
+                break
             
-            if goatQuizSlide > 1050:
-                mainMenu = False
+            
+            clock.tick(60)
+            pygame.display.flip()
+            loopOnce = loopOnce + 1
+        screen.blit(goatGuyNormal,(-70,483))
+        goatGuy1Text = defFont.render("Hey dont press that!", True, white)
+        screen.blit(goatGuy1Text,(150,483))
+    elif titleButtonCounter == 2:
+        screen.blit(goatGuyNormal,(-70,483))
+        goatGuy2Text = defFont.render("Im warning you, dont press it!", True, white)
+        screen.blit(goatGuy2Text,(150,483))
+    elif titleButtonCounter == 3:
+        screen.blit(goatGuyNormal,(-70,483))
+        goatGuy3Text = defFont.render("You better stop that right now!", True, white)
+        screen.blit(goatGuy3Text,(150,483))
+    elif titleButtonCounter == 4:
+        screen.blit(goatGuyAngry,(-70,483))
+        goatGuy4Text = defFont.render("ENOUGH IS ENOUGH STOP RIGHT NOW!", True, white)
+        screen.blit(goatGuy4Text,(150,483))
+    elif titleButtonCounter == 5:
+        screen.blit(goatGuyAngry,(-70,483))
+        goatGuy5Text = defFont.render("ALRIGHT THAT'S.....", True, white)
+        screen.blit(goatGuy5Text,(150,483))
+        screen.blit(goatQuizTitle,(240, 64))
+        screen.blit(startButtonImg,(384,570))
+        pygame.display.flip()
+        sleep(.8)
+        titleButtonCounter = titleButtonCounter + 1
+    elif titleButtonCounter == 6:
+        screen.blit(goatGuyNormal,(-70,483))
+        goatGuy6Text = defFont.render("Wait...something's wrong...", True, white)
+        screen.fill(navy)
+        screen.blit(goatGuyNormal,(-70,483))
+        screen.blit(goatGuy6Text,(150,483))
+        screen.blit(goatQuizTitle,(240, 64))
+        screen.blit(startButtonImg,(384,570))
+        pygame.display.flip()
+        sleep(3)
+        titleButtonCounter = titleButtonCounter + 1
+    elif titleButtonCounter == 7:
+        goatGuy7Text = defFont.render("Im really serious this time", True, white)
+        screen.fill(navy)
+        screen.blit(goatGuyNormal,(-70,483))
+        screen.blit(goatGuy7Text,(150,483))
+        screen.blit(goatQuizTitle,(240, 64))
+        screen.blit(startButtonImg,(384,570))
+        pygame.display.flip()
+        sleep(2)
+        titleButtonCounter = titleButtonCounter + 1
+    elif titleButtonCounter == 8:
+        goatGuy8Text = defFont.render("DO NOT PRESS THAT BUTTON AGAIN", True, white)
+        screen.fill(navy)
+        screen.blit(goatGuyAngry,(-70,483))
+        screen.blit(goatGuy8Text,(150,483))
+        screen.blit(goatQuizTitle,(240, 64))
+        screen.blit(startButtonImg,(384,570))
+        pygame.display.flip()
+    elif titleButtonCounter == 9:
+        goatGuy9Text = defFont.render("What have you done...", True, white)
+        screen.fill(navy)
+        screen.blit(goatGuyNormal,(-70,483))
+        screen.blit(goatGuy9Text,(150,483))
+        screen.blit(goatQuizTitle,(240, 64))
+        screen.blit(startButtonImg,(384,570))
+        pygame.display.flip()
+        sleep(2)
+        while True:
+                
+            screen.fill(navy)
+            screen.blit(goatGuyShocked,(-70,483))
+            
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:  
+                    False
+                    
+            goatQuizSlide2 = goatQuizSlide2 + 4
+            screen.blit(goatQuizTitle,(240, goatQuizSlide2))
+            
+            if goatQuizSlide2 > 200:
+                startButtonSlide2 = startButtonSlide2 + 4
+                screen.blit(startButtonImg,(384, startButtonSlide2))
+            else:
+                screen.blit(startButtonImg,(384,570))
+            
+            if goatQuizSlide2 > 1050:
                 break
             
             clock.tick(60)
             pygame.display.flip()
+        titleButtonCounter = titleButtonCounter + 1
+    elif titleButtonCounter == 10:
+        goatGuy10Text = defFont.render("LOOK WHAT YOU DID! YOU BROKE IT!", True, white)
+        screen.fill(navy)
+        screen.blit(goatGuyAngry,(-70,483))
+        screen.blit(goatGuy10Text,(150,483))
+        pygame.display.flip()
+        sleep(3)
+        titleButtonCounter = titleButtonCounter + 1
+    elif titleButtonCounter == 11:
+        goatGuy11Text = defFont.render("THIS IS WHY WE CANT HAVE NICE THINGS!", True, white)
+        screen.fill(navy)
+        screen.blit(goatGuyAngry,(-70,483))
+        screen.blit(goatGuy11Text,(140,483))
+        pygame.display.flip()
+        sleep(2.5)
+        titleButtonCounter = titleButtonCounter + 1
+    elif titleButtonCounter == 12:
+        goatGuy12Text = defFont.render("Whatever your fun's over", True, white)
+        screen.fill(navy)
+        screen.blit(goatGuyAngry,(-70,483))
+        screen.blit(goatGuy12Text,(150,483))
+        pygame.display.flip()
+        sleep(2)
+        titleButtonCounter = titleButtonCounter + 1
+    elif titleButtonCounter == 13:
+        goatGuy13Text = defFont.render("You ruined my quiz, Goodbye", True, white)
+        screen.fill(navy)
+        screen.blit(goatGuyNormal,(-70,483))
+        screen.blit(goatGuy13Text,(150,483))
+        pygame.display.flip()
+        sleep(3)
+        pygame.quit()
+    
+    if titleButtonCounter < 10:
+        if startButton.draw() == True:
+            print("Starting Quiz")
+            pygame.mixer.Sound.play(clickSound)
+            pygame.mixer.Sound.play(startSound)
+            screen.fill(navy)
+            screen.blit(goatQuizTitle,(240, 64))
+            screen.blit(startButtonDownImg,(384,570))
+            pygame.display.flip()
+            sleep(.1)
+            screen.blit(startButtonImg,(384,570))
+            pygame.display.flip()
+            sleep(.1)
+            goatQuizSlide = 240
+            startButtonSlide = 384
+            while True:
+                
+                screen.fill(navy)
+                
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:  
+                        False
+                        
+                goatQuizSlide = goatQuizSlide + 8
+                screen.blit(goatQuizTitle,(goatQuizSlide, 64))
+                
+                startButtonSlide = startButtonSlide - 8
+                screen.blit(startButtonImg,(startButtonSlide, 570))
+                
+                if goatQuizSlide > 1050:
+                    mainMenu = False
+                    break
+                
+                clock.tick(60)
+                pygame.display.flip()
     
     clock.tick(60)
     pygame.display.flip()

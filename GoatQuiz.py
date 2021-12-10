@@ -77,9 +77,9 @@ def playvideo(pathVideo):
 # <-- Main menu assets loading -->
 
 #THE TRY THING WASNT WORKING SO I REMOVED IT
-startSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\scream.mp3"))
+startSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\scream.wav"))
 clickSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\button.wav"))
-demolitionSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\demolition.mp3"))
+demolitionSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\demolition.wav"))
 
 defFont = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
 defFontQuestion = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
@@ -1064,9 +1064,22 @@ while running == True:
         elif goatResponse == "BoxerGoat":
             boxerGoat += 1
             break
-
+        
         clock.tick(60)
         pygame.display.flip()
+
+    print("happyGoat = ",happyGoat)
+    print("sadGoat = ",sadGoat)
+    print("tropicalGoat = ",tropicalGoat)
+    print("anxiousGoat = ",anxiousGoat)
+    print("gamerGoat = ",gamerGoat)
+    print("angryGoat = ",angryGoat)
+    print("healthyGoat = ",healthyGoat)
+    print("spiderGoat = ",spiderGoat)
+    print("nomadGoat = ",nomadGoat)
+    print("armyGoat = ",armyGoat)
+    print("musicalGoat = ",musicalGoat)
+    print("boxerGoat = ",boxerGoat)
     
     #Question9
     while(True):

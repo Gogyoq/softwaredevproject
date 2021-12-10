@@ -590,7 +590,7 @@ while(mainMenu == True):
         goatGuy11Text = defFont.render("THIS IS WHY WE CANT HAVE NICE THINGS!", True, white)
         screen.fill(navy)
         screen.blit(goatGuyAngry,(-70,483))
-        screen.blit(goatGuy11Text,(140,483))
+        screen.blit(goatGuy11Text,(130,483))
         pygame.display.flip()
         sleep(2.5)
         titleButtonCounter = titleButtonCounter + 1

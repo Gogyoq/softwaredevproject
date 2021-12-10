@@ -23,7 +23,6 @@ except:
 pygame.init()
 pygame.font.init()
 
-
 # Various variables used for the pygame window are declared here
 size = width, height = 1024, 768
 center = (256,384)
@@ -34,17 +33,12 @@ blue = (0,0,255)
 black = (0,0,0)
 navy = (21,76,121)
 
-# Pygame window loaded
-# Along with width height and mouse variables
+# Pygame window loaded with width height and mouse variables
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Goat Quiz")
 width = screen.get_width()
 height = screen.get_height()
 startClicked = False
-
-# # Getting current directory
-# cwd = os.getcwd()
-# print(cwd)
 
 def playvideo(pathVideo):
     video = cv2.VideoCapture(pathVideo)
@@ -174,7 +168,7 @@ ansbutton5 = Button(50,560,button5)
 ansbutton6 = Button(50,650,button6)
 titleButton = Button(240,64,goatQuizTitle)
 
-# Declaring Goat integers
+# Declaring goat integers
 happyGoat = 0
 sadGoat = 0
 tropicalGoat = 0
@@ -189,7 +183,7 @@ musicalGoat = 0
 boxerGoat = 0
 winningGoat = None
 
-#Declaring goat strings
+# Declaring goat strings
 happyGoatString = "HappyGoat"
 sadGoatString = "SadGoat"
 tropicalGoatString = "TropicalGoat"
@@ -226,7 +220,7 @@ class Questions():
         # Drawing buttons
         if ansbutton1.draw() == True:
             print("Button1")
-            # Button goes down when pressed
+            #  Button goes down when pressed
             pygame.draw.rect(screen,navy,pygame.Rect(50,200,80,560))
             screen.blit(button1Down,(50,200))
             screen.blit(button2,(50,290))
@@ -236,7 +230,7 @@ class Questions():
             screen.blit(button6,(50,650))
             pygame.display.flip()
             sleep(.1)
-            # Goat tally
+            #  Goat tally
             if goat1 == "HappyGoat":
                 return "HappyGoat"
             elif goat1 == "SadGoat":
@@ -264,7 +258,7 @@ class Questions():
                 
         if ansbutton2.draw() == True:
             print("Button2")
-            #button goes down when pressed
+            # Button goes down when pressed
             pygame.draw.rect(screen,navy,pygame.Rect(50,290,80,560))
             screen.blit(button2Down,(50,290))
             screen.blit(button1,(50,200))
@@ -274,7 +268,7 @@ class Questions():
             screen.blit(button6,(50,650))
             pygame.display.flip()
             sleep(.1)
-            #Goat tally
+            # Goat tally
             if goat2 == "HappyGoat":
                 return "HappyGoat"
             elif goat2 == "SadGoat":
@@ -302,7 +296,7 @@ class Questions():
 
         if ansbutton3.draw() == True:
             print("Button3")
-            #button goes down when pressed
+            # Button goes down when pressed
             pygame.draw.rect(screen,navy,pygame.Rect(50,380,80,560))
             screen.blit(button3Down,(50,380))
             screen.blit(button1,(50,200))
@@ -312,7 +306,7 @@ class Questions():
             screen.blit(button6,(50,650))
             pygame.display.flip()
             sleep(.1)
-            #Goat tally
+            # Goat tally
             if goat3 == "HappyGoat":
                 return "HappyGoat"
             elif goat3 == "SadGoat":
@@ -340,7 +334,7 @@ class Questions():
 
         if ansbutton4.draw() == True:
             print("Button4")
-            #button goes down when pressed
+            # Button goes down when pressed
             pygame.draw.rect(screen,navy,pygame.Rect(50,470,80,560))
             screen.blit(button4Down,(50,470))
             screen.blit(button1,(50,200))
@@ -350,7 +344,7 @@ class Questions():
             screen.blit(button6,(50,650))
             pygame.display.flip()
             sleep(.1)
-            #Goat tally
+            # Goat tally
             if goat4 == "HappyGoat":
                 return "HappyGoat"
             elif goat4 == "SadGoat":
@@ -378,7 +372,7 @@ class Questions():
 
         if ansbutton5.draw() == True:
             print("Button5")
-            #button goes down when pressed
+            # Button goes down when pressed
             pygame.draw.rect(screen,navy,pygame.Rect(50,560,80,560))
             screen.blit(button5Down,(50,560))
             screen.blit(button1,(50,200))
@@ -388,7 +382,7 @@ class Questions():
             screen.blit(button6,(50,650))
             pygame.display.flip()
             sleep(.1)
-            #Goat tally
+            # Goat tally
             if goat5 == "HappyGoat":
                 return "HappyGoat"
             elif goat5 == "SadGoat":
@@ -416,7 +410,7 @@ class Questions():
 
         if ansbutton6.draw() == True:
             print("Button6")
-            #button goes down when pressed
+            # Button goes down when pressed
             pygame.draw.rect(screen,navy,pygame.Rect(50,650,80,560))
             screen.blit(button6Down,(50,650))
             screen.blit(button1,(50,200))
@@ -426,7 +420,7 @@ class Questions():
             screen.blit(button5,(50,560))
             pygame.display.flip()
             sleep(.1)
-            #Goat tally
+            # Goat tally
             if goat6 == "HappyGoat":
                 return "HappyGoat"
             elif goat6 == "SadGoat":
@@ -663,7 +657,7 @@ while running == True:
             running = False
     
     #I CANT CREATE A FUNCTION OUT OF THIS SINCE IT MODIFIES VARIBLES IN THE MAIN PROGRAM. ITS MORE WORK TO MAKE THE FUNCTION THEN TOO JUST COPY AND PASTE THIS
-    #Question1
+    # Question1
     while(True):
         
         screen.fill(navy)
@@ -714,7 +708,7 @@ while running == True:
         clock.tick(60)
         pygame.display.flip()
     
-    #Question2
+    # Question2
     while(True):
         
         screen.fill(navy)
@@ -765,7 +759,7 @@ while running == True:
         clock.tick(60)
         pygame.display.flip()
     
-    #Question3
+    # Question3
     while(True):
         
         screen.fill(navy)
@@ -816,7 +810,7 @@ while running == True:
         clock.tick(60)
         pygame.display.flip()
     
-    #Question4
+    # Question4
     while(True):
             
         screen.fill(navy)
@@ -867,7 +861,7 @@ while running == True:
         clock.tick(60)
         pygame.display.flip()
     
-    #Question5
+    # Question5
     while(True):
             
         screen.fill(navy)
@@ -918,7 +912,7 @@ while running == True:
         clock.tick(60)
         pygame.display.flip()
     
-    #Question6
+    # Question6
     while(True):
             
         screen.fill(navy)
@@ -969,7 +963,7 @@ while running == True:
         clock.tick(60)
         pygame.display.flip()
     
-    #Question7
+    # Question7
     while(True):
             
         screen.fill(navy)
@@ -1020,7 +1014,7 @@ while running == True:
         clock.tick(60)
         pygame.display.flip()
     
-    #Question8
+    # Question8
     while(True):
             
         screen.fill(navy)
@@ -1071,7 +1065,7 @@ while running == True:
         clock.tick(60)
         pygame.display.flip()
     
-    #Question9
+    # Question9
     while(True):
             
         screen.fill(navy)
@@ -1122,7 +1116,7 @@ while running == True:
         clock.tick(60)
         pygame.display.flip()
     
-    #Question10
+    # Question10
     while(True):
             
         screen.fill(navy)
@@ -1173,7 +1167,7 @@ while running == True:
         clock.tick(60)
         pygame.display.flip()
     
-    #Question11
+    # Question11
     while(True):
             
         screen.fill(navy)
@@ -1224,7 +1218,7 @@ while running == True:
         clock.tick(60)
         pygame.display.flip()
     
-    #Question12
+    # Question12
     while(True):
             
         screen.fill(navy)
@@ -1275,7 +1269,7 @@ while running == True:
         clock.tick(60)
         pygame.display.flip()
         
-    #Question13
+    # Question13
     while(True):
             
         screen.fill(navy)
@@ -1326,7 +1320,7 @@ while running == True:
         clock.tick(60)
         pygame.display.flip()
     
-    #Question14
+    # Question14
     while(True):
             
         screen.fill(navy)
@@ -1377,7 +1371,7 @@ while running == True:
         clock.tick(60)
         pygame.display.flip()
     
-    #Question15
+    # Question15
     while(True):
             
         screen.fill(navy)
@@ -1428,7 +1422,7 @@ while running == True:
         clock.tick(60)
         pygame.display.flip()
     
-    #Question16
+    # Question16
     while(True):
             
         screen.fill(navy)
@@ -1479,7 +1473,7 @@ while running == True:
         clock.tick(60)
         pygame.display.flip()
     
-    #Question17
+    # Question17
     while(True):
             
         screen.fill(navy)
@@ -1530,7 +1524,7 @@ while running == True:
         clock.tick(60)
         pygame.display.flip()
     
-    #Question18
+    # Question18
     while(True):
             
         screen.fill(navy)
@@ -1581,7 +1575,7 @@ while running == True:
         clock.tick(60)
         pygame.display.flip()
         
-    #Question19
+    # Question19
     while(True):
             
         screen.fill(navy)
@@ -1632,7 +1626,7 @@ while running == True:
         clock.tick(60)
         pygame.display.flip()
     
-    #Question20
+    # Question20
     while(True):
             
         screen.fill(navy)
@@ -1697,7 +1691,7 @@ while running == True:
     print("boxerGoat = ",boxerGoat)
     
     variables = {"happyGoat":happyGoat,"sadGoat":sadGoat,"tropicalGoat":tropicalGoat,"anxiousGoat":anxiousGoat,"gamerGoat":gamerGoat,"angryGoat":angryGoat,"healthyGoat":healthyGoat,"spiderGoat":spiderGoat,"nomadGoat":nomadGoat,"armyGoat":armyGoat,"musicalGoat":musicalGoat,"boxerGoat":boxerGoat}
-    #max_value = max(variables.values())
+    # max_value = max(variables.values())
     winningGoat = max(variables, key=variables.get)
 
     print(winningGoat)
@@ -1705,6 +1699,7 @@ while running == True:
     if winningGoat == "happyGoat":
         print("PLay happy goat video here and print text associated with it")
         #reminder: create pixel art for YOU GOT:
+        #more lik "YOU GOAT" hahahahahahahaahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahaha
         
         
     clock.tick(60)

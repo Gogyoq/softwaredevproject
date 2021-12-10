@@ -212,7 +212,7 @@ class Questions():
         ans5Text = defFont.render(ans5, True, white)
         ans6Text = defFont.render(ans6, True, white)
         # Displaying it on screen
-        screen.blit(questionText,(50,50))
+        screen.blit(questionText,(30,50))
         screen.blit(ans1Text,(140,200))
         screen.blit(ans2Text,(140,290))
         screen.blit(ans3Text,(140,380))
@@ -669,7 +669,7 @@ while running == True:
                 if event.type == pygame.QUIT:  
                     pygame.quit()
         
-        goatResponse = Questions.question("Describe Your Personality With a Food", "Steak", "BoxerGoat", "Lucky Charms", "HappyGoat", "Pineapple", "TropicalGoat", "Coffee", "AnxiousGoat", "Hot Dogs", "SpiderGoat", "McDonalds", "ArmyGoat")
+        goatResponse = Questions.question("1. Describe Your Personality With a Food", "Steak", "BoxerGoat", "Lucky Charms", "HappyGoat", "Pineapple", "TropicalGoat", "Coffee", "AnxiousGoat", "Hot Dogs", "SpiderGoat", "McDonalds", "ArmyGoat")
         
         if goatResponse == "HappyGoat":
             happyGoat += 1
@@ -720,7 +720,7 @@ while running == True:
                 if event.type == pygame.QUIT:  
                     pygame.quit()
         
-        goatResponse = Questions.question("Favourite Type of Drink", "G-Fuel", gamerGoatString, "Pop", happyGoatString, "Water", healthyGoatString, "Tea", anxiousGoatString, "Energy Drink", boxerGoatString, "Milk", armyGoatString)
+        goatResponse = Questions.question("2. Favourite Type of Drink", "G-Fuel", gamerGoatString, "Pop", happyGoatString, "Water", healthyGoatString, "Tea", anxiousGoatString, "Energy Drink", boxerGoatString, "Milk", armyGoatString)
         
         if goatResponse == "HappyGoat":
             happyGoat += 1
@@ -771,7 +771,7 @@ while running == True:
                 if event.type == pygame.QUIT:  
                     pygame.quit()
         
-        goatResponse = Questions.question("Favourite School Subject", "Math", happyGoatString, "Gym", boxerGoatString, "English", anxiousGoatString, "Lunch", gamerGoatString, "Science", spiderGoatString, "History", nomadGoatString)
+        goatResponse = Questions.question("3. Favourite School Subject", "Math", happyGoatString, "Gym", boxerGoatString, "English", anxiousGoatString, "Lunch", gamerGoatString, "Science", spiderGoatString, "History", nomadGoatString)
         
         if goatResponse == "HappyGoat":
             happyGoat += 1
@@ -822,7 +822,7 @@ while running == True:
                 if event.type == pygame.QUIT:  
                     pygame.quit()
         
-        goatResponse = Questions.question("What is Your State of Mind?", "Crazy", angryGoatString, "Tired", anxiousGoatString, "Bored", nomadGoatString, "Social", healthyGoatString, "Fear", armyGoatString, "Depressed", sadGoatString)
+        goatResponse = Questions.question("4. What is Your State of Mind?", "Crazy", angryGoatString, "Tired", anxiousGoatString, "Bored", nomadGoatString, "Social", healthyGoatString, "Fear", armyGoatString, "Depressed", sadGoatString)
         
         if goatResponse == "HappyGoat":
             happyGoat += 1
@@ -873,7 +873,7 @@ while running == True:
                 if event.type == pygame.QUIT:  
                     pygame.quit()
         
-        goatResponse = Questions.question("What's Your Dream Holiday Destination", "Disney", happyGoatString, "Cuba", angryGoatString, "Nowhere", nomadGoatString, "Japan", musicalGoatString, "Dominican Republic", tropicalGoatString, "Ohio", sadGoatString)
+        goatResponse = Questions.question("5. What's Your Dream Holiday?", "Disney", happyGoatString, "Cuba", angryGoatString, "Nowhere", nomadGoatString, "Japan", musicalGoatString, "Dominican Republic", tropicalGoatString, "Ohio", sadGoatString)
         
         if goatResponse == "HappyGoat":
             happyGoat += 1
@@ -924,7 +924,7 @@ while running == True:
                 if event.type == pygame.QUIT:  
                     pygame.quit()
         
-        goatResponse = Questions.question("Where Would Your Dream House be?", "Mountains", armyGoatString, "City", spiderGoatString, "Forest", musicalGoatString, "Desert", nomadGoatString, "Beach House", tropicalGoatString, "Space", gamerGoatString)
+        goatResponse = Questions.question("6. Where Would Your Dream House be?", "Mountains", armyGoatString, "City", spiderGoatString, "Forest", musicalGoatString, "Desert", nomadGoatString, "Beach House", tropicalGoatString, "Space", gamerGoatString)
         
         if goatResponse == "HappyGoat":
             happyGoat += 1
@@ -975,7 +975,7 @@ while running == True:
                 if event.type == pygame.QUIT:  
                     pygame.quit()
         
-        goatResponse = Questions.question("What's Your Favourite Movie Genre", "Action", boxerGoatString, "Rom-Com", angryGoatString, "Sci-Fi", sadGoatString, "Thriller", tropicalGoatString, "Comedy", gamerGoatString, "Musical", musicalGoatString)
+        goatResponse = Questions.question("7. What's Your Favourite Movie Genre?", "Action", boxerGoatString, "Rom-Com", angryGoatString, "Sci-Fi", sadGoatString, "Thriller", tropicalGoatString, "Comedy", gamerGoatString, "Musical", musicalGoatString)
         
         if goatResponse == "HappyGoat":
             happyGoat += 1
@@ -1026,7 +1026,7 @@ while running == True:
                 if event.type == pygame.QUIT:  
                     pygame.quit()
         
-        goatResponse = Questions.question("Favourite Music Genre", "Rap", sadGoatString, "Rock", spiderGoatString, "Hip-Hop", healthyGoatString, "EDM", anxiousGoatString, "Country", angryGoatString, "Classical", tropicalGoatString)
+        goatResponse = Questions.question("8. What's Your Favourite Music Genre?", "Rap", sadGoatString, "Rock", spiderGoatString, "Hip-Hop", healthyGoatString, "EDM", anxiousGoatString, "Country", angryGoatString, "Classical", tropicalGoatString)
         
         if goatResponse == "HappyGoat":
             happyGoat += 1
@@ -1090,7 +1090,7 @@ while running == True:
                 if event.type == pygame.QUIT:  
                     pygame.quit()
         
-        goatResponse = Questions.question("Which Superpower Would You Want Most?", "Strength", boxerGoatString, "Super Speed", happyGoatString, "Teleportation", nomadGoatString, "Telekinesis", gamerGoatString, "Mind Reading", musicalGoatString, "Invisibility", armyGoatString)
+        goatResponse = Questions.question("9. Which Superpower Would You Want?", "Strength", boxerGoatString, "Super Speed", happyGoatString, "Teleportation", nomadGoatString, "Telekinesis", gamerGoatString, "Mind Reading", musicalGoatString, "Invisibility", armyGoatString)
         
         if goatResponse == "HappyGoat":
             happyGoat += 1
@@ -1141,7 +1141,7 @@ while running == True:
                 if event.type == pygame.QUIT:  
                     pygame.quit()
         
-        goatResponse = Questions.question("Pick a Movie Series", "Marvel", spiderGoatString, "Harry Potter", anxiousGoatString, "Star Wars", healthyGoatString, "Hunger Games", tropicalGoatString, "Dark Knight", armyGoatString, "Other", sadGoatString)
+        goatResponse = Questions.question("10. Pick a Movie Series", "Marvel", spiderGoatString, "Harry Potter", anxiousGoatString, "Star Wars", healthyGoatString, "Hunger Games", tropicalGoatString, "Dark Knight", armyGoatString, "Other", sadGoatString)
         
         if goatResponse == "HappyGoat":
             happyGoat += 1
@@ -1192,7 +1192,7 @@ while running == True:
                 if event.type == pygame.QUIT:  
                     pygame.quit()
         
-        goatResponse = Questions.question("What's Your Favourite Animal?", "Goat", healthyGoat, "GOAT", gamerGoatString, "gOAt", spiderGoatString, "goaT", musicalGoatString, "goat", nomadGoat, "I don't like goats", sadGoatString)
+        goatResponse = Questions.question("11. What's Your Favourite Animal?", "Goat", healthyGoat, "GOAT", gamerGoatString, "gOAt", spiderGoatString, "goaT", musicalGoatString, "goat", nomadGoat, "I don't like goats", sadGoatString)
         
         if goatResponse == "HappyGoat":
             happyGoat += 1
@@ -1243,7 +1243,7 @@ while running == True:
                 if event.type == pygame.QUIT:  
                     pygame.quit()
         
-        goatResponse = Questions.question("What's Your Favourite Colour", "Blue", happyGoatString, "Green", armyGoatString, "Pink", tropicalGoatString, "Red", angryGoatString, "Yellow", anxiousGoatString, "Transparent", sadGoatString)
+        goatResponse = Questions.question("12. What's Your Favourite Colour?", "Blue", happyGoatString, "Green", armyGoatString, "Pink", tropicalGoatString, "Red", angryGoatString, "Yellow", anxiousGoatString, "Transparent", sadGoatString)
         
         if goatResponse == "HappyGoat":
             happyGoat += 1
@@ -1294,7 +1294,7 @@ while running == True:
                 if event.type == pygame.QUIT:  
                     pygame.quit()
         
-        goatResponse = Questions.question("Pick a Social Media Platform", "Facebook", boxerGoatString, "Snapchat", healthyGoatString, "Tiktok", gamerGoatString, "Instagram", spiderGoatString, "Tinder", musicalGoatString, "WhatsApp", nomadGoatString)
+        goatResponse = Questions.question("13. Pick a Social Media Platform", "Facebook", boxerGoatString, "Snapchat", healthyGoatString, "Tiktok", gamerGoatString, "Instagram", spiderGoatString, "Tinder", musicalGoatString, "WhatsApp", nomadGoatString)
         
         if goatResponse == "HappyGoat":
             happyGoat += 1
@@ -1345,7 +1345,7 @@ while running == True:
                 if event.type == pygame.QUIT:  
                     pygame.quit()
         
-        goatResponse = Questions.question("How Do You Spend Your Free Time?", "Outside", healthyGoatString, "Listening to Music", musicalGoatString, "Watching Movies/Tv", angryGoatString, "Family", happyGoatString, "Gaming", gamerGoatString, "Sports", boxerGoatString)
+        goatResponse = Questions.question("14. How Do You Spend Your Free Time?", "Outside", healthyGoatString, "Listening to Music", musicalGoatString, "Watching Movies/Tv", angryGoatString, "Family", happyGoatString, "Gaming", gamerGoatString, "Sports", boxerGoatString)
         
         if goatResponse == "HappyGoat":
             happyGoat += 1
@@ -1396,7 +1396,7 @@ while running == True:
                 if event.type == pygame.QUIT:  
                     pygame.quit()
         
-        goatResponse = Questions.question("What is Your Favourite Game Platform?", "Playstation", angryGoatString, "Mobile", happyGoatString, "Computer", armyGoatString, "Virtual Reality", sadGoatString, "Xbox", tropicalGoatString, "None/Other", healthyGoatString)
+        goatResponse = Questions.question("15. Favourite Video Game Platform?", "Playstation", angryGoatString, "Mobile", happyGoatString, "Computer", armyGoatString, "Virtual Reality", sadGoatString, "Xbox", tropicalGoatString, "None/Other", healthyGoatString)
         
         if goatResponse == "HappyGoat":
             happyGoat += 1
@@ -1447,7 +1447,7 @@ while running == True:
                 if event.type == pygame.QUIT:  
                     pygame.quit()
         
-        goatResponse = Questions.question("What is Your Dream Job?", "Superhero", spiderGoatString, "Government", armyGoatString, "Trades", boxerGoatString, "Homeless", nomadGoatString, "Musician", musicalGoatString, "None", sadGoatString)
+        goatResponse = Questions.question("16. What is Your Dream Job?", "Superhero", spiderGoatString, "Government", armyGoatString, "Trades", boxerGoatString, "Homeless", nomadGoatString, "Musician", musicalGoatString, "None", sadGoatString)
         
         if goatResponse == "HappyGoat":
             happyGoat += 1
@@ -1498,7 +1498,7 @@ while running == True:
                 if event.type == pygame.QUIT:  
                     pygame.quit()
         
-        goatResponse = Questions.question("What is Your Favourite Kind of Media?", "Movies", tropicalGoatString, "Tv Shows", healthyGoatString, "Comics", gamerGoatString, "Youtube", angryGoatString, "Anime", anxiousGoatString, "Other", boxerGoatString)
+        goatResponse = Questions.question("17. Favourite Kind of Media?", "Movies", tropicalGoatString, "Tv Shows", healthyGoatString, "Comics", gamerGoatString, "Youtube", angryGoatString, "Anime", anxiousGoatString, "Other", boxerGoatString)
         
         if goatResponse == "HappyGoat":
             happyGoat += 1
@@ -1549,7 +1549,7 @@ while running == True:
                 if event.type == pygame.QUIT:  
                     pygame.quit()
         
-        goatResponse = Questions.question("What is The Best Star Wars Media?", "The Prequels", sadGoatString, "The Originals", happyGoatString, "The Sequels", nomadGoatString, "Tv Shows", anxiousGoatString, "The Books", spiderGoatString, "None", boxerGoatString)
+        goatResponse = Questions.question("18. What is The Best Star Wars Media?", "The Prequels", sadGoatString, "The Originals", happyGoatString, "The Sequels", nomadGoatString, "Tv Shows", anxiousGoatString, "The Books", spiderGoatString, "None", boxerGoatString)
         
         if goatResponse == "HappyGoat":
             happyGoat += 1
@@ -1600,7 +1600,7 @@ while running == True:
                 if event.type == pygame.QUIT:  
                     pygame.quit()
         
-        goatResponse = Questions.question("What is Your Favourite Vegetable", "Potato", spiderGoatString, "Tomato", angryGoatString, "Onions", musicalGoatString, "Carrots", tropicalGoatString, "Cucumber", gamerGoatString, "Other", healthyGoatString)
+        goatResponse = Questions.question("19. What is Your Favourite Vegetable?", "Potato", spiderGoatString, "Tomato", angryGoatString, "Onions", musicalGoatString, "Carrots", tropicalGoatString, "Cucumber", gamerGoatString, "Other", healthyGoatString)
         
         if goatResponse == "HappyGoat":
             happyGoat += 1
@@ -1651,7 +1651,7 @@ while running == True:
                 if event.type == pygame.QUIT:  
                     pygame.quit()
         
-        goatResponse = Questions.question("Are Goats Cool?", "Yes", armyGoatString, "No", anxiousGoatString, "Sometimes", happyGoatString, "They Are Annoying", angryGoatString, "What is a Goat?", nomadGoatString, "They Sound Cool", musicalGoatString)
+        goatResponse = Questions.question("20. Are Goats Cool?", "Yes", armyGoatString, "No", anxiousGoatString, "Sometimes", happyGoatString, "They Are Annoying", angryGoatString, "What is a Goat?", nomadGoatString, "They Sound Cool", musicalGoatString)
         
         if goatResponse == "HappyGoat":
             happyGoat += 1

@@ -1064,9 +1064,22 @@ while running == True:
         elif goatResponse == "BoxerGoat":
             boxerGoat += 1
             break
-
+        
         clock.tick(60)
         pygame.display.flip()
+
+    print("happyGoat = ",happyGoat)
+    print("sadGoat = ",sadGoat)
+    print("tropicalGoat = ",tropicalGoat)
+    print("anxiousGoat = ",anxiousGoat)
+    print("gamerGoat = ",gamerGoat)
+    print("angryGoat = ",angryGoat)
+    print("healthyGoat = ",healthyGoat)
+    print("spiderGoat = ",spiderGoat)
+    print("nomadGoat = ",nomadGoat)
+    print("armyGoat = ",armyGoat)
+    print("musicalGoat = ",musicalGoat)
+    print("boxerGoat = ",boxerGoat)
     
     clock.tick(60)
     pygame.display.flip()

@@ -21,7 +21,6 @@ except:
     exit()
 
 pygame.init()
-pygame.font.init()
 
 # Various variables used for the pygame window are declared here
 size = width, height = 1024, 768
@@ -40,6 +39,8 @@ width = screen.get_width()
 height = screen.get_height()
 startClicked = False
 
+# Function to play video files (relies on openCV)
+# Credit to Rabbid76 - https://stackoverflow.com/questions/21356439/how-to-load-and-play-a-video-in-pygame
 def playvideo(pathVideo):
     video = cv2.VideoCapture(pathVideo)
     success, video_image = video.read()
@@ -120,7 +121,7 @@ button6Down = pygame.transform.scale(button6Down,(80,80))
 goatQuizTitleDown = pygame.image.load(os.path.join(sys.path[0], r"Sprites\GoatQuizTitleDown.png"), "r")
 goatQuizTitleDown = pygame.transform.scale(goatQuizTitleDown,(544,512))
 
-#Goat Guy Images and variables
+# Goat Guy Images and variables
 goatGuyNormal = pygame.image.load(os.path.join(sys.path[0], r"Sprites\GoatGuyNormal.png"), "r")
 goatGuyNormal = pygame.transform.scale(goatGuyNormal,(320,320))
 goatGuyShocked = pygame.image.load(os.path.join(sys.path[0], r"Sprites\GoatGuyShocked.png"), "r")
@@ -132,6 +133,7 @@ goatGuySlide = -210
 loopOnce = 1
 goatQuizSlide2 = 64
 startButtonSlide2 = 570
+
 # Button Class
 class Button():
     def __init__(self, x, y, image):
@@ -575,7 +577,7 @@ while(mainMenu == True):
             clock.tick(60)
             pygame.display.flip()
         titleButtonCounter = titleButtonCounter + 1
-    elif titleButtonCounter == 10:
+    elif titleButtonCounter == 10:  # Quiz cannot be started at this point
         goatGuy10Text = defFont.render("LOOK WHAT YOU DID! YOU BROKE IT!", True, white)
         screen.fill(navy)
         screen.blit(goatGuyAngry,(-70,483))

@@ -23,6 +23,7 @@ except:
 pygame.init()
 pygame.font.init()
 
+
 # Various variables used for the pygame window are declared here
 size = width, height = 1024, 768
 center = (256,384)
@@ -80,6 +81,7 @@ def playvideo(pathVideo):
 startSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\scream.wav"))
 clickSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\button.wav"))
 demolitionSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\demolition.wav"))
+sansSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\sans.wav"))
 
 defFont = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
 defFontQuestion = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
@@ -185,6 +187,7 @@ nomadGoat = 0
 armyGoat = 0
 musicalGoat = 0
 boxerGoat = 0
+winningGoat = None
 
 #Declaring goat strings
 happyGoatString = "HappyGoat"
@@ -1067,19 +1070,6 @@ while running == True:
         
         clock.tick(60)
         pygame.display.flip()
-
-    print("happyGoat = ",happyGoat)
-    print("sadGoat = ",sadGoat)
-    print("tropicalGoat = ",tropicalGoat)
-    print("anxiousGoat = ",anxiousGoat)
-    print("gamerGoat = ",gamerGoat)
-    print("angryGoat = ",angryGoat)
-    print("healthyGoat = ",healthyGoat)
-    print("spiderGoat = ",spiderGoat)
-    print("nomadGoat = ",nomadGoat)
-    print("armyGoat = ",armyGoat)
-    print("musicalGoat = ",musicalGoat)
-    print("boxerGoat = ",boxerGoat)
     
     #Question9
     while(True):
@@ -1192,7 +1182,7 @@ while running == True:
                 if event.type == pygame.QUIT:  
                     pygame.quit()
         
-        goatResponse = Questions.question("11. What's Your Favourite Animal?", "Goat", healthyGoat, "GOAT", gamerGoatString, "gOAt", spiderGoatString, "goaT", musicalGoatString, "goat", nomadGoat, "I don't like goats", sadGoatString)
+        goatResponse = Questions.question("11. What's Your Favourite Animal?", "Goat", healthyGoatString, "GOAT", gamerGoatString, "gOAt", spiderGoatString, "goaT", musicalGoatString, "goat", nomadGoatString, "I don't like goats", sadGoatString)
         
         if goatResponse == "HappyGoat":
             happyGoat += 1
@@ -1692,7 +1682,31 @@ while running == True:
 
         clock.tick(60)
         pygame.display.flip()
+        
+    print("happyGoat = ",happyGoat)
+    print("sadGoat = ",sadGoat)
+    print("tropicalGoat = ",tropicalGoat)
+    print("anxiousGoat = ",anxiousGoat)
+    print("gamerGoat = ",gamerGoat)
+    print("angryGoat = ",angryGoat)
+    print("healthyGoat = ",healthyGoat)
+    print("spiderGoat = ",spiderGoat)
+    print("nomadGoat = ",nomadGoat)
+    print("armyGoat = ",armyGoat)
+    print("musicalGoat = ",musicalGoat)
+    print("boxerGoat = ",boxerGoat)
     
+    variables = {"happyGoat":happyGoat,"sadGoat":sadGoat,"tropicalGoat":tropicalGoat,"anxiousGoat":anxiousGoat,"gamerGoat":gamerGoat,"angryGoat":angryGoat,"healthyGoat":healthyGoat,"spiderGoat":spiderGoat,"nomadGoat":nomadGoat,"armyGoat":armyGoat,"musicalGoat":musicalGoat,"boxerGoat":boxerGoat}
+    #max_value = max(variables.values())
+    winningGoat = max(variables, key=variables.get)
+
+    print(winningGoat)
+    
+    if winningGoat == "happyGoat":
+        print("PLay happy goat video here and print text associated with it")
+        #reminder: create pixel art for YOU GOT:
+        
+        
     clock.tick(60)
     pygame.display.flip()
 

@@ -609,6 +609,7 @@ while(mainMenu == True):
         pygame.display.flip()
         sleep(3)
         pygame.quit()
+        exit()
     
     if titleButtonCounter < 10:
         if startButton.draw() == True:

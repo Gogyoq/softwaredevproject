@@ -6,6 +6,8 @@
 
 import os
 import sys
+from random import randint
+from time import time
 from time import sleep
 
 try:
@@ -29,6 +31,7 @@ white = (255,255,255)
 gray = (211,211,211)
 darkGray = (105,105,105)
 blue = (0,0,255)
+lightBlue = (99,155,255)
 black = (0,0,0)
 navy = (21,76,121)
 
@@ -80,7 +83,7 @@ sansSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\sans.wav"))
 
 defFont = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
 defFontQuestion = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
-defFontGoatGuy = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 40)
+defFontLoading = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 80)
 
 startButtonImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\StartButton.png"), "r")
 startButtonImg = pygame.transform.scale(startButtonImg, (272,96))
@@ -133,6 +136,79 @@ goatGuySlide = -210
 loopOnce = 1
 goatQuizSlide2 = 64
 startButtonSlide2 = 570
+
+#Loading icon images
+loading1 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading1.png"), "r")
+loading1 = pygame.transform.scale(loading1,(192,64))
+loading2 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading2.png"), "r")
+loading2 = pygame.transform.scale(loading2,(192,64))
+loading3 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading3.png"), "r")
+loading3 = pygame.transform.scale(loading3,(192,64))
+loading4 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading4.png"), "r")
+loading4 = pygame.transform.scale(loading4,(192,64))
+loading5 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading5.png"), "r")
+loading5 = pygame.transform.scale(loading5,(192,64))
+loading6 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading6.png"), "r")
+loading6 = pygame.transform.scale(loading6,(192,64))
+loading7 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading7.png"), "r")
+loading7 = pygame.transform.scale(loading7,(192,64))
+loading8 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading8.png"), "r")
+loading8 = pygame.transform.scale(loading8,(192,64))
+loading9 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading9.png"), "r")
+loading9 = pygame.transform.scale(loading9,(192,64))
+loading10 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading10.png"), "r")
+loading10 = pygame.transform.scale(loading10,(192,64))
+
+#Loading icon method
+def loading(x,y):
+    updateLoading = pygame.Rect(x,y,192,64)
+    loadingText = defFontLoading.render("Calculating", True, white)
+    screen.blit(loadingText,(x-350,y-20))
+    pygame.display.flip()
+    
+    screen.blit(loading1,(x,y))
+    pygame.display.update(updateLoading)
+    sleep(.45)
+    pygame.draw.rect(screen,navy,pygame.Rect(x,y,192,64))
+    screen.blit(loading2,(x,y))
+    pygame.display.update(updateLoading)
+    sleep(.08)
+    pygame.draw.rect(screen,navy,pygame.Rect(x,y,192,64))
+    screen.blit(loading3,(x,y))
+    pygame.display.update(updateLoading)
+    sleep(.08)
+    pygame.draw.rect(screen,navy,pygame.Rect(x,y,192,64))
+    screen.blit(loading4,(x,y))
+    pygame.display.update(updateLoading)
+    sleep(.08)
+    pygame.draw.rect(screen,navy,pygame.Rect(x,y,192,64))
+    screen.blit(loading5,(x,y))
+    pygame.display.update(updateLoading)
+    sleep(.08)
+    pygame.draw.rect(screen,navy,pygame.Rect(x,y,192,64))
+    screen.blit(loading6,(x,y))
+    pygame.display.update(updateLoading)
+    sleep(.08)
+    pygame.draw.rect(screen,navy,pygame.Rect(x,y,192,64))
+    screen.blit(loading7,(x,y))
+    pygame.display.update(updateLoading)
+    sleep(.08)
+    pygame.draw.rect(screen,navy,pygame.Rect(x,y,192,64))
+    screen.blit(loading8,(x,y))
+    pygame.display.update(updateLoading)
+    sleep(.08)
+    pygame.draw.rect(screen,navy,pygame.Rect(x,y,192,64))
+    screen.blit(loading9,(x,y))
+    pygame.display.update(updateLoading)
+    sleep(.08)
+    pygame.draw.rect(screen,navy,pygame.Rect(x,y,192,64))
+    screen.blit(loading10,(x,y))
+    pygame.display.update(updateLoading)
+    sleep(.08)
+        
+        
+        
+
 
 # Button Class
 class Button():
@@ -455,6 +531,8 @@ clock = pygame.time.Clock()
 mainMenu = True
 while(mainMenu == True):
     
+    clock.tick(60)
+    
     screen.fill(navy)
     
     for event in pygame.event.get():
@@ -647,11 +725,12 @@ while(mainMenu == True):
                 clock.tick(60)
                 pygame.display.flip()
     
-    clock.tick(60)
     pygame.display.flip()
 
 running = True
 while running == True:
+    
+    clock.tick(60)
     
     screen.fill(navy)
     
@@ -1700,13 +1779,42 @@ while running == True:
     print(winningGoat)
     
     if winningGoat == "happyGoat":
+        newWinningGoat = "Happy Goat"
         print("PLay happy goat video here and print text associated with it")
         #reminder: create pixel art for YOU GOT:
-        #more lik "YOU GOAT" hahahahahahahaahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahaha
-        
-        
+    
+    break
+
+randCalculating = randint(1,3)
+calculating = time()
+stopCalculating = calculating + randCalculating
+stoppedCalculating = False
+refreshOnce = False
+endScreen = True
+while endScreen == True:
+    
+    screen.fill(navy)
+    
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:  
+            endScreen = False
+    
+    if(refreshOnce == True):
+        if time() < stopCalculating:
+            loading(580,350)
+            stoppedCalculating = True
+    
+    if stoppedCalculating == True:
+        winningGoatText = defFont.render(newWinningGoat, True, white)
+        screen.blit(winningGoatText,(200,400))
+    
+    
+    refreshOnce = True
+    
     clock.tick(60)
     pygame.display.flip()
+
+
 
 print("Quiz Finished")
 pygame.quit()

@@ -43,7 +43,7 @@ width = screen.get_width()
 height = screen.get_height()
 startClicked = False
 
-#r"C:\Users\gamer\Desktop\Genie\Python Project\GoatQuiz.py\ffmpeg\bin\ffmpeg"
+#CREDIT TO KINGSLEY FOR METHOD https://stackoverflow.com/questions/62870381/how-to-play-video-in-pygame-currently
 class VideoSprite( pygame.sprite.Sprite ):
     FFMPEG_BIN = (os.path.join(sys.path[0], r"ffmpeg\bin\ffmpeg"))  # Full path to ffmpeg executable
 
@@ -82,11 +82,6 @@ class VideoSprite( pygame.sprite.Sprite ):
                     self.image.fill( ( 0,0,0 ) )
                     self.video_stop = True
 
-#create video sprite
-video_sprite1 = VideoSprite(pygame.Rect(100,100,320,240 ), (os.path.join(sys.path[0], r"Videos\MusicalGoat.mp4")))
-#sprite_group = pygame.sprite.GroupSingle()
-sprite_group = pygame.sprite.Group()
-sprite_group.add(video_sprite1)
 # <-- Main menu assets loading -->
 
 startSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\scream.wav"))
@@ -1809,26 +1804,42 @@ while running == True:
     
     if winningGoat == "happyGoat":
         newWinningGoat = "Happy Goat"
+        
     elif winningGoat == "sadGoat":
         newWinningGoat = "Sad Goat"
+        
     elif winningGoat == "tropicalGoat":
         newWinningGoat = "Tropical Goat"
+        
     elif winningGoat == "anxiousGoat":
         newWinningGoat = "Anxious Goat"
+        
     elif winningGoat == "gamerGoat":
         newWinningGoat = "Gamer Goat"
+        
     elif winningGoat == "angryGoat":
         newWinningGoat = "Angry Goat"
+        
     elif winningGoat == "healthyGoat":
         newWinningGoat = "Healthy Goat"
+        
     elif winningGoat == "spiderGoat":
         newWinningGoat = "Spider Goat"
+        
     elif winningGoat == "nomadGoat":
         newWinningGoat = "Nomad Goat"
+        
     elif winningGoat == "armyGoat":
         newWinningGoat = "Army Goat"
+        
     elif winningGoat == "musicalGoat":
         newWinningGoat = "Musical Goat"
+        
+        musicalGoatVideo = VideoSprite(pygame.Rect(320,320,380,380), (os.path.join(sys.path[0], r"Videos\MusicalGoat.mp4")))
+        sprite_group = pygame.sprite.Group()
+        sprite_group.add(musicalGoatVideo)
+        #NOT DONE IF YOU DONT GET MUSICA: GOAT PROGRAM WILL CRASH
+        
     elif winningGoat == "boxerGoat":
         newWinningGoat = "Boxer Goat"
     
@@ -1858,6 +1869,8 @@ while endScreen == True:
         winningGoatText = defFontLoading.render(newWinningGoat, True, white)
         screen.blit(winningGoatText,(320,194))
         screen.blit(youGot,(212,64))
+        
+        pygame.draw.rect(screen,lightBlue,pygame.Rect(310,310,400,400))
         
         sprite_group.update()
         sprite_group.draw(screen)

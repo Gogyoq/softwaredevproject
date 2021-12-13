@@ -279,6 +279,17 @@ titleButton = Button(240,64,goatQuizTitle)
 cheatButton = Button(10,746,cheatButtonImg)
 backButton = Button(10,10,backButtonImg)
 plusOneButton1 = Button(10,100,plusOneImg)
+plusOneButton2 = Button(10,190,plusOneImg)
+plusOneButton3 = Button(10,280,plusOneImg)
+plusOneButton4 = Button(10,370,plusOneImg)
+plusOneButton5 = Button(10,460,plusOneImg)
+plusOneButton6 = Button(10,550,plusOneImg)
+plusOneButton7 = Button(10,640,plusOneImg)
+plusOneButton8 = Button(500,100,plusOneImg)
+plusOneButton9 = Button(500,190,plusOneImg)
+plusOneButton10 = Button(500,280,plusOneImg)
+plusOneButton11 = Button(500,370,plusOneImg)
+plusOneButton12 = Button(500,460,plusOneImg)
 
 # Declaring goat integers
 happyGoat = 0
@@ -603,10 +614,218 @@ while(mainMenu == True):
             
             #Drawing plus one buttons
             if plusOneButton1.draw() == True:
-                happyGoat = happyGoat + 1
+                happyGoat += 1
                 screen.fill(navy)
                 screen.blit(plusOneDownImg,(10,100))
+                screen.blit(plusOneImg,(500,460))
+                screen.blit(plusOneImg,(500,370))
+                screen.blit(plusOneImg,(500,280))
+                screen.blit(plusOneImg,(500,190))
+                screen.blit(plusOneImg,(500,100))
+                screen.blit(plusOneImg,(10,640))
+                screen.blit(plusOneImg,(10,550))
+                screen.blit(plusOneImg,(10,460))
+                screen.blit(plusOneImg,(10,370))
+                screen.blit(plusOneImg,(10,280))
+                screen.blit(plusOneImg,(10,190))
                 square = pygame.Rect(10,100,80,80)
+                pygame.display.update(square)
+                
+            elif plusOneButton2.draw() == True:
+                sadGoat += 1 
+                screen.fill(navy)
+                screen.blit(plusOneDownImg,(10,190))
+                screen.blit(plusOneImg,(500,460))
+                screen.blit(plusOneImg,(500,370))
+                screen.blit(plusOneImg,(500,280))
+                screen.blit(plusOneImg,(500,190))
+                screen.blit(plusOneImg,(500,100))
+                screen.blit(plusOneImg,(10,640))
+                screen.blit(plusOneImg,(10,550))
+                screen.blit(plusOneImg,(10,460))
+                screen.blit(plusOneImg,(10,370))
+                screen.blit(plusOneImg,(10,280))
+                screen.blit(plusOneImg,(10,100))
+                square = pygame.Rect(10,190,80,80)
+                pygame.display.update(square)
+            
+            elif plusOneButton3.draw() == True:
+                tropicalGoat += 1 
+                screen.fill(navy)
+                screen.blit(plusOneDownImg,(10,280))
+                screen.blit(plusOneImg,(500,460))
+                screen.blit(plusOneImg,(500,370))
+                screen.blit(plusOneImg,(500,280))
+                screen.blit(plusOneImg,(500,190))
+                screen.blit(plusOneImg,(500,100))
+                screen.blit(plusOneImg,(10,640))
+                screen.blit(plusOneImg,(10,550))
+                screen.blit(plusOneImg,(10,460))
+                screen.blit(plusOneImg,(10,370))
+                screen.blit(plusOneImg,(10,190))
+                screen.blit(plusOneImg,(10,100))
+                square = pygame.Rect(10,280,80,80)
+                pygame.display.update(square)
+            
+            elif plusOneButton4.draw() == True:
+                anxiousGoat += 1 
+                screen.fill(navy)
+                screen.blit(plusOneDownImg,(10,370))
+                screen.blit(plusOneImg,(500,460))
+                screen.blit(plusOneImg,(500,370))
+                screen.blit(plusOneImg,(500,280))
+                screen.blit(plusOneImg,(500,190))
+                screen.blit(plusOneImg,(500,100))
+                screen.blit(plusOneImg,(10,640))
+                screen.blit(plusOneImg,(10,550))
+                screen.blit(plusOneImg,(10,460))
+                screen.blit(plusOneImg,(10,280))
+                screen.blit(plusOneImg,(10,190))
+                screen.blit(plusOneImg,(10,100))
+                square = pygame.Rect(10,370,80,80)
+                pygame.display.update(square)
+                
+            elif plusOneButton5.draw() == True:
+                gamerGoat += 1 
+                screen.fill(navy)
+                screen.blit(plusOneDownImg,(10,460))
+                screen.blit(plusOneImg,(500,460))
+                screen.blit(plusOneImg,(500,370))
+                screen.blit(plusOneImg,(500,280))
+                screen.blit(plusOneImg,(500,190))
+                screen.blit(plusOneImg,(500,100))
+                screen.blit(plusOneImg,(10,640))
+                screen.blit(plusOneImg,(10,550))
+                screen.blit(plusOneImg,(10,370))
+                screen.blit(plusOneImg,(10,280))
+                screen.blit(plusOneImg,(10,190))
+                screen.blit(plusOneImg,(10,100))
+                square = pygame.Rect(10,460,80,80)
+                pygame.display.update(square)
+            
+            elif plusOneButton6.draw() == True:
+                angryGoat += 1 
+                screen.fill(navy)
+                screen.blit(plusOneDownImg,(10,550))
+                screen.blit(plusOneImg,(500,460))
+                screen.blit(plusOneImg,(500,370))
+                screen.blit(plusOneImg,(500,280))
+                screen.blit(plusOneImg,(500,190))
+                screen.blit(plusOneImg,(500,100))
+                screen.blit(plusOneImg,(10,640))
+                screen.blit(plusOneImg,(10,460))
+                screen.blit(plusOneImg,(10,370))
+                screen.blit(plusOneImg,(10,280))
+                screen.blit(plusOneImg,(10,190))
+                screen.blit(plusOneImg,(10,100))
+                square = pygame.Rect(10,550,80,80)
+                pygame.display.update(square)
+            
+            elif plusOneButton7.draw() == True:
+                healthyGoat += 1 
+                screen.fill(navy)
+                screen.blit(plusOneDownImg,(10,640))
+                screen.blit(plusOneImg,(500,460))
+                screen.blit(plusOneImg,(500,370))
+                screen.blit(plusOneImg,(500,280))
+                screen.blit(plusOneImg,(500,190))
+                screen.blit(plusOneImg,(500,100))
+                screen.blit(plusOneImg,(10,550))
+                screen.blit(plusOneImg,(10,460))
+                screen.blit(plusOneImg,(10,370))
+                screen.blit(plusOneImg,(10,280))
+                screen.blit(plusOneImg,(10,190))
+                screen.blit(plusOneImg,(10,100))
+                square = pygame.Rect(10,640,80,80)
+                pygame.display.update(square)
+            
+            elif plusOneButton8.draw() == True:
+                spiderGoat += 1 
+                screen.fill(navy)
+                screen.blit(plusOneDownImg,(500,100))
+                screen.blit(plusOneImg,(500,460))
+                screen.blit(plusOneImg,(500,370))
+                screen.blit(plusOneImg,(500,280))
+                screen.blit(plusOneImg,(500,190))
+                screen.blit(plusOneImg,(10,640))
+                screen.blit(plusOneImg,(10,550))
+                screen.blit(plusOneImg,(10,460))
+                screen.blit(plusOneImg,(10,370))
+                screen.blit(plusOneImg,(10,280))
+                screen.blit(plusOneImg,(10,190))
+                screen.blit(plusOneImg,(10,100))
+                square = pygame.Rect(500,100,80,80)
+                pygame.display.update(square)
+            
+            elif plusOneButton9.draw() == True:
+                nomadGoat += 1 
+                screen.fill(navy)
+                screen.blit(plusOneDownImg,(500,190))
+                screen.blit(plusOneImg,(500,460))
+                screen.blit(plusOneImg,(500,370))
+                screen.blit(plusOneImg,(500,280))
+                screen.blit(plusOneImg,(500,100))
+                screen.blit(plusOneImg,(10,640))
+                screen.blit(plusOneImg,(10,550))
+                screen.blit(plusOneImg,(10,460))
+                screen.blit(plusOneImg,(10,370))
+                screen.blit(plusOneImg,(10,280))
+                screen.blit(plusOneImg,(10,190))
+                screen.blit(plusOneImg,(10,100))
+                square = pygame.Rect(500,190,80,80)
+                pygame.display.update(square)
+                
+            elif plusOneButton10.draw() == True:
+                armyGoat += 1 
+                screen.fill(navy)
+                screen.blit(plusOneDownImg,(500,280))
+                screen.blit(plusOneImg,(500,460))
+                screen.blit(plusOneImg,(500,370))
+                screen.blit(plusOneImg,(500,190))
+                screen.blit(plusOneImg,(500,100))
+                screen.blit(plusOneImg,(10,640))
+                screen.blit(plusOneImg,(10,550))
+                screen.blit(plusOneImg,(10,460))
+                screen.blit(plusOneImg,(10,370))
+                screen.blit(plusOneImg,(10,280))
+                screen.blit(plusOneImg,(10,190))
+                screen.blit(plusOneImg,(10,100))
+                square = pygame.Rect(500,280,80,80)
+                pygame.display.update(square)
+            
+            elif plusOneButton11.draw() == True:
+                musicalGoat += 1 
+                screen.fill(navy)
+                screen.blit(plusOneDownImg,(500,370))
+                screen.blit(plusOneImg,(500,460))
+                screen.blit(plusOneImg,(500,280))
+                screen.blit(plusOneImg,(500,190))
+                screen.blit(plusOneImg,(500,100))
+                screen.blit(plusOneImg,(10,640))
+                screen.blit(plusOneImg,(10,550))
+                screen.blit(plusOneImg,(10,460))
+                screen.blit(plusOneImg,(10,370))
+                screen.blit(plusOneImg,(10,280))
+                screen.blit(plusOneImg,(10,190))
+                screen.blit(plusOneImg,(10,100))
+                square = pygame.Rect(500,370,80,80)
+                pygame.display.update(square)
+            elif plusOneButton12.draw() == True:
+                boxerGoat += 1 
+                screen.fill(navy)
+                screen.blit(plusOneDownImg,(500,460))
+                screen.blit(plusOneImg,(500,370))
+                screen.blit(plusOneImg,(500,280))
+                screen.blit(plusOneImg,(500,190))
+                screen.blit(plusOneImg,(500,100))
+                screen.blit(plusOneImg,(10,640))
+                screen.blit(plusOneImg,(10,550))
+                screen.blit(plusOneImg,(10,460))
+                screen.blit(plusOneImg,(10,370))
+                screen.blit(plusOneImg,(10,280))
+                screen.blit(plusOneImg,(10,190))
+                screen.blit(plusOneImg,(10,100))
+                square = pygame.Rect(500,460,80,80)
                 pygame.display.update(square)
                 
             
@@ -614,6 +833,39 @@ while(mainMenu == True):
             #Drawing text next to buttons
             plusOneText1 = defFont.render("Happy", True, white)
             screen.blit(plusOneText1,(100,100))
+            
+            plusOneText2 = defFont.render("Sad", True, white)
+            screen.blit(plusOneText2,(100,190))
+            
+            plusOneText3 = defFont.render("Tropical", True, white)
+            screen.blit(plusOneText3,(100,280))
+            
+            plusOneText4 = defFont.render("Anxious", True, white)
+            screen.blit(plusOneText4,(100,370))
+            
+            plusOneText5 = defFont.render("Gamer", True, white)
+            screen.blit(plusOneText5,(100,460))
+            
+            plusOneText6 = defFont.render("Angry", True, white)
+            screen.blit(plusOneText6,(100,550))
+            
+            plusOneText7 = defFont.render("Healthy", True, white)
+            screen.blit(plusOneText7,(100,640))
+            
+            plusOneText8 = defFont.render("Spider", True, white)
+            screen.blit(plusOneText8,(590,100))
+            
+            plusOneText9 = defFont.render("Nomad", True, white)
+            screen.blit(plusOneText9,(590,190))
+            
+            plusOneText10 = defFont.render("Army", True, white)
+            screen.blit(plusOneText10,(590,280))
+            
+            plusOneText11 = defFont.render("Musical", True, white)
+            screen.blit(plusOneText11,(590,370))
+            
+            plusOneText12 = defFont.render("Boxer", True, white)
+            screen.blit(plusOneText12,(590,460))
             
             if backButton.draw() == True:
                 screen.fill(navy)

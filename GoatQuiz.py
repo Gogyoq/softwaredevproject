@@ -27,7 +27,7 @@ pygame.init()
 
 # Various variables used for the pygame window are declared here
 size = width, height = 1024, 768
-center = (256,384)
+center = 512
 white = (255,255,255)
 gray = (211,211,211)
 darkGray = (105,105,105)
@@ -183,6 +183,23 @@ loading10 = pygame.transform.scale(loading10,(192,64))
 youGot = pygame.image.load(os.path.join(sys.path[0], r"Sprites\YouGot.png"), "r")
 youGot = pygame.transform.scale(youGot,(600,120))
 
+#Cheat Menu Buttons
+cheatButtonImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\CheatButton.png"), "r")
+
+cheatButtonDownImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\CheatButtonDown.png"), "r")
+
+backButtonImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\BackButton.png"), "r")
+backButtonImg = pygame.transform.scale(backButtonImg, (174,72))
+
+backButtonDownImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\BackButtonDown.png"), "r")
+backButtonDownImg = pygame.transform.scale(backButtonDownImg, (174,72))
+
+plusOneImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\PlusOne.png"), "r")
+plusOneImg = pygame.transform.scale(plusOneImg,(80,80))
+
+plusOneDownImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\PlusOneDown.png"), "r")
+plusOneDownImg = pygame.transform.scale(plusOneDownImg,(80,80))
+
 #Loading icon method
 def loading(x,y):
     updateLoading = pygame.Rect(x,y,192,64)
@@ -269,6 +286,10 @@ ansbutton4 = Button(50,470,button4)
 ansbutton5 = Button(50,560,button5)
 ansbutton6 = Button(50,650,button6)
 titleButton = Button(240,64,goatQuizTitle)
+#Cheat Menu Buttons
+cheatButton = Button(10,746,cheatButtonImg)
+backButton = Button(10,10,backButtonImg)
+plusOneButton1 = Button(10,100,plusOneImg)
 
 # Declaring goat integers
 happyGoat = 0
@@ -570,6 +591,51 @@ while(mainMenu == True):
         screen.blit(startButtonImg,(384,570))
         pygame.display.flip()
         sleep(.1)
+    
+    #Creating a cheat menu to get access to all goat endings easily
+    if cheatButton.draw() == True:
+        screen.fill(navy)
+        screen.blit(cheatButtonDownImg,(10,746))
+        screen.blit(goatQuizTitle,(240, 64))
+        screen.blit(startButtonImg,(384,570))
+        pygame.display.flip()
+        sleep(.1)
+        screen.blit(cheatButtonImg,(10,746))
+        sleep(.1)
+        while(True):
+            
+            clock.tick(60)
+            
+            screen.fill(navy)
+            
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:  
+                    pygame.quit()
+            
+            #Drawing plus one buttons
+            if plusOneButton1.draw() == True:
+                happyGoat = happyGoat + 1
+                screen.fill(navy)
+                screen.blit(plusOneDownImg,(10,100))
+                square = pygame.Rect(10,100,80,80)
+                pygame.display.update(square)
+                
+            
+            
+            #Drawing text next to buttons
+            plusOneText1 = defFont.render("Happy", True, white)
+            screen.blit(plusOneText1,(100,100))
+            
+            if backButton.draw() == True:
+                screen.fill(navy)
+                screen.blit(backButtonDownImg,(10,10))
+                pygame.display.flip()
+                sleep(.1)
+                screen.blit(backButtonImg,(10,10))
+                sleep(.1)
+                break
+            
+            pygame.display.flip()
             
     if titleButtonCounter == 1:
         while loopOnce <= 45:
@@ -1805,45 +1871,110 @@ while running == True:
     if winningGoat == "happyGoat":
         newWinningGoat = "Happy Goat"
         
+        happyGoatVideo = VideoSprite(pygame.Rect(center-254,320,507,380), (os.path.join(sys.path[0], r"Videos\HappyGoat.mp4")))
+        sprite_group = pygame.sprite.Group()
+        sprite_group.add(happyGoatVideo)
+        
+        border = pygame.Rect((center-264,310,527,400))
+        
     elif winningGoat == "sadGoat":
         newWinningGoat = "Sad Goat"
+        
+        sadGoatVideo = VideoSprite(pygame.Rect(center-254,320,507,380), (os.path.join(sys.path[0], r"Videos\SadGoat.mp4")))
+        sprite_group = pygame.sprite.Group()
+        sprite_group.add(sadGoatVideo)
+        
+        border = pygame.Rect((center-264,310,527,400))
         
     elif winningGoat == "tropicalGoat":
         newWinningGoat = "Tropical Goat"
         
+        tropicalGoatVideo = VideoSprite(pygame.Rect(center-338,320,676,380), (os.path.join(sys.path[0], r"Videos\TropicalGoat.mp4")))
+        sprite_group = pygame.sprite.Group()
+        sprite_group.add(tropicalGoatVideo)
+        
+        border = pygame.Rect((center-348,310,696,400))
+        
     elif winningGoat == "anxiousGoat":
         newWinningGoat = "Anxious Goat"
+        
+        anxiousGoatVideo = VideoSprite(pygame.Rect(center-338,320,676,380), (os.path.join(sys.path[0], r"Videos\AnxiousGoat.mp4")))
+        sprite_group = pygame.sprite.Group()
+        sprite_group.add(anxiousGoatVideo)
+        
+        border = pygame.Rect((center-348,310,696,400))
         
     elif winningGoat == "gamerGoat":
         newWinningGoat = "Gamer Goat"
         
+        gamerGoatVideo = VideoSprite(pygame.Rect(center-187,320,374,380), (os.path.join(sys.path[0], r"Videos\GamerGoat.mp4")))
+        sprite_group = pygame.sprite.Group()
+        sprite_group.add(gamerGoatVideo)
+        
+        border = pygame.Rect((center-197,310,394,400))
+        
     elif winningGoat == "angryGoat":
         newWinningGoat = "Angry Goat"
+        
+        angryGoatVideo = VideoSprite(pygame.Rect(center-338,320,676,380), (os.path.join(sys.path[0], r"Videos\AngryGoat.mp4")))
+        sprite_group = pygame.sprite.Group()
+        sprite_group.add(angryGoatVideo)
+        
+        border = pygame.Rect((center-348,310,696,400))
         
     elif winningGoat == "healthyGoat":
         newWinningGoat = "Healthy Goat"
         
+        healthyGoatVideo = VideoSprite(pygame.Rect(center-338,320,676,380), (os.path.join(sys.path[0], r"Videos\HealthyGoat.mp4")))
+        sprite_group = pygame.sprite.Group()
+        sprite_group.add(healthyGoatVideo)
+        
+        border = pygame.Rect((center-348,310,696,400))
+        
     elif winningGoat == "spiderGoat":
         newWinningGoat = "Spider Goat"
+        
+        spiderGoatVideo = VideoSprite(pygame.Rect(center-152,320,304,380), (os.path.join(sys.path[0], r"Videos\SpiderGoat.mp4")))
+        sprite_group = pygame.sprite.Group()
+        sprite_group.add(spiderGoatVideo)
+        
+        border = pygame.Rect((center-162,310,324,400))
         
     elif winningGoat == "nomadGoat":
         newWinningGoat = "Nomad Goat"
         
+        nomadGoatVideo = VideoSprite(pygame.Rect(center-338,320,676,380), (os.path.join(sys.path[0], r"Videos\NomadGoat.mp4")))
+        sprite_group = pygame.sprite.Group()
+        sprite_group.add(nomadGoatVideo)
+        
+        border = pygame.Rect((center-348,310,696,400))
+        
     elif winningGoat == "armyGoat":
         newWinningGoat = "Army Goat"
+        
+        armyGoatVideo = VideoSprite(pygame.Rect(center-254,320,507,380), (os.path.join(sys.path[0], r"Videos\ArmyGoat.mp4")))
+        sprite_group = pygame.sprite.Group()
+        sprite_group.add(armyGoatVideo)
+        
+        border = pygame.Rect((center-264,310,527,400))
         
     elif winningGoat == "musicalGoat":
         newWinningGoat = "Musical Goat"
         
-        musicalGoatVideo = VideoSprite(pygame.Rect(320,320,380,380), (os.path.join(sys.path[0], r"Videos\MusicalGoat.mp4")))
+        musicalGoatVideo = VideoSprite(pygame.Rect(center-190,320,380,380), (os.path.join(sys.path[0], r"Videos\MusicalGoat.mp4")))
         sprite_group = pygame.sprite.Group()
         sprite_group.add(musicalGoatVideo)
         
-        border = pygame.Rect((310,310,400,400))
-        #NOT DONE IF YOU DONT GET MUSICAL GOAT PROGRAM WILL CRASH
+        border = pygame.Rect((center-200,310,400,400))
         
     elif winningGoat == "boxerGoat":
         newWinningGoat = "Boxer Goat"
+        
+        boxerGoatVideo = VideoSprite(pygame.Rect(center-338,320,676,380), (os.path.join(sys.path[0], r"Videos\BoxerGoat.mp4")))
+        sprite_group = pygame.sprite.Group()
+        sprite_group.add(boxerGoatVideo)
+        
+        border = pygame.Rect((center-348,310,696,400))
     
     break
 

@@ -75,12 +75,30 @@ class VideoSprite( pygame.sprite.Sprite ):
                     self.image.fill( ( 0,0,0 ) )
                     self.video_stop = True
 
+def videoSound(directory):
+    pygame.mixer.music.load(directory)
+    pygame.mixer.music.play(-1)
+
+
 # <-- Main menu assets loading -->
 
 startSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\scream.wav"))
 clickSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\button.wav"))
 demolitionSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\demolition.wav"))
 sansSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\sans.wav"))
+
+# happyGoatSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Videos\happygoat.wav"))
+# sadGoatSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Videos\sadgoat.wav"))
+# tropicalGoatSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Videos\tropicalgoat.wav"))
+# anxiousGoatSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Videos\anxiousgoat.wav"))
+# gamerGoatSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Videos\gamergoat.wav"))
+# angryGoatSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Videos\angrygoat.wav"))
+# healthyGoatSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Videos\healthygoat.wav"))
+# spiderGoatSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Videos\spidergoat.wav"))
+# nomadGoatSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Videos\nomadgoat.wav"))
+# armyGoatSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Videos\armygoat.wav"))
+# musicalGoatSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Videos\musicalgoat.wav"))
+# boxerGoatSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Videos\happygoat.wav"))
 
 defFont = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
 defFontQuestion = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
@@ -1859,12 +1877,13 @@ while running == True:
     
     if winningGoat == "happyGoat":
         newWinningGoat = "Happy Goat"
-        
+
         happyGoatVideo = VideoSprite(pygame.Rect(center-254,320,507,380), (os.path.join(sys.path[0], r"Videos\HappyGoat.mp4")))
         sprite_group = pygame.sprite.Group()
         sprite_group.add(happyGoatVideo)
         
         border = pygame.Rect((center-264,310,527,400))
+        videoSound(os.path.join(sys.path[0], r"Videos\happygoat.wav"))
         
     elif winningGoat == "sadGoat":
         newWinningGoat = "Sad Goat"
@@ -1923,8 +1942,6 @@ while running == True:
     elif winningGoat == "spiderGoat":
         newWinningGoat = "Spider Goat"
 
-        
-        
         spiderGoatVideo = VideoSprite(pygame.Rect(center-152,320,304,380), (os.path.join(sys.path[0], r"Videos\SpiderGoat.mp4")))
         sprite_group = pygame.sprite.Group()
         sprite_group.add(spiderGoatVideo)

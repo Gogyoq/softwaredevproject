@@ -44,7 +44,7 @@ height = screen.get_height()
 startClicked = False
 
 class VideoSprite( pygame.sprite.Sprite ):
-    FFMPEG_BIN = "/usr/bin/ffmpeg"   # Full path to ffmpeg executable
+    FFMPEG_BIN = os.path.join(sys.path[0], "\ffmpeg\bin\ffmpeg")   # Full path to ffmpeg executable
 
     def __init__(self, rect, filename, FPS=25 ):
         pygame.sprite.Sprite.__init__(self)

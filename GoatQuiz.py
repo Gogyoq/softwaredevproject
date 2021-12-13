@@ -43,8 +43,9 @@ width = screen.get_width()
 height = screen.get_height()
 startClicked = False
 
+#r"C:\Users\gamer\Desktop\Genie\Python Project\GoatQuiz.py\ffmpeg\bin\ffmpeg"
 class VideoSprite( pygame.sprite.Sprite ):
-    FFMPEG_BIN = os.path.join(sys.path[0], "\ffmpeg\bin\ffmpeg")   # Full path to ffmpeg executable
+    FFMPEG_BIN = (os.path.join(sys.path[0], r"ffmpeg\bin\ffmpeg"))  # Full path to ffmpeg executable
 
     def __init__(self, rect, filename, FPS=25 ):
         pygame.sprite.Sprite.__init__(self)
@@ -1808,8 +1809,28 @@ while running == True:
     
     if winningGoat == "happyGoat":
         newWinningGoat = "Happy Goat"
-        print("PLay happy goat video here and print text associated with it")
-        #reminder: create pixel art for YOU GOT:
+    elif winningGoat == "sadGoat":
+        newWinningGoat = "Sad Goat"
+    elif winningGoat == "tropicalGoat":
+        newWinningGoat = "Tropical Goat"
+    elif winningGoat == "anxiousGoat":
+        newWinningGoat = "Anxious Goat"
+    elif winningGoat == "gamerGoat":
+        newWinningGoat = "Gamer Goat"
+    elif winningGoat == "angryGoat":
+        newWinningGoat = "Angry Goat"
+    elif winningGoat == "healthyGoat":
+        newWinningGoat = "Healthy Goat"
+    elif winningGoat == "spiderGoat":
+        newWinningGoat = "Spider Goat"
+    elif winningGoat == "nomadGoat":
+        newWinningGoat = "Nomad Goat"
+    elif winningGoat == "armyGoat":
+        newWinningGoat = "Army Goat"
+    elif winningGoat == "musicalGoat":
+        newWinningGoat = "Musical Goat"
+    elif winningGoat == "boxerGoat":
+        newWinningGoat = "Boxer Goat"
     
     break
 

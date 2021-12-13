@@ -83,7 +83,7 @@ class VideoSprite( pygame.sprite.Sprite ):
                     self.video_stop = True
 
 #create video sprite
-video_sprite1 = VideoSprite( pygame.Rect( 100, 100, 320, 240 ), (os.path.join(sys.path[0], r"Videos\MusicalGoat.mp4")))
+video_sprite1 = VideoSprite(pygame.Rect(100,100,320,240 ), (os.path.join(sys.path[0], r"Videos\MusicalGoat.mp4")))
 #sprite_group = pygame.sprite.GroupSingle()
 sprite_group = pygame.sprite.Group()
 sprite_group.add(video_sprite1)

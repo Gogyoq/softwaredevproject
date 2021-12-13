@@ -1838,7 +1838,9 @@ while running == True:
         musicalGoatVideo = VideoSprite(pygame.Rect(320,320,380,380), (os.path.join(sys.path[0], r"Videos\MusicalGoat.mp4")))
         sprite_group = pygame.sprite.Group()
         sprite_group.add(musicalGoatVideo)
-        #NOT DONE IF YOU DONT GET MUSICA: GOAT PROGRAM WILL CRASH
+        
+        border = pygame.Rect((310,310,400,400))
+        #NOT DONE IF YOU DONT GET MUSICAL GOAT PROGRAM WILL CRASH
         
     elif winningGoat == "boxerGoat":
         newWinningGoat = "Boxer Goat"
@@ -1870,7 +1872,7 @@ while endScreen == True:
         screen.blit(winningGoatText,(320,194))
         screen.blit(youGot,(212,64))
         
-        pygame.draw.rect(screen,lightBlue,pygame.Rect(310,310,400,400))
+        pygame.draw.rect(screen,lightBlue,border)
         
         sprite_group.update()
         sprite_group.draw(screen)

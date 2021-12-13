@@ -44,34 +44,39 @@ startClicked = False
 
 # Function to play video files (relies on openCV)
 # Credit to Rabbid76 - https://stackoverflow.com/questions/21356439/how-to-load-and-play-a-video-in-pygame
-def playvideo(pathVideo):
-    video = cv2.VideoCapture(pathVideo)
-    success, video_image = video.read()
-    fps = video.get(cv2.CAP_PROP_FPS)
 
-    window = pygame.display.set_mode(video_image.shape[1::-1])
-    clock = pygame.time.Clock()
+# def playvideo(pathVideo):
+#     video = cv2.VideoCapture(pathVideo)
+#     success, video_image = video.read()
+#     fps = video.get(cv2.CAP_PROP_FPS)
 
-    run = success
-    while run:
-        clock.tick(fps)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                run = False
+#     window = pygame.display.set_mode(video_image.shape[1::-1])
+#     clock = pygame.time.Clock()
+
+#     #sound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\swiftgoat.wav"))
+#     #pygame.mixer.Sound.play(sound)
+
+
+#     run = success
+#     while run:
+#         clock.tick(fps)
+#         for event in pygame.event.get():
+#             if event.type == pygame.QUIT:
+#                 run = False
         
-        success, video_image = video.read()
-        if success:
-            video_surf = pygame.image.frombuffer(
-                video_image.tobytes(), video_image.shape[1::-1], "BGR")
-        else:
-            run = False
-        window.blit(video_surf, (0, 0))
-        pygame.display.flip()
+#         success, video_image = video.read()
+#         if success:
+#             video_surf = pygame.image.frombuffer(video_image.tobytes(), video_image.shape[1::-1], "BGR")
+#         else:
+#             run = False
+#         window.blit(video_surf, (0, 0))
+        
+#         pygame.display.flip()
 
-# sound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\swiftgoat.mp3"))
-# pygame.mixer.Sound.play(sound)
 
-# playvideo(os.path.join(sys.path[0], r"Videos\swiftgoatvideo.mp4"))
+# playvideo(os.path.join(sys.path[0], r"Videos\MusicalGoat.mp4"))
+
+
 
 # <-- Main menu assets loading -->
 
@@ -158,6 +163,10 @@ loading9 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading
 loading9 = pygame.transform.scale(loading9,(192,64))
 loading10 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading10.png"), "r")
 loading10 = pygame.transform.scale(loading10,(192,64))
+
+#End screen image
+youGot = pygame.image.load(os.path.join(sys.path[0], r"Sprites\youGot.png"), "r")
+youGot = pygame.transform.scale(youGot,(600,120))
 
 #Loading icon method
 def loading(x,y):
@@ -1780,8 +1789,28 @@ while running == True:
     
     if winningGoat == "happyGoat":
         newWinningGoat = "Happy Goat"
-        print("PLay happy goat video here and print text associated with it")
-        #reminder: create pixel art for YOU GOT:
+    elif winningGoat == "sadGoat":
+        newWinningGoat = "Sad Goat"
+    elif winningGoat == "tropicalGoat":
+        newWinningGoat = "Tropical Goat"
+    elif winningGoat == "anxiousGoat":
+        newWinningGoat = "Anxious Goat"
+    elif winningGoat == "gamerGoat":
+        newWinningGoat = "Gamer Goat"
+    elif winningGoat == "angryGoat":
+        newWinningGoat = "Angry Goat"
+    elif winningGoat == "healthyGoat":
+        newWinningGoat = "Healthy Goat"
+    elif winningGoat == "spiderGoat":
+        newWinningGoat = "Spider Goat"
+    elif winningGoat == "nomadGoat":
+        newWinningGoat = "Nomad Goat"
+    elif winningGoat == "armyGoat":
+        newWinningGoat = "Army Goat"
+    elif winningGoat == "musicalGoat":
+        newWinningGoat = "Musical Goat"
+    elif winningGoat == "boxerGoat":
+        newWinningGoat = "Boxer Goat"
     
     break
 
@@ -1805,8 +1834,9 @@ while endScreen == True:
             stoppedCalculating = True
     
     if stoppedCalculating == True:
-        winningGoatText = defFont.render(newWinningGoat, True, white)
-        screen.blit(winningGoatText,(200,400))
+        winningGoatText = defFontLoading.render(newWinningGoat, True, white)
+        screen.blit(winningGoatText,(320,194))
+        screen.blit(youGot,(212,64))
     
     
     refreshOnce = True

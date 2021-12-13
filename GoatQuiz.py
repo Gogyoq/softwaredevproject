@@ -9,6 +9,7 @@ import sys
 from random import randint
 from time import time
 from time import sleep
+import subprocess
 
 try:
     import pygame
@@ -42,45 +43,51 @@ width = screen.get_width()
 height = screen.get_height()
 startClicked = False
 
-# Function to play video files (relies on openCV)
-# Credit to Rabbid76 - https://stackoverflow.com/questions/21356439/how-to-load-and-play-a-video-in-pygame
+class VideoSprite( pygame.sprite.Sprite ):
+    FFMPEG_BIN = "/usr/bin/ffmpeg"   # Full path to ffmpeg executable
 
-# def playvideo(pathVideo):
-#     video = cv2.VideoCapture(pathVideo)
-#     success, video_image = video.read()
-#     fps = video.get(cv2.CAP_PROP_FPS)
+    def __init__(self, rect, filename, FPS=25 ):
+        pygame.sprite.Sprite.__init__(self)
+        command = [ self.FFMPEG_BIN,
+                    '-loglevel', 'quiet',
+                    '-i', filename,
+                    '-f', 'image2pipe',
+                    '-s', '%dx%d' % (rect.width, rect.height),
+                    '-pix_fmt', 'rgb24',
+                    '-vcodec', 'rawvideo', '-' ]
+        self.bytes_per_frame = rect.width * rect.height * 3
+        self.proc   = subprocess.Popen( command, stdout=subprocess.PIPE, bufsize=self.bytes_per_frame*3 )
+        self.image  = pygame.Surface( ( rect.width, rect.height ), pygame.HWSURFACE )
+        self.rect   = self.image.get_rect()
+        self.rect.x = rect.x
+        self.rect.y = rect.y
+        # Used to maintain frame-rate
+        self.last_at     = 0           # time frame starts to show
+        self.frame_delay = 1000 / FPS  # milliseconds duration to show frame
+        self.video_stop  = False
 
-#     window = pygame.display.set_mode(video_image.shape[1::-1])
-#     clock = pygame.time.Clock()
+    def update( self ):
+        if ( not self.video_stop ):
+            time_now = pygame.time.get_ticks()
+            if ( time_now > self.last_at + self.frame_delay ):   # has the frame shown for long enough
+                self.last_at = time_now
+                try:
+                    raw_image = self.proc.stdout.read( self.bytes_per_frame )
+                    self.image = pygame.image.frombuffer(raw_image, (self.rect.width, self.rect.height), 'RGB')
+                    #self.proc.stdout.flush()  - doesn't seem to be necessary
+                except:
+                    # error getting data, end of file?  Black Screen it
+                    self.image = pygame.Surface( ( self.rect.width, self.rect.height ), pygame.HWSURFACE )
+                    self.image.fill( ( 0,0,0 ) )
+                    self.video_stop = True
 
-#     #sound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\swiftgoat.wav"))
-#     #pygame.mixer.Sound.play(sound)
-
-
-#     run = success
-#     while run:
-#         clock.tick(fps)
-#         for event in pygame.event.get():
-#             if event.type == pygame.QUIT:
-#                 run = False
-        
-#         success, video_image = video.read()
-#         if success:
-#             video_surf = pygame.image.frombuffer(video_image.tobytes(), video_image.shape[1::-1], "BGR")
-#         else:
-#             run = False
-#         window.blit(video_surf, (0, 0))
-        
-#         pygame.display.flip()
-
-
-# playvideo(os.path.join(sys.path[0], r"Videos\MusicalGoat.mp4"))
-
-
-
+#create video sprite
+video_sprite1 = VideoSprite( pygame.Rect( 100, 100, 320, 240 ), (os.path.join(sys.path[0], r"Videos\MusicalGoat.mp4")))
+#sprite_group = pygame.sprite.GroupSingle()
+sprite_group = pygame.sprite.Group()
+sprite_group.add(video_sprite1)
 # <-- Main menu assets loading -->
 
-#THE TRY THING WASNT WORKING SO I REMOVED IT
 startSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\scream.wav"))
 clickSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\button.wav"))
 demolitionSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\demolition.wav"))
@@ -93,13 +100,16 @@ defFontLoading = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"),
 startButtonImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\StartButton.png"), "r")
 startButtonImg = pygame.transform.scale(startButtonImg, (272,96))
 
-goatQuizTitle = pygame.image.load(os.path.join(sys.path[0], r"Sprites\GoatQuizTitle.png"), "r")
-goatQuizTitle = pygame.transform.scale(goatQuizTitle, (544, 512))
-
 startButtonDownImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\StartButtonDown.png"), "r")
 startButtonDownImg = pygame.transform.scale(startButtonDownImg, (272,96))
 
-# Quiz buttons images initialization
+goatQuizTitle = pygame.image.load(os.path.join(sys.path[0], r"Sprites\GoatQuizTitle.png"), "r")
+goatQuizTitle = pygame.transform.scale(goatQuizTitle, (544, 512))
+
+goatQuizTitleDown = pygame.image.load(os.path.join(sys.path[0], r"Sprites\GoatQuizTitleDown.png"), "r")
+goatQuizTitleDown = pygame.transform.scale(goatQuizTitleDown,(544,512))
+
+# Quiz buttons images initializatio
 button1 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button1.png"), "r")
 button1 = pygame.transform.scale(button1,(80,80))
 button2 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button2.png"), "r")
@@ -126,8 +136,8 @@ button5Down = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button5Down.
 button5Down = pygame.transform.scale(button5Down,(80,80))
 button6Down = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button6Down.png"), "r")
 button6Down = pygame.transform.scale(button6Down,(80,80))
-goatQuizTitleDown = pygame.image.load(os.path.join(sys.path[0], r"Sprites\GoatQuizTitleDown.png"), "r")
-goatQuizTitleDown = pygame.transform.scale(goatQuizTitleDown,(544,512))
+
+
 
 # Goat Guy Images and variables
 goatGuyNormal = pygame.image.load(os.path.join(sys.path[0], r"Sprites\GoatGuyNormal.png"), "r")
@@ -145,27 +155,36 @@ startButtonSlide2 = 570
 #Loading icon images
 loading1 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading1.png"), "r")
 loading1 = pygame.transform.scale(loading1,(192,64))
+
 loading2 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading2.png"), "r")
 loading2 = pygame.transform.scale(loading2,(192,64))
+
 loading3 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading3.png"), "r")
 loading3 = pygame.transform.scale(loading3,(192,64))
+
 loading4 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading4.png"), "r")
 loading4 = pygame.transform.scale(loading4,(192,64))
+
 loading5 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading5.png"), "r")
 loading5 = pygame.transform.scale(loading5,(192,64))
+
 loading6 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading6.png"), "r")
 loading6 = pygame.transform.scale(loading6,(192,64))
+
 loading7 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading7.png"), "r")
 loading7 = pygame.transform.scale(loading7,(192,64))
+
 loading8 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading8.png"), "r")
 loading8 = pygame.transform.scale(loading8,(192,64))
+
 loading9 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading9.png"), "r")
 loading9 = pygame.transform.scale(loading9,(192,64))
+
 loading10 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading10.png"), "r")
 loading10 = pygame.transform.scale(loading10,(192,64))
 
-#End screen image
-youGot = pygame.image.load(os.path.join(sys.path[0], r"Sprites\youGot.png"), "r")
+#You Got Image
+youGot = pygame.image.load(os.path.join(sys.path[0], r"Sprites\YouGot.png"), "r")
 youGot = pygame.transform.scale(youGot,(600,120))
 
 #Loading icon method
@@ -1789,28 +1808,8 @@ while running == True:
     
     if winningGoat == "happyGoat":
         newWinningGoat = "Happy Goat"
-    elif winningGoat == "sadGoat":
-        newWinningGoat = "Sad Goat"
-    elif winningGoat == "tropicalGoat":
-        newWinningGoat = "Tropical Goat"
-    elif winningGoat == "anxiousGoat":
-        newWinningGoat = "Anxious Goat"
-    elif winningGoat == "gamerGoat":
-        newWinningGoat = "Gamer Goat"
-    elif winningGoat == "angryGoat":
-        newWinningGoat = "Angry Goat"
-    elif winningGoat == "healthyGoat":
-        newWinningGoat = "Healthy Goat"
-    elif winningGoat == "spiderGoat":
-        newWinningGoat = "Spider Goat"
-    elif winningGoat == "nomadGoat":
-        newWinningGoat = "Nomad Goat"
-    elif winningGoat == "armyGoat":
-        newWinningGoat = "Army Goat"
-    elif winningGoat == "musicalGoat":
-        newWinningGoat = "Musical Goat"
-    elif winningGoat == "boxerGoat":
-        newWinningGoat = "Boxer Goat"
+        print("PLay happy goat video here and print text associated with it")
+        #reminder: create pixel art for YOU GOT:
     
     break
 
@@ -1820,6 +1819,7 @@ stopCalculating = calculating + randCalculating
 stoppedCalculating = False
 refreshOnce = False
 endScreen = True
+
 while endScreen == True:
     
     screen.fill(navy)
@@ -1837,6 +1837,11 @@ while endScreen == True:
         winningGoatText = defFontLoading.render(newWinningGoat, True, white)
         screen.blit(winningGoatText,(320,194))
         screen.blit(youGot,(212,64))
+        
+        sprite_group.update()
+        sprite_group.draw(screen)
+        pygame.display.flip()
+
     
     
     refreshOnce = True

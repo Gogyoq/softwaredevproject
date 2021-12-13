@@ -4,8 +4,7 @@
 # Description: A personality quiz that assigns you one of twelve goats at the end
 # Prerequesites: OpenCV, pygame
 
-import os
-import sys
+import os, sys, subprocess
 from random import randint
 from time import time
 from time import sleep
@@ -15,12 +14,6 @@ try:
     import pygame
 except:
     print("pygame Not Installed! Please run prerequesite batch file to install.")
-    exit()
-
-try:
-    import cv2
-except:
-    print("openCV Not Installed! Please run prerequesite batch file to install.")
     exit()
 
 pygame.init()
@@ -229,10 +222,6 @@ def loading(x,y):
     screen.blit(loading10,(x,y))
     pygame.display.update(updateLoading)
     sleep(.08)
-        
-        
-        
-
 
 # Button Class
 class Button():
@@ -628,7 +617,7 @@ while(mainMenu == True):
         sleep(3)
         titleButtonCounter = titleButtonCounter + 1
     elif titleButtonCounter == 7:
-        goatGuy7Text = defFont.render("Im really serious this time", True, white)
+        goatGuy7Text = defFont.render("I'm really serious this time", True, white)
         screen.fill(navy)
         screen.blit(goatGuyNormal,(-70,483))
         screen.blit(goatGuy7Text,(150,483))
@@ -1825,6 +1814,8 @@ while running == True:
         
     elif winningGoat == "spiderGoat":
         newWinningGoat = "Spider Goat"
+
+        
         
     elif winningGoat == "nomadGoat":
         newWinningGoat = "Nomad Goat"

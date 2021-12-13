@@ -44,7 +44,7 @@ startClicked = False
 
 # Function to play video files (relies on openCV)
 # Credit to Rabbid76 - https://stackoverflow.com/questions/21356439/how-to-load-and-play-a-video-in-pygame
-def playvideo(pathVideo):
+def playvideo(pathVideo,pathAudio):
     video = cv2.VideoCapture(pathVideo)
     success, video_image = video.read()
     fps = video.get(cv2.CAP_PROP_FPS)
@@ -53,6 +53,9 @@ def playvideo(pathVideo):
     clock = pygame.time.Clock()
 
     run = success
+
+    sound = pygame.mixer.Sound(os.path.join(pathAudio))
+    pygame.mixer.Sound.play(sound)
     while run:
         clock.tick(fps)
         for event in pygame.event.get():
@@ -68,10 +71,7 @@ def playvideo(pathVideo):
         window.blit(video_surf, (0, 0))
         pygame.display.flip()
 
-# sound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\swiftgoat.mp3"))
-# pygame.mixer.Sound.play(sound)
-
-# playvideo(os.path.join(sys.path[0], r"Videos\swiftgoatvideo.mp4"))
+#playvideo(os.path.join(sys.path[0], r"Videos\swiftgoat.mp4"),os.path.join(sys.path[0], r"Videos\swiftgoat.wav"))
 
 # <-- Main menu assets loading -->
 
@@ -1791,6 +1791,7 @@ stopCalculating = calculating + randCalculating
 stoppedCalculating = False
 refreshOnce = False
 endScreen = True
+
 while endScreen == True:
     
     screen.fill(navy)

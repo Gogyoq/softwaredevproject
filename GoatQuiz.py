@@ -1,7 +1,7 @@
 # Author: Aidan Kooiman, Izaan Syed, Robert Connors, Evan Miller
 # Date: 11/26/2021
 # FileName: GoatQuiz
-# Description: A personality quiz that assigns you one of twelve goats at the end, coded in spaghetti due to time constraints 🍝
+# Description: A personality quiz that assigns you one of twelve goats at the end
 # Prerequesites: pygame
 
 import os, sys, subprocess

@@ -11,7 +11,7 @@ from time import time, sleep
 try:
     import pygame
 except:
-    print("pygame Not Installed! Please run "Install Pygame" batch file to install.")
+    print("pygame Not Installed! Please run 'Install Pygame' batch file to install.")
     exit()
 
 pygame.init()
@@ -317,8 +317,6 @@ nomadGoatString = "NomadGoat"
 armyGoatString = "ArmyGoat"
 musicalGoatString = "MusicalGoat"
 boxerGoatString = "BoxerGoat"
-
-
     
 # Question class
 class Questions():
@@ -949,18 +947,22 @@ while(mainMenu == True):
         screen.blit(goatGuyNormal,(-70,483))
         goatGuy1Text = defFont.render("Hey dont press that!", True, white)
         screen.blit(goatGuy1Text,(150,483))
+
     elif titleButtonCounter == 2:
         screen.blit(goatGuyNormal,(-70,483))
         goatGuy2Text = defFont.render("Im warning you, dont press it!", True, white)
         screen.blit(goatGuy2Text,(150,483))
+
     elif titleButtonCounter == 3:
         screen.blit(goatGuyNormal,(-70,483))
         goatGuy3Text = defFont.render("You better stop that right now!", True, white)
         screen.blit(goatGuy3Text,(150,483))
+
     elif titleButtonCounter == 4:
         screen.blit(goatGuyAngry,(-70,483))
         goatGuy4Text = defFont.render("ENOUGH IS ENOUGH STOP RIGHT NOW!", True, white)
         screen.blit(goatGuy4Text,(150,483))
+
     elif titleButtonCounter == 5:
         screen.blit(goatGuyAngry,(-70,483))
         goatGuy5Text = defFont.render("ALRIGHT THAT'S.....", True, white)
@@ -970,6 +972,7 @@ while(mainMenu == True):
         pygame.display.flip()
         sleep(.8)
         titleButtonCounter += 1
+        
     elif titleButtonCounter == 6:
         screen.blit(goatGuyNormal,(-70,483))
         goatGuy6Text = defFont.render("Wait...something's wrong...", True, white)
@@ -981,6 +984,7 @@ while(mainMenu == True):
         pygame.display.flip()
         sleep(3)
         titleButtonCounter += 1
+
     elif titleButtonCounter == 7:
         goatGuy7Text = defFont.render("I'm really serious this time", True, white)
         screen.fill(navy)
@@ -991,6 +995,7 @@ while(mainMenu == True):
         pygame.display.flip()
         sleep(2)
         titleButtonCounter += 1
+
     elif titleButtonCounter == 8:
         goatGuy8Text = defFont.render("DO NOT PRESS THAT BUTTON AGAIN", True, white)
         screen.fill(navy)
@@ -999,6 +1004,7 @@ while(mainMenu == True):
         screen.blit(goatQuizTitle,(240, 64))
         screen.blit(startButtonImg,(384,570))
         pygame.display.flip()
+
     elif titleButtonCounter == 9:
         goatGuy9Text = defFont.render("What have you done...", True, white)
         screen.fill(navy)
@@ -1033,6 +1039,7 @@ while(mainMenu == True):
             clock.tick(60)
             pygame.display.flip()
         titleButtonCounter += 1
+
     elif titleButtonCounter == 10:  # Quiz cannot be started at this point
         goatGuy10Text = defFont.render("LOOK WHAT YOU DID! YOU BROKE IT!", True, white)
         screen.fill(navy)
@@ -1041,6 +1048,7 @@ while(mainMenu == True):
         pygame.display.flip()
         sleep(3)
         titleButtonCounter += 1
+
     elif titleButtonCounter == 11:
         goatGuy11Text = defFont.render("THIS IS WHY WE CANT HAVE NICE THINGS!", True, white)
         screen.fill(navy)
@@ -1049,6 +1057,7 @@ while(mainMenu == True):
         pygame.display.flip()
         sleep(2.5)
         titleButtonCounter += 1
+
     elif titleButtonCounter == 12:
         goatGuy12Text = defFont.render("Whatever your fun's over", True, white)
         screen.fill(navy)
@@ -1057,6 +1066,7 @@ while(mainMenu == True):
         pygame.display.flip()
         sleep(2)
         titleButtonCounter += 1
+
     elif titleButtonCounter == 13:
         goatGuy13Text = defFont.render("You ruined my quiz, Goodbye", True, white)
         screen.fill(navy)

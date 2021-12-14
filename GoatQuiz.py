@@ -1,7 +1,7 @@
 # Author: Aidan Kooiman, Izaan Syed, Robert Connors, Evan Miller
 # Date: 11/26/2021
 # FileName: GoatQuiz
-# Description: A personality quiz that assigns you one of twelve goats at the end
+# Description: A personality quiz that assigns you one of twelve goats at the end, coded in spaghetti due to time constraints 🍝
 # Prerequesites: pygame
 
 import os, sys, subprocess
@@ -11,7 +11,7 @@ from time import time, sleep
 try:
     import pygame
 except:
-    print("pygame Not Installed! Please run prerequesite batch file to install.")
+    print("pygame Not Installed! Please run "Install Pygame" batch file to install.")
     exit()
 
 pygame.init()
@@ -27,12 +27,12 @@ lightBlue = (99,155,255)
 black = (0,0,0)
 navy = (21,76,121)
 
-# Pygame window loaded with width height and mouse variables
+# Pygame window loading with width height and mouse variables
 screen = pygame.display.set_mode(size)
+clock = pygame.time.Clock()
 pygame.display.set_caption("Goat Quiz")
 width = screen.get_width()
 height = screen.get_height()
-startClicked = False
 
 # Video Display Class
 # Credit to Kingsley for method
@@ -75,13 +75,11 @@ class VideoSprite( pygame.sprite.Sprite ):
                     self.image.fill( ( 0,0,0 ) )
                     self.video_stop = True
 
-
 # <-- Main menu assets loading -->
 
-startSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\scream.wav"))
-clickSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\button.wav"))
-demolitionSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\demolition.wav"))
-sansSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\sans.wav"))
+startSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\scream.wav")) # Used on quiz start
+clickSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\button.wav")) # Used whenever quiz button is clicked
+demolitionSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\demolition.wav")) # Used in easter egg
 
 defFont = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
 defFontQuestion = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
@@ -127,8 +125,6 @@ button5Down = pygame.transform.scale(button5Down,(80,80))
 button6Down = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button6Down.png"), "r")
 button6Down = pygame.transform.scale(button6Down,(80,80))
 
-
-
 # Goat Guy Images and variables
 goatGuyNormal = pygame.image.load(os.path.join(sys.path[0], r"Sprites\GoatGuyNormal.png"), "r")
 goatGuyNormal = pygame.transform.scale(goatGuyNormal,(320,320))
@@ -138,9 +134,9 @@ goatGuyAngry = pygame.image.load(os.path.join(sys.path[0], r"Sprites\GoatGuyAngr
 goatGuyAngry = pygame.transform.scale(goatGuyAngry,(320,320))
 titleButtonCounter = 0
 goatGuySlide = -210
-loopOnce = 1
 goatQuizSlide2 = 64
 startButtonSlide2 = 570
+loopOnce = 1
 
 #Loading icon images
 loading1 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading1.png"), "r")
@@ -173,11 +169,11 @@ loading9 = pygame.transform.scale(loading9,(192,64))
 loading10 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading10.png"), "r")
 loading10 = pygame.transform.scale(loading10,(192,64))
 
-#You Got Image
+# You Got Image
 youGot = pygame.image.load(os.path.join(sys.path[0], r"Sprites\YouGot.png"), "r")
 youGot = pygame.transform.scale(youGot,(600,120))
 
-#Cheat Menu Buttons
+# Cheat Menu Buttons
 cheatButtonImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\CheatButton.png"), "r")
 
 cheatButtonDownImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\CheatButtonDown.png"), "r")
@@ -194,7 +190,7 @@ plusOneImg = pygame.transform.scale(plusOneImg,(80,80))
 plusOneDownImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\PlusOneDown.png"), "r")
 plusOneDownImg = pygame.transform.scale(plusOneDownImg,(80,80))
 
-#Loading icon method
+# Loading icon method
 def loading(x,y):
     updateLoading = pygame.Rect(x,y,192,64)
     loadingText = defFontLoading.render("Calculating", True, white)
@@ -276,7 +272,8 @@ ansbutton4 = Button(50,470,button4)
 ansbutton5 = Button(50,560,button5)
 ansbutton6 = Button(50,650,button6)
 titleButton = Button(240,64,goatQuizTitle)
-#Cheat Menu Buttons
+
+# Cheat Menu Buttons
 cheatButton = Button(10,746,cheatButtonImg)
 backButton = Button(10,10,backButtonImg)
 plusOneButton1 = Button(10,100,plusOneImg)
@@ -292,7 +289,7 @@ plusOneButton10 = Button(500,280,plusOneImg)
 plusOneButton11 = Button(500,370,plusOneImg)
 plusOneButton12 = Button(500,460,plusOneImg)
 
-# Declaring goat integers
+# Declaring goat integers, stores amount of "score" for each goat type
 happyGoat = 0
 sadGoat = 0
 tropicalGoat = 0
@@ -320,6 +317,8 @@ nomadGoatString = "NomadGoat"
 armyGoatString = "ArmyGoat"
 musicalGoatString = "MusicalGoat"
 boxerGoatString = "BoxerGoat"
+
+
     
 # Question class
 class Questions():
@@ -622,11 +621,8 @@ def createQuestion(text, ans1, goat1, ans2, goat2, ans3, goat3, ans4, goat4, ans
 
         clock.tick(60)
         pygame.display.flip()
-    
-            
-clock = pygame.time.Clock()
 
-# <-- Start of game loop --> 
+# <-- Start of quiz loop --> 
 mainMenu = True
 while(mainMenu == True):
     
@@ -639,14 +635,14 @@ while(mainMenu == True):
             pygame.quit()
     
     if titleButton.draw() == True:
-        titleButtonCounter = titleButtonCounter + 1
+        titleButtonCounter += 1
         screen.fill(navy)
         screen.blit(goatQuizTitleDown,(240, 64))
         screen.blit(startButtonImg,(384,570))
         pygame.display.flip()
         sleep(.1)
     
-    #Creating a cheat menu to get access to all goat endings easily
+    # Creating a cheat menu to get access to all goat endings easily
     if cheatButton.draw() == True:
         screen.fill(navy)
         screen.blit(cheatButtonDownImg,(10,746))
@@ -666,7 +662,7 @@ while(mainMenu == True):
                 if event.type == pygame.QUIT:  
                     pygame.quit()
             
-            #Drawing plus one buttons
+            # Drawing plus one buttons
             if plusOneButton1.draw() == True:
                 goatDictionary["happyGoat"] += 1
                 screen.fill(navy)
@@ -881,10 +877,8 @@ while(mainMenu == True):
                 screen.blit(plusOneImg,(10,100))
                 square = pygame.Rect(500,460,80,80)
                 pygame.display.update(square)
-                
             
-            
-            #Drawing text next to buttons
+            # Drawing text next to buttons
             plusOneText1 = defFont.render("Happy", True, white)
             screen.blit(plusOneText1,(100,100))
             
@@ -943,16 +937,15 @@ while(mainMenu == True):
                 if event.type == pygame.QUIT:  
                     False
                     
-            goatGuySlide = goatGuySlide + 3
+            goatGuySlide += 3
             screen.blit(goatGuyNormal,(goatGuySlide, 483))
             
             if goatGuySlide > -70:
                 break
             
-            
             clock.tick(60)
             pygame.display.flip()
-            loopOnce = loopOnce + 1
+            loopOnce += 1
         screen.blit(goatGuyNormal,(-70,483))
         goatGuy1Text = defFont.render("Hey dont press that!", True, white)
         screen.blit(goatGuy1Text,(150,483))
@@ -976,7 +969,7 @@ while(mainMenu == True):
         screen.blit(startButtonImg,(384,570))
         pygame.display.flip()
         sleep(.8)
-        titleButtonCounter = titleButtonCounter + 1
+        titleButtonCounter += 1
     elif titleButtonCounter == 6:
         screen.blit(goatGuyNormal,(-70,483))
         goatGuy6Text = defFont.render("Wait...something's wrong...", True, white)
@@ -987,7 +980,7 @@ while(mainMenu == True):
         screen.blit(startButtonImg,(384,570))
         pygame.display.flip()
         sleep(3)
-        titleButtonCounter = titleButtonCounter + 1
+        titleButtonCounter += 1
     elif titleButtonCounter == 7:
         goatGuy7Text = defFont.render("I'm really serious this time", True, white)
         screen.fill(navy)
@@ -997,7 +990,7 @@ while(mainMenu == True):
         screen.blit(startButtonImg,(384,570))
         pygame.display.flip()
         sleep(2)
-        titleButtonCounter = titleButtonCounter + 1
+        titleButtonCounter += 1
     elif titleButtonCounter == 8:
         goatGuy8Text = defFont.render("DO NOT PRESS THAT BUTTON AGAIN", True, white)
         screen.fill(navy)
@@ -1025,11 +1018,11 @@ while(mainMenu == True):
                 if event.type == pygame.QUIT:  
                     False
                     
-            goatQuizSlide2 = goatQuizSlide2 + 4
+            goatQuizSlide2 += 4
             screen.blit(goatQuizTitle,(240, goatQuizSlide2))
             
             if goatQuizSlide2 > 200:
-                startButtonSlide2 = startButtonSlide2 + 4
+                startButtonSlide2 += 4
                 screen.blit(startButtonImg,(384, startButtonSlide2))
             else:
                 screen.blit(startButtonImg,(384,570))
@@ -1039,7 +1032,7 @@ while(mainMenu == True):
             
             clock.tick(60)
             pygame.display.flip()
-        titleButtonCounter = titleButtonCounter + 1
+        titleButtonCounter += 1
     elif titleButtonCounter == 10:  # Quiz cannot be started at this point
         goatGuy10Text = defFont.render("LOOK WHAT YOU DID! YOU BROKE IT!", True, white)
         screen.fill(navy)
@@ -1047,7 +1040,7 @@ while(mainMenu == True):
         screen.blit(goatGuy10Text,(150,483))
         pygame.display.flip()
         sleep(3)
-        titleButtonCounter = titleButtonCounter + 1
+        titleButtonCounter += 1
     elif titleButtonCounter == 11:
         goatGuy11Text = defFont.render("THIS IS WHY WE CANT HAVE NICE THINGS!", True, white)
         screen.fill(navy)
@@ -1055,7 +1048,7 @@ while(mainMenu == True):
         screen.blit(goatGuy11Text,(130,483))
         pygame.display.flip()
         sleep(2.5)
-        titleButtonCounter = titleButtonCounter + 1
+        titleButtonCounter += 1
     elif titleButtonCounter == 12:
         goatGuy12Text = defFont.render("Whatever your fun's over", True, white)
         screen.fill(navy)
@@ -1063,7 +1056,7 @@ while(mainMenu == True):
         screen.blit(goatGuy12Text,(150,483))
         pygame.display.flip()
         sleep(2)
-        titleButtonCounter = titleButtonCounter + 1
+        titleButtonCounter += 1
     elif titleButtonCounter == 13:
         goatGuy13Text = defFont.render("You ruined my quiz, Goodbye", True, white)
         screen.fill(navy)
@@ -1097,7 +1090,7 @@ while(mainMenu == True):
                     if event.type == pygame.QUIT:  
                         False
                         
-                goatQuizSlide = goatQuizSlide + 8
+                goatQuizSlide += 8
                 screen.blit(goatQuizTitle,(goatQuizSlide, 64))
                 
                 startButtonSlide = startButtonSlide - 8
@@ -1123,64 +1116,64 @@ while running == True:
         if event.type == pygame.QUIT:  
             running = False
     
-    # Question1
+    # Question 1
     createQuestion("1. Describe Your Personality With a Food", "Steak", "BoxerGoat", "Lucky Charms", "HappyGoat", "Pineapple", "TropicalGoat", "Coffee", "AnxiousGoat", "Hot Dogs", "SpiderGoat", "McDonalds", "ArmyGoat")
     
-    # Question2
+    # Question 2
     createQuestion("2. Favourite Type of Drink", "G-Fuel", gamerGoatString, "Pop", happyGoatString, "Water", healthyGoatString, "Tea", anxiousGoatString, "Energy Drink", boxerGoatString, "Milk", armyGoatString)
-    
-    # Question3
+
+    # Question 3
     createQuestion("3. Favourite School Subject", "Math", happyGoatString, "Gym", boxerGoatString, "English", anxiousGoatString, "Lunch", gamerGoatString, "Science", spiderGoatString, "History", nomadGoatString)
     
-    # Question4
+    # Question 4
     createQuestion("4. What is Your State of Mind?", "Crazy", angryGoatString, "Tired", anxiousGoatString, "Bored", nomadGoatString, "Social", healthyGoatString, "Fear", armyGoatString, "Depressed", sadGoatString)
     
-    # Question5
+    # Question 5
     createQuestion("5. What's Your Dream Holiday?", "Disney", happyGoatString, "Cuba", angryGoatString, "Nowhere", nomadGoatString, "Japan", musicalGoatString, "Dominican Republic", tropicalGoatString, "Ohio", sadGoatString)
     
-    # Question6
+    # Question 6
     createQuestion("6. Where Would Your Dream House be?", "Mountains", armyGoatString, "City", spiderGoatString, "Forest", musicalGoatString, "Desert", nomadGoatString, "Beach House", tropicalGoatString, "Space", gamerGoatString)
     
-    # Question7
+    # Question 7
     createQuestion("7. What's Your Favourite Movie Genre?", "Action", boxerGoatString, "Rom-Com", angryGoatString, "Sci-Fi", sadGoatString, "Thriller", tropicalGoatString, "Comedy", gamerGoatString, "Musical", musicalGoatString)
     
-    # Question8
+    # Question 8
     createQuestion("8. What's Your Favourite Music Genre?", "Rap", sadGoatString, "Rock", spiderGoatString, "Hip-Hop", healthyGoatString, "EDM", anxiousGoatString, "Country", angryGoatString, "Classical", tropicalGoatString)
     
-    # Question9
+    # Question 9
     createQuestion("9. Which Superpower Would You Want?", "Strength", boxerGoatString, "Super Speed", happyGoatString, "Teleportation", nomadGoatString, "Telekinesis", gamerGoatString, "Mind Reading", musicalGoatString, "Invisibility", armyGoatString)
     
-    # Question10
+    # Question 10
     createQuestion("10. Pick a Movie Series", "Marvel", spiderGoatString, "Harry Potter", anxiousGoatString, "Star Wars", healthyGoatString, "Hunger Games", tropicalGoatString, "Dark Knight", armyGoatString, "Other", sadGoatString)
     
-    # Question11
+    # Question 11
     createQuestion("11. What's Your Favourite Animal?", "Goat", healthyGoatString, "GOAT", gamerGoatString, "gOAt", spiderGoatString, "goaT", musicalGoatString, "goat", nomadGoatString, "I don't like goats", sadGoatString)
     
-    # Question12
+    # Question 12
     createQuestion("12. What's Your Favourite Colour?", "Blue", happyGoatString, "Green", armyGoatString, "Pink", tropicalGoatString, "Red", angryGoatString, "Yellow", anxiousGoatString, "Transparent", sadGoatString)
         
-    # Question13
+    # Question 13
     createQuestion("13. Pick a Social Media Platform", "Facebook", boxerGoatString, "Snapchat", healthyGoatString, "Tiktok", gamerGoatString, "Instagram", spiderGoatString, "Tinder", musicalGoatString, "WhatsApp", nomadGoatString)
     
-    # Question14
+    # Question 14
     createQuestion("14. How Do You Spend Your Free Time?", "Outside", healthyGoatString, "Listening to Music", musicalGoatString, "Watching Movies/Tv", angryGoatString, "Family", happyGoatString, "Gaming", gamerGoatString, "Sports", boxerGoatString)
     
-    # Question15
+    # Question 15
     createQuestion("15. Favourite Video Game Platform?", "Playstation", angryGoatString, "Mobile", happyGoatString, "Computer", armyGoatString, "Virtual Reality", sadGoatString, "Xbox", tropicalGoatString, "None/Other", healthyGoatString)
     
-    # Question16
+    # Question 16
     createQuestion("16. What is Your Dream Job?", "Superhero", spiderGoatString, "Government", armyGoatString, "Trades", boxerGoatString, "Homeless", nomadGoatString, "Musician", musicalGoatString, "None", sadGoatString)
     
-    # Question17
+    # Question 17
     createQuestion("17. Favourite Kind of Media?", "Movies", tropicalGoatString, "Tv Shows", healthyGoatString, "Comics", gamerGoatString, "Youtube", angryGoatString, "Anime", anxiousGoatString, "Other", boxerGoatString)
     
-    # Question18
+    # Question 18
     createQuestion("18. What is The Best Star Wars Media?", "The Prequels", sadGoatString, "The Originals", happyGoatString, "The Sequels", nomadGoatString, "Tv Shows", anxiousGoatString, "The Books", spiderGoatString, "None", boxerGoatString)
         
-    # Question19
+    # Question 19
     createQuestion("19. What is Your Favourite Vegetable?", "Potato", spiderGoatString, "Tomato", angryGoatString, "Onions", musicalGoatString, "Carrots", tropicalGoatString, "Cucumber", gamerGoatString, "Other", healthyGoatString)
     
-    # Question20
+    # Question 20
     createQuestion("20. Are Goats Cool?", "Yes", armyGoatString, "No", anxiousGoatString, "Sometimes", happyGoatString, "They Are Annoying", angryGoatString, "What is a Goat?", nomadGoatString, "They Sound Cool", musicalGoatString)
         
     print(goatDictionary)
@@ -1196,7 +1189,7 @@ while running == True:
         happyGoatVideo = VideoSprite(pygame.Rect(center-254,320,507,380), (os.path.join(sys.path[0], r"Videos\HappyGoat.mp4")))
         sprite_group = pygame.sprite.Group()
         sprite_group.add(happyGoatVideo)
-        
+        videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\happygoat.wav"))
         border = pygame.Rect((center-264,310,527,400))
         
     elif winningGoat == "sadGoat":
@@ -1205,9 +1198,7 @@ while running == True:
         sadGoatVideo = VideoSprite(pygame.Rect(center-254,320,507,380), (os.path.join(sys.path[0], r"Videos\SadGoat.mp4")))
         sprite_group = pygame.sprite.Group()
         sprite_group.add(sadGoatVideo)
-        
         videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\sadgoat.wav"))
-        
         border = pygame.Rect((center-264,310,527,400))
         
     elif winningGoat == "tropicalGoat":
@@ -1216,9 +1207,7 @@ while running == True:
         tropicalGoatVideo = VideoSprite(pygame.Rect(center-338,320,676,380), (os.path.join(sys.path[0], r"Videos\TropicalGoat.mp4")))
         sprite_group = pygame.sprite.Group()
         sprite_group.add(tropicalGoatVideo)
-        
         videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\tropicalgoat.wav"))
-        
         border = pygame.Rect((center-348,310,696,400))
         
     elif winningGoat == "anxiousGoat":
@@ -1227,9 +1216,7 @@ while running == True:
         anxiousGoatVideo = VideoSprite(pygame.Rect(center-338,320,676,380), (os.path.join(sys.path[0], r"Videos\AnxiousGoat.mp4")))
         sprite_group = pygame.sprite.Group()
         sprite_group.add(anxiousGoatVideo)
-        
         videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\anxiousgoat.wav"))
-        
         border = pygame.Rect((center-348,310,696,400))
         
     elif winningGoat == "gamerGoat":
@@ -1238,7 +1225,7 @@ while running == True:
         gamerGoatVideo = VideoSprite(pygame.Rect(center-187,320,374,380), (os.path.join(sys.path[0], r"Videos\GamerGoat.mp4")))
         sprite_group = pygame.sprite.Group()
         sprite_group.add(gamerGoatVideo)
-        
+        videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\gamergoat.wav"))
         border = pygame.Rect((center-197,310,394,400))
         
     elif winningGoat == "angryGoat":
@@ -1247,9 +1234,7 @@ while running == True:
         angryGoatVideo = VideoSprite(pygame.Rect(center-338,320,676,380), (os.path.join(sys.path[0], r"Videos\AngryGoat.mp4")))
         sprite_group = pygame.sprite.Group()
         sprite_group.add(angryGoatVideo)
-        
         videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\angrygoat.wav"))
-        
         border = pygame.Rect((center-348,310,696,400))
         
     elif winningGoat == "healthyGoat":
@@ -1258,7 +1243,7 @@ while running == True:
         healthyGoatVideo = VideoSprite(pygame.Rect(center-338,320,676,380), (os.path.join(sys.path[0], r"Videos\HealthyGoat.mp4")))
         sprite_group = pygame.sprite.Group()
         sprite_group.add(healthyGoatVideo)
-        
+        videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\healthygoat.wav"))
         border = pygame.Rect((center-348,310,696,400))
         
     elif winningGoat == "spiderGoat":
@@ -1267,7 +1252,7 @@ while running == True:
         spiderGoatVideo = VideoSprite(pygame.Rect(center-152,320,304,380), (os.path.join(sys.path[0], r"Videos\SpiderGoat.mp4")))
         sprite_group = pygame.sprite.Group()
         sprite_group.add(spiderGoatVideo)
-        
+        videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\spidergoat.wav"))
         border = pygame.Rect((center-162,310,324,400))
         
     elif winningGoat == "nomadGoat":
@@ -1276,9 +1261,7 @@ while running == True:
         nomadGoatVideo = VideoSprite(pygame.Rect(center-338,320,676,380), (os.path.join(sys.path[0], r"Videos\NomadGoat.mp4")))
         sprite_group = pygame.sprite.Group()
         sprite_group.add(nomadGoatVideo)
-        
         videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\nomadgoat.wav"))
-        
         border = pygame.Rect((center-348,310,696,400))
         
     elif winningGoat == "armyGoat":
@@ -1287,7 +1270,7 @@ while running == True:
         armyGoatVideo = VideoSprite(pygame.Rect(center-254,320,507,380), (os.path.join(sys.path[0], r"Videos\ArmyGoat.mp4")))
         sprite_group = pygame.sprite.Group()
         sprite_group.add(armyGoatVideo)
-        
+        videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\armygoat.wav"))
         border = pygame.Rect((center-264,310,527,400))
         
     elif winningGoat == "musicalGoat":
@@ -1296,9 +1279,7 @@ while running == True:
         musicalGoatVideo = VideoSprite(pygame.Rect(center-190,320,380,380), (os.path.join(sys.path[0], r"Videos\MusicalGoat.mp4")))
         sprite_group = pygame.sprite.Group()
         sprite_group.add(musicalGoatVideo)
-        
         videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\musicalgoat.wav"))
-        
         border = pygame.Rect((center-200,310,400,400))
         
     elif winningGoat == "boxerGoat":
@@ -1307,14 +1288,11 @@ while running == True:
         boxerGoatVideo = VideoSprite(pygame.Rect(center-338,320,676,380), (os.path.join(sys.path[0], r"Videos\BoxerGoat.mp4")))
         sprite_group = pygame.sprite.Group()
         sprite_group.add(boxerGoatVideo)
-        
+        videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\boxergoat.wav"))
         border = pygame.Rect((center-348,310,696,400))
-    
     break
 
-randCalculating = randint(1,3)
-calculating = time()
-stopCalculating = calculating + randCalculating
+stopCalculating = time() + randint(1,3) # Determines random amount of "calculating time"
 stoppedCalculating = False
 refreshOnce = False
 endScreen = True
@@ -1351,14 +1329,10 @@ while endScreen == True:
             except:
                 print("Exception: No Sound For Video")
                 playOnce = True
-
-    
     
     refreshOnce = True
     
     pygame.display.flip()
-
-
 
 print("Quiz Finished")
 pygame.quit()

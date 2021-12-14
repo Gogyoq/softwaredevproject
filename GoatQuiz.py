@@ -1102,6 +1102,7 @@ while(mainMenu == True):
             sleep(.1)
             goatQuizSlide = 240
             startButtonSlide = 384
+            cheatButtonSlide = 10
             while True:
                 
                 screen.fill(navy)
@@ -1115,6 +1116,9 @@ while(mainMenu == True):
                 
                 startButtonSlide = startButtonSlide - 8
                 screen.blit(startButtonImg,(startButtonSlide, 570))
+                
+                cheatButtonSlide = cheatButtonSlide - 1
+                screen.blit(cheatButtonImg,(cheatButtonSlide, 746))
                 
                 if goatQuizSlide > 1050:
                     mainMenu = False

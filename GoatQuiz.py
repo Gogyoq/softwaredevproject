@@ -2,13 +2,11 @@
 # Date: 11/26/2021
 # FileName: GoatQuiz
 # Description: A personality quiz that assigns you one of twelve goats at the end
-# Prerequesites: OpenCV, pygame
+# Prerequesites: pygame
 
 import os, sys, subprocess
 from random import randint
-from time import time
-from time import sleep
-import subprocess
+from time import time, sleep
 
 try:
     import pygame
@@ -36,7 +34,9 @@ width = screen.get_width()
 height = screen.get_height()
 startClicked = False
 
-#CREDIT TO KINGSLEY FOR METHOD https://stackoverflow.com/questions/62870381/how-to-play-video-in-pygame-currently
+# Video Display Class
+# Credit to Kingsley for method
+# https://stackoverflow.com/questions/62870381/how-to-play-video-in-pygame-currently
 class VideoSprite( pygame.sprite.Sprite ):
     FFMPEG_BIN = (os.path.join(sys.path[0], r"ffmpeg\bin\ffmpeg"))  # Full path to ffmpeg executable
 
@@ -82,19 +82,6 @@ startSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\scream.wav"))
 clickSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\button.wav"))
 demolitionSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\demolition.wav"))
 sansSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\sans.wav"))
-
-# happyGoatSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Videos\happygoat.wav"))
-# sadGoatSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Videos\sadgoat.wav"))
-# tropicalGoatSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Videos\tropicalgoat.wav"))
-# anxiousGoatSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Videos\anxiousgoat.wav"))
-# gamerGoatSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Videos\gamergoat.wav"))
-# angryGoatSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Videos\angrygoat.wav"))
-# healthyGoatSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Videos\healthygoat.wav"))
-# spiderGoatSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Videos\spidergoat.wav"))
-# nomadGoatSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Videos\nomadgoat.wav"))
-# armyGoatSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Videos\armygoat.wav"))
-# musicalGoatSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Videos\musicalgoat.wav"))
-# boxerGoatSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Videos\happygoat.wav"))
 
 defFont = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
 defFontQuestion = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)

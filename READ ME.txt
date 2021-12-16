@@ -3,6 +3,18 @@ Date: 11/26/2021
 Description: A personality quiz that assigns you one of twelve goats at the end
 Prerequesites: pygame
 
+
+DISCLAIMER REGARDING GOAT VIDEO SOUND:
+Some goat videos have sound turned off by default since the original audio is not good or includes people talking. 
+We did this to maintain a feeling of polish to our program.
+The goat videos that have sound by default require/benefit greatly from having audio.
+If you would like all goat videos to have sound please change the soundsON boolean to True.
+The variable is located right under our imports and pygame.init()
+
+The goat videos affected by the soundsON variable are:
+Happy Goat, Gamer Goat, Healthy Goat, Spider Goat, Army Goat and Boxer Goat
+
+
 How to play the quiz:
 1. Click the start button
 2. Answer each question

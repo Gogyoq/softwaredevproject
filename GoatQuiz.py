@@ -4,8 +4,7 @@
 # Description: A personality quiz that assigns you one of twelve goats at the end
 # Prerequesites: pygame
 
-import os, sys, subprocess, tkinter
-from random import randint
+import os, sys, subprocess, tkinter, random
 from time import time, sleep
 
 try:               # Since pygame is not a preinstalled library, error checking added on initialization
@@ -182,6 +181,25 @@ plusOneDownImg = pygame.transform.scale(plusOneDownImg,(80,80))
 
 blank = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Blank.png"), "r")
 
+#Retry, Exit and Arrow images
+retryButtonImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\RetryButton.png"), "r")
+retryButtonImg = pygame.transform.scale(retryButtonImg, (204,72))
+
+retryButtonDownImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\RetryButtonDown.png"), "r")
+retryButtonDownImg = pygame.transform.scale(retryButtonDownImg, (204,72))
+
+exitButtonImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\ExitButton.png"), "r")
+exitButtonImg = pygame.transform.scale(exitButtonImg, (174,72))
+
+exitButtonDownImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\ExitButtonDown.png"), "r")
+exitButtonDownImg = pygame.transform.scale(exitButtonDownImg, (174,72))
+
+arrowButtonImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\ArrowButton.png"), "r")
+arrowButtonImg = pygame.transform.scale(arrowButtonImg,(64,64))
+
+arrowButtonDownImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\ArrowButtonDown.png"), "r")
+arrowButtonDownImg = pygame.transform.scale(arrowButtonDownImg,(64,64))
+
 #Loading icon method
 def loading(x,y):
     updateLoading = pygame.Rect(x,y,192,64)
@@ -264,6 +282,9 @@ ansbutton4 = Button(50,470,button4)
 ansbutton5 = Button(50,560,button5)
 ansbutton6 = Button(50,650,button6)
 titleButton = Button(240,64,goatQuizTitle)
+retryButton = Button(10,204,retryButtonImg)
+exitButton = Button(840,204,exitButtonImg)
+arrowButton = Button(10,10,arrowButtonImg)
 
 # Cheat menu buttons
 showCheat = Button(10,746,blank)
@@ -281,21 +302,6 @@ plusOneButton9 = Button(500,190,plusOneImg)
 plusOneButton10 = Button(500,280,plusOneImg)
 plusOneButton11 = Button(500,370,plusOneImg)
 plusOneButton12 = Button(500,460,plusOneImg)
-
-# Declaring goat integers, stores amount of "score" for each goat type
-happyGoat = 0
-sadGoat = 0
-tropicalGoat = 0
-anxiousGoat = 0
-gamerGoat = 0
-angryGoat = 0
-healthyGoat = 0
-spiderGoat = 0
-nomadGoat = 0
-armyGoat = 0
-musicalGoat = 0
-boxerGoat = 0
-winningGoat = None
 
 # Declaring goat strings
 happyGoatString = "HappyGoat"
@@ -323,7 +329,7 @@ class Questions():
         ans5Text = defFont.render(ans5, True, white)
         ans6Text = defFont.render(ans6, True, white)
         # Displaying it on screen
-        screen.blit(questionText,(30,50))
+        screen.blit(questionText,(30,90))
         screen.blit(ans1Text,(140,200))
         screen.blit(ans2Text,(140,290))
         screen.blit(ans3Text,(140,380))
@@ -560,7 +566,8 @@ class Questions():
             elif goat6 == "BoxerGoat":
                 return "BoxerGoat"
 
-goatDictionary = {"happyGoat":happyGoat,"sadGoat":sadGoat,"tropicalGoat":tropicalGoat,"anxiousGoat":anxiousGoat,"gamerGoat":gamerGoat,"angryGoat":angryGoat,"healthyGoat":healthyGoat,"spiderGoat":spiderGoat,"nomadGoat":nomadGoat,"armyGoat":armyGoat,"musicalGoat":musicalGoat,"boxerGoat":boxerGoat}
+winningGoat = None
+goatDictionary = {"happyGoat":0,"sadGoat":0,"tropicalGoat":0,"anxiousGoat":0,"gamerGoat":0,"angryGoat":0,"healthyGoat":0,"spiderGoat":0,"nomadGoat":0,"armyGoat":0,"musicalGoat":0,"boxerGoat":0}
 
 def createQuestion(text, ans1, goat1, ans2, goat2, ans3, goat3, ans4, goat4, ans5, goat5, ans6, goat6):
     while(True):
@@ -570,6 +577,21 @@ def createQuestion(text, ans1, goat1, ans2, goat2, ans3, goat3, ans4, goat4, ans
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:  
                     pygame.quit()
+                    
+        arrowRefresh = pygame.Rect(10,10,64,64)
+        global arrowButtonPressed
+        arrowButtonPressed = False
+        
+        if arrowButton.draw() == True:
+            pygame.draw.rect(screen,navy,arrowRefresh)
+            screen.blit(arrowButtonDownImg,(10,10))
+            pygame.display.update(arrowRefresh)
+            sleep(.1)
+            screen.blit(arrowButtonImg,(10,10))
+            pygame.display.update(arrowRefresh)
+            sleep(.1)
+            arrowButtonPressed = True
+            break
         
         goatResponse = Questions.question(text, ans1, goat1, ans2, goat2, ans3, goat3, ans4, goat4, ans5, goat5, ans6, goat6)
         
@@ -617,745 +639,824 @@ def createQuestion(text, ans1, goat1, ans2, goat2, ans3, goat3, ans4, goat4, ans
 showCheatPressed = False
 clock = pygame.time.Clock()
 
-# <-- Start of quiz loop --> 
-mainMenu = True
-while(mainMenu == True):
-    
-    clock.tick(60)
-    
-    screen.fill(navy)
-    
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:  
-            pygame.quit()
-    
-    if titleButton.draw() == True:
-        titleButtonCounter += 1
-        screen.fill(navy)
-        screen.blit(goatQuizTitleDown,(240, 64))
-        screen.blit(startButtonImg,(384,570))
-        pygame.display.flip()
-        sleep(.1)
-    
-    #Creating a cheat menu to get access to all goat endings easily
-    if showCheatPressed == False:
-        if showCheat.draw() ==  True:
-            showCheatPressed = True
-    if showCheatPressed == True:
-        if cheatButton.draw() == True:
-            screen.fill(navy)
-            screen.blit(cheatButtonDownImg,(10,746))
-            screen.blit(goatQuizTitle,(240, 64))
-            screen.blit(startButtonImg,(384,570))
-            pygame.display.flip()
-            sleep(.1)
-            screen.blit(cheatButtonImg,(10,746))
-            sleep(.1)
-            while(True):
-                
-                clock.tick(60)
-                
-                screen.fill(navy)
-                
-                for event in pygame.event.get():
-                    if event.type == pygame.QUIT:  
-                        pygame.quit()
-                
-                #Drawing plus one buttons
-                if plusOneButton1.draw() == True:
-                    goatDictionary["happyGoat"] += 1
-                    screen.fill(navy)
-                    screen.blit(plusOneDownImg,(10,100))
-                    screen.blit(plusOneImg,(500,460))
-                    screen.blit(plusOneImg,(500,370))
-                    screen.blit(plusOneImg,(500,280))
-                    screen.blit(plusOneImg,(500,190))
-                    screen.blit(plusOneImg,(500,100))
-                    screen.blit(plusOneImg,(10,640))
-                    screen.blit(plusOneImg,(10,550))
-                    screen.blit(plusOneImg,(10,460))
-                    screen.blit(plusOneImg,(10,370))
-                    screen.blit(plusOneImg,(10,280))
-                    screen.blit(plusOneImg,(10,190))
-                    square = pygame.Rect(10,100,80,80)
-                    pygame.display.update(square)
-                    
-                elif plusOneButton2.draw() == True:
-                    goatDictionary["sadGoat"] += 1 
-                    screen.fill(navy)
-                    screen.blit(plusOneDownImg,(10,190))
-                    screen.blit(plusOneImg,(500,460))
-                    screen.blit(plusOneImg,(500,370))
-                    screen.blit(plusOneImg,(500,280))
-                    screen.blit(plusOneImg,(500,190))
-                    screen.blit(plusOneImg,(500,100))
-                    screen.blit(plusOneImg,(10,640))
-                    screen.blit(plusOneImg,(10,550))
-                    screen.blit(plusOneImg,(10,460))
-                    screen.blit(plusOneImg,(10,370))
-                    screen.blit(plusOneImg,(10,280))
-                    screen.blit(plusOneImg,(10,100))
-                    square = pygame.Rect(10,190,80,80)
-                    pygame.display.update(square)
-                
-                elif plusOneButton3.draw() == True:
-                    goatDictionary["tropicalGoat"] += 1 
-                    screen.fill(navy)
-                    screen.blit(plusOneDownImg,(10,280))
-                    screen.blit(plusOneImg,(500,460))
-                    screen.blit(plusOneImg,(500,370))
-                    screen.blit(plusOneImg,(500,280))
-                    screen.blit(plusOneImg,(500,190))
-                    screen.blit(plusOneImg,(500,100))
-                    screen.blit(plusOneImg,(10,640))
-                    screen.blit(plusOneImg,(10,550))
-                    screen.blit(plusOneImg,(10,460))
-                    screen.blit(plusOneImg,(10,370))
-                    screen.blit(plusOneImg,(10,190))
-                    screen.blit(plusOneImg,(10,100))
-                    square = pygame.Rect(10,280,80,80)
-                    pygame.display.update(square)
-                
-                elif plusOneButton4.draw() == True:
-                    goatDictionary["anxiousGoat"] += 1 
-                    screen.fill(navy)
-                    screen.blit(plusOneDownImg,(10,370))
-                    screen.blit(plusOneImg,(500,460))
-                    screen.blit(plusOneImg,(500,370))
-                    screen.blit(plusOneImg,(500,280))
-                    screen.blit(plusOneImg,(500,190))
-                    screen.blit(plusOneImg,(500,100))
-                    screen.blit(plusOneImg,(10,640))
-                    screen.blit(plusOneImg,(10,550))
-                    screen.blit(plusOneImg,(10,460))
-                    screen.blit(plusOneImg,(10,280))
-                    screen.blit(plusOneImg,(10,190))
-                    screen.blit(plusOneImg,(10,100))
-                    square = pygame.Rect(10,370,80,80)
-                    pygame.display.update(square)
-                    
-                elif plusOneButton5.draw() == True:
-                    goatDictionary["gamerGoat"] += 1 
-                    screen.fill(navy)
-                    screen.blit(plusOneDownImg,(10,460))
-                    screen.blit(plusOneImg,(500,460))
-                    screen.blit(plusOneImg,(500,370))
-                    screen.blit(plusOneImg,(500,280))
-                    screen.blit(plusOneImg,(500,190))
-                    screen.blit(plusOneImg,(500,100))
-                    screen.blit(plusOneImg,(10,640))
-                    screen.blit(plusOneImg,(10,550))
-                    screen.blit(plusOneImg,(10,370))
-                    screen.blit(plusOneImg,(10,280))
-                    screen.blit(plusOneImg,(10,190))
-                    screen.blit(plusOneImg,(10,100))
-                    square = pygame.Rect(10,460,80,80)
-                    pygame.display.update(square)
-                
-                elif plusOneButton6.draw() == True:
-                    goatDictionary["angryGoat"] += 1 
-                    screen.fill(navy)
-                    screen.blit(plusOneDownImg,(10,550))
-                    screen.blit(plusOneImg,(500,460))
-                    screen.blit(plusOneImg,(500,370))
-                    screen.blit(plusOneImg,(500,280))
-                    screen.blit(plusOneImg,(500,190))
-                    screen.blit(plusOneImg,(500,100))
-                    screen.blit(plusOneImg,(10,640))
-                    screen.blit(plusOneImg,(10,460))
-                    screen.blit(plusOneImg,(10,370))
-                    screen.blit(plusOneImg,(10,280))
-                    screen.blit(plusOneImg,(10,190))
-                    screen.blit(plusOneImg,(10,100))
-                    square = pygame.Rect(10,550,80,80)
-                    pygame.display.update(square)
-                
-                elif plusOneButton7.draw() == True:
-                    goatDictionary["healthyGoat"] += 1 
-                    screen.fill(navy)
-                    screen.blit(plusOneDownImg,(10,640))
-                    screen.blit(plusOneImg,(500,460))
-                    screen.blit(plusOneImg,(500,370))
-                    screen.blit(plusOneImg,(500,280))
-                    screen.blit(plusOneImg,(500,190))
-                    screen.blit(plusOneImg,(500,100))
-                    screen.blit(plusOneImg,(10,550))
-                    screen.blit(plusOneImg,(10,460))
-                    screen.blit(plusOneImg,(10,370))
-                    screen.blit(plusOneImg,(10,280))
-                    screen.blit(plusOneImg,(10,190))
-                    screen.blit(plusOneImg,(10,100))
-                    square = pygame.Rect(10,640,80,80)
-                    pygame.display.update(square)
-                
-                elif plusOneButton8.draw() == True:
-                    goatDictionary["spiderGoat"] += 1 
-                    screen.fill(navy)
-                    screen.blit(plusOneDownImg,(500,100))
-                    screen.blit(plusOneImg,(500,460))
-                    screen.blit(plusOneImg,(500,370))
-                    screen.blit(plusOneImg,(500,280))
-                    screen.blit(plusOneImg,(500,190))
-                    screen.blit(plusOneImg,(10,640))
-                    screen.blit(plusOneImg,(10,550))
-                    screen.blit(plusOneImg,(10,460))
-                    screen.blit(plusOneImg,(10,370))
-                    screen.blit(plusOneImg,(10,280))
-                    screen.blit(plusOneImg,(10,190))
-                    screen.blit(plusOneImg,(10,100))
-                    square = pygame.Rect(500,100,80,80)
-                    pygame.display.update(square)
-                
-                elif plusOneButton9.draw() == True:
-                    goatDictionary["nomadGoat"] += 1 
-                    screen.fill(navy)
-                    screen.blit(plusOneDownImg,(500,190))
-                    screen.blit(plusOneImg,(500,460))
-                    screen.blit(plusOneImg,(500,370))
-                    screen.blit(plusOneImg,(500,280))
-                    screen.blit(plusOneImg,(500,100))
-                    screen.blit(plusOneImg,(10,640))
-                    screen.blit(plusOneImg,(10,550))
-                    screen.blit(plusOneImg,(10,460))
-                    screen.blit(plusOneImg,(10,370))
-                    screen.blit(plusOneImg,(10,280))
-                    screen.blit(plusOneImg,(10,190))
-                    screen.blit(plusOneImg,(10,100))
-                    square = pygame.Rect(500,190,80,80)
-                    pygame.display.update(square)
-                    
-                elif plusOneButton10.draw() == True:
-                    goatDictionary["armyGoat"] += 1 
-                    screen.fill(navy)
-                    screen.blit(plusOneDownImg,(500,280))
-                    screen.blit(plusOneImg,(500,460))
-                    screen.blit(plusOneImg,(500,370))
-                    screen.blit(plusOneImg,(500,190))
-                    screen.blit(plusOneImg,(500,100))
-                    screen.blit(plusOneImg,(10,640))
-                    screen.blit(plusOneImg,(10,550))
-                    screen.blit(plusOneImg,(10,460))
-                    screen.blit(plusOneImg,(10,370))
-                    screen.blit(plusOneImg,(10,280))
-                    screen.blit(plusOneImg,(10,190))
-                    screen.blit(plusOneImg,(10,100))
-                    square = pygame.Rect(500,280,80,80)
-                    pygame.display.update(square)
-                
-                elif plusOneButton11.draw() == True:
-                    goatDictionary["musicalGoat"] += 1 
-                    screen.fill(navy)
-                    screen.blit(plusOneDownImg,(500,370))
-                    screen.blit(plusOneImg,(500,460))
-                    screen.blit(plusOneImg,(500,280))
-                    screen.blit(plusOneImg,(500,190))
-                    screen.blit(plusOneImg,(500,100))
-                    screen.blit(plusOneImg,(10,640))
-                    screen.blit(plusOneImg,(10,550))
-                    screen.blit(plusOneImg,(10,460))
-                    screen.blit(plusOneImg,(10,370))
-                    screen.blit(plusOneImg,(10,280))
-                    screen.blit(plusOneImg,(10,190))
-                    screen.blit(plusOneImg,(10,100))
-                    square = pygame.Rect(500,370,80,80)
-                    pygame.display.update(square)
-                elif plusOneButton12.draw() == True:
-                    goatDictionary["boxerGoat"] += 1 
-                    screen.fill(navy)
-                    screen.blit(plusOneDownImg,(500,460))
-                    screen.blit(plusOneImg,(500,370))
-                    screen.blit(plusOneImg,(500,280))
-                    screen.blit(plusOneImg,(500,190))
-                    screen.blit(plusOneImg,(500,100))
-                    screen.blit(plusOneImg,(10,640))
-                    screen.blit(plusOneImg,(10,550))
-                    screen.blit(plusOneImg,(10,460))
-                    screen.blit(plusOneImg,(10,370))
-                    screen.blit(plusOneImg,(10,280))
-                    screen.blit(plusOneImg,(10,190))
-                    screen.blit(plusOneImg,(10,100))
-                    square = pygame.Rect(500,460,80,80)
-                    pygame.display.update(square)
-                
-            
-            
-                #Drawing text next to buttons
-                plusOneText1 = defFont.render("Happy", True, white)
-                screen.blit(plusOneText1,(100,100))
-                
-                plusOneText2 = defFont.render("Sad", True, white)
-                screen.blit(plusOneText2,(100,190))
-                
-                plusOneText3 = defFont.render("Tropical", True, white)
-                screen.blit(plusOneText3,(100,280))
-                
-                plusOneText4 = defFont.render("Anxious", True, white)
-                screen.blit(plusOneText4,(100,370))
-                
-                plusOneText5 = defFont.render("Gamer", True, white)
-                screen.blit(plusOneText5,(100,460))
-                
-                plusOneText6 = defFont.render("Angry", True, white)
-                screen.blit(plusOneText6,(100,550))
-                
-                plusOneText7 = defFont.render("Healthy", True, white)
-                screen.blit(plusOneText7,(100,640))
-                
-                plusOneText8 = defFont.render("Spider", True, white)
-                screen.blit(plusOneText8,(590,100))
-                
-                plusOneText9 = defFont.render("Nomad", True, white)
-                screen.blit(plusOneText9,(590,190))
-                
-                plusOneText10 = defFont.render("Army", True, white)
-                screen.blit(plusOneText10,(590,280))
-                
-                plusOneText11 = defFont.render("Musical", True, white)
-                screen.blit(plusOneText11,(590,370))
-                
-                plusOneText12 = defFont.render("Boxer", True, white)
-                screen.blit(plusOneText12,(590,460))
-                
-                if backButton.draw() == True:
-                    screen.fill(navy)
-                    screen.blit(backButtonDownImg,(10,10))
-                    pygame.display.flip()
-                    sleep(.1)
-                    screen.blit(backButtonImg,(10,10))
-                    sleep(.1)
-                    break
-                
-                pygame.display.flip()
-            
-    if titleButtonCounter == 1:
-        while loopOnce <= 45:
-            
-            screen.fill(navy)
-            screen.blit(startButtonImg,(384,570))
-            screen.blit(goatQuizTitle,(240, 64))
-            
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:  
-                    False
-                    
-            goatGuySlide += 3
-            screen.blit(goatGuyNormal,(goatGuySlide, 483))
-            
-            if goatGuySlide > -70:
-                break
-            
-            clock.tick(60)
-            pygame.display.flip()
-            loopOnce += 1
-        screen.blit(goatGuyNormal,(-70,483))
-        goatGuy1Text = defFont.render("Hey dont press that!", True, white)
-        screen.blit(goatGuy1Text,(150,483))
+#Start of loop allowing retry
+while(True):
 
-    elif titleButtonCounter == 2:
-        screen.blit(goatGuyNormal,(-70,483))
-        goatGuy2Text = defFont.render("Im warning you, dont press it!", True, white)
-        screen.blit(goatGuy2Text,(150,483))
-
-    elif titleButtonCounter == 3:
-        screen.blit(goatGuyNormal,(-70,483))
-        goatGuy3Text = defFont.render("You better stop that right now!", True, white)
-        screen.blit(goatGuy3Text,(150,483))
-
-    elif titleButtonCounter == 4:
-        screen.blit(goatGuyAngry,(-70,483))
-        goatGuy4Text = defFont.render("ENOUGH IS ENOUGH STOP RIGHT NOW!", True, white)
-        screen.blit(goatGuy4Text,(150,483))
-
-    elif titleButtonCounter == 5:
-        screen.blit(goatGuyAngry,(-70,483))
-        goatGuy5Text = defFont.render("ALRIGHT THAT'S.....", True, white)
-        screen.blit(goatGuy5Text,(150,483))
-        screen.blit(goatQuizTitle,(240, 64))
-        screen.blit(startButtonImg,(384,570))
-        pygame.display.flip()
-        sleep(.8)
-        titleButtonCounter += 1
+    #Variables that need to be reset if retry is pressed
+    winningGoat = None
+    goatDictionary = {"happyGoat":0,"sadGoat":0,"tropicalGoat":0,"anxiousGoat":0,"gamerGoat":0,"angryGoat":0,"healthyGoat":0,"spiderGoat":0,"nomadGoat":0,"armyGoat":0,"musicalGoat":0,"boxerGoat":0}
+    videoSound = None
+    
+    arrowButtonPressed = False
+    
+    # <-- Start of quiz loop --> 
+    mainMenu = True
+    while(mainMenu == True):
         
-    elif titleButtonCounter == 6:
-        screen.blit(goatGuyNormal,(-70,483))
-        goatGuy6Text = defFont.render("Wait...something's wrong...", True, white)
+        clock.tick(60)
+        
         screen.fill(navy)
-        screen.blit(goatGuyNormal,(-70,483))
-        screen.blit(goatGuy6Text,(150,483))
-        screen.blit(goatQuizTitle,(240, 64))
-        screen.blit(startButtonImg,(384,570))
-        pygame.display.flip()
-        sleep(3)
-        titleButtonCounter += 1
-
-    elif titleButtonCounter == 7:
-        goatGuy7Text = defFont.render("I'm really serious this time", True, white)
-        screen.fill(navy)
-        screen.blit(goatGuyNormal,(-70,483))
-        screen.blit(goatGuy7Text,(150,483))
-        screen.blit(goatQuizTitle,(240, 64))
-        screen.blit(startButtonImg,(384,570))
-        pygame.display.flip()
-        sleep(2)
-        titleButtonCounter += 1
-
-    elif titleButtonCounter == 8:
-        goatGuy8Text = defFont.render("DO NOT PRESS THAT BUTTON AGAIN", True, white)
-        screen.fill(navy)
-        screen.blit(goatGuyAngry,(-70,483))
-        screen.blit(goatGuy8Text,(150,483))
-        screen.blit(goatQuizTitle,(240, 64))
-        screen.blit(startButtonImg,(384,570))
-        pygame.display.flip()
-
-    elif titleButtonCounter == 9:
-        goatGuy9Text = defFont.render("What have you done...", True, white)
-        screen.fill(navy)
-        screen.blit(goatGuyNormal,(-70,483))
-        screen.blit(goatGuy9Text,(150,483))
-        screen.blit(goatQuizTitle,(240, 64))
-        screen.blit(startButtonImg,(384,570))
-        pygame.display.flip()
-        sleep(2)
-        pygame.mixer.Sound.play(demolitionSound)
-        while True:
-                
+        
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:  
+                pygame.quit()
+        
+        if titleButton.draw() == True:
+            titleButtonCounter += 1
             screen.fill(navy)
-            screen.blit(goatGuyShocked,(-70,483))
-            
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:  
-                    False
-                    
-            goatQuizSlide2 += 4
-            screen.blit(goatQuizTitle,(240, goatQuizSlide2))
-            
-            if goatQuizSlide2 > 200:
-                startButtonSlide2 += 4
-                screen.blit(startButtonImg,(384, startButtonSlide2))
-            else:
-                screen.blit(startButtonImg,(384,570))
-            
-            if goatQuizSlide2 > 1050:
-                break
-            
-            clock.tick(60)
-            pygame.display.flip()
-        titleButtonCounter += 1
-
-    elif titleButtonCounter == 10:  # Quiz cannot be started at this point
-        goatGuy10Text = defFont.render("LOOK WHAT YOU DID! YOU BROKE IT!", True, white)
-        screen.fill(navy)
-        screen.blit(goatGuyAngry,(-70,483))
-        screen.blit(goatGuy10Text,(150,483))
-        pygame.display.flip()
-        sleep(3)
-        titleButtonCounter += 1
-
-    elif titleButtonCounter == 11:
-        goatGuy11Text = defFont.render("THIS IS WHY WE CANT HAVE NICE THINGS!", True, white)
-        screen.fill(navy)
-        screen.blit(goatGuyAngry,(-70,483))
-        screen.blit(goatGuy11Text,(130,483))
-        pygame.display.flip()
-        sleep(2.5)
-        titleButtonCounter += 1
-
-    elif titleButtonCounter == 12:
-        goatGuy12Text = defFont.render("Whatever your fun's over", True, white)
-        screen.fill(navy)
-        screen.blit(goatGuyAngry,(-70,483))
-        screen.blit(goatGuy12Text,(150,483))
-        pygame.display.flip()
-        sleep(2)
-        titleButtonCounter += 1
-
-    elif titleButtonCounter == 13:
-        goatGuy13Text = defFont.render("You ruined my quiz, Goodbye", True, white)
-        screen.fill(navy)
-        screen.blit(goatGuyNormal,(-70,483))
-        screen.blit(goatGuy13Text,(150,483))
-        pygame.display.flip()
-        sleep(3)
-        pygame.quit()
-        exit()
-    
-    if titleButtonCounter < 10:
-        if startButton.draw() == True:
-            print("Starting Quiz")
-            pygame.mixer.Sound.play(clickSound)
-            pygame.mixer.Sound.play(startSound)
-            screen.fill(navy)
-            screen.blit(goatQuizTitle,(240, 64))
-            screen.blit(startButtonDownImg,(384,570))
-            pygame.display.flip()
-            sleep(.1)
+            screen.blit(goatQuizTitleDown,(240, 64))
             screen.blit(startButtonImg,(384,570))
             pygame.display.flip()
             sleep(.1)
-            goatQuizSlide = 240
-            startButtonSlide = 384
-            cheatButtonSlide = 10
-            while True:
+        
+        #Creating a cheat menu to get access to all goat endings easily
+        if showCheatPressed == False:
+            if showCheat.draw() ==  True:
+                showCheatPressed = True
+        if showCheatPressed == True:
+            if cheatButton.draw() == True:
+                screen.fill(navy)
+                screen.blit(cheatButtonDownImg,(10,746))
+                screen.blit(goatQuizTitle,(240, 64))
+                screen.blit(startButtonImg,(384,570))
+                pygame.display.flip()
+                sleep(.1)
+                screen.blit(cheatButtonImg,(10,746))
+                sleep(.1)
+                while(True):
+                    
+                    clock.tick(60)
+                    
+                    screen.fill(navy)
+                    
+                    for event in pygame.event.get():
+                        if event.type == pygame.QUIT:  
+                            pygame.quit()
+                    
+                    #Drawing plus one buttons
+                    if plusOneButton1.draw() == True:
+                        goatDictionary["happyGoat"] += 1
+                        screen.fill(navy)
+                        screen.blit(plusOneDownImg,(10,100))
+                        screen.blit(plusOneImg,(500,460))
+                        screen.blit(plusOneImg,(500,370))
+                        screen.blit(plusOneImg,(500,280))
+                        screen.blit(plusOneImg,(500,190))
+                        screen.blit(plusOneImg,(500,100))
+                        screen.blit(plusOneImg,(10,640))
+                        screen.blit(plusOneImg,(10,550))
+                        screen.blit(plusOneImg,(10,460))
+                        screen.blit(plusOneImg,(10,370))
+                        screen.blit(plusOneImg,(10,280))
+                        screen.blit(plusOneImg,(10,190))
+                        square = pygame.Rect(10,100,80,80)
+                        pygame.display.update(square)
+                        
+                    elif plusOneButton2.draw() == True:
+                        goatDictionary["sadGoat"] += 1 
+                        screen.fill(navy)
+                        screen.blit(plusOneDownImg,(10,190))
+                        screen.blit(plusOneImg,(500,460))
+                        screen.blit(plusOneImg,(500,370))
+                        screen.blit(plusOneImg,(500,280))
+                        screen.blit(plusOneImg,(500,190))
+                        screen.blit(plusOneImg,(500,100))
+                        screen.blit(plusOneImg,(10,640))
+                        screen.blit(plusOneImg,(10,550))
+                        screen.blit(plusOneImg,(10,460))
+                        screen.blit(plusOneImg,(10,370))
+                        screen.blit(plusOneImg,(10,280))
+                        screen.blit(plusOneImg,(10,100))
+                        square = pygame.Rect(10,190,80,80)
+                        pygame.display.update(square)
+                    
+                    elif plusOneButton3.draw() == True:
+                        goatDictionary["tropicalGoat"] += 1 
+                        screen.fill(navy)
+                        screen.blit(plusOneDownImg,(10,280))
+                        screen.blit(plusOneImg,(500,460))
+                        screen.blit(plusOneImg,(500,370))
+                        screen.blit(plusOneImg,(500,280))
+                        screen.blit(plusOneImg,(500,190))
+                        screen.blit(plusOneImg,(500,100))
+                        screen.blit(plusOneImg,(10,640))
+                        screen.blit(plusOneImg,(10,550))
+                        screen.blit(plusOneImg,(10,460))
+                        screen.blit(plusOneImg,(10,370))
+                        screen.blit(plusOneImg,(10,190))
+                        screen.blit(plusOneImg,(10,100))
+                        square = pygame.Rect(10,280,80,80)
+                        pygame.display.update(square)
+                    
+                    elif plusOneButton4.draw() == True:
+                        goatDictionary["anxiousGoat"] += 1 
+                        screen.fill(navy)
+                        screen.blit(plusOneDownImg,(10,370))
+                        screen.blit(plusOneImg,(500,460))
+                        screen.blit(plusOneImg,(500,370))
+                        screen.blit(plusOneImg,(500,280))
+                        screen.blit(plusOneImg,(500,190))
+                        screen.blit(plusOneImg,(500,100))
+                        screen.blit(plusOneImg,(10,640))
+                        screen.blit(plusOneImg,(10,550))
+                        screen.blit(plusOneImg,(10,460))
+                        screen.blit(plusOneImg,(10,280))
+                        screen.blit(plusOneImg,(10,190))
+                        screen.blit(plusOneImg,(10,100))
+                        square = pygame.Rect(10,370,80,80)
+                        pygame.display.update(square)
+                        
+                    elif plusOneButton5.draw() == True:
+                        goatDictionary["gamerGoat"] += 1 
+                        screen.fill(navy)
+                        screen.blit(plusOneDownImg,(10,460))
+                        screen.blit(plusOneImg,(500,460))
+                        screen.blit(plusOneImg,(500,370))
+                        screen.blit(plusOneImg,(500,280))
+                        screen.blit(plusOneImg,(500,190))
+                        screen.blit(plusOneImg,(500,100))
+                        screen.blit(plusOneImg,(10,640))
+                        screen.blit(plusOneImg,(10,550))
+                        screen.blit(plusOneImg,(10,370))
+                        screen.blit(plusOneImg,(10,280))
+                        screen.blit(plusOneImg,(10,190))
+                        screen.blit(plusOneImg,(10,100))
+                        square = pygame.Rect(10,460,80,80)
+                        pygame.display.update(square)
+                    
+                    elif plusOneButton6.draw() == True:
+                        goatDictionary["angryGoat"] += 1 
+                        screen.fill(navy)
+                        screen.blit(plusOneDownImg,(10,550))
+                        screen.blit(plusOneImg,(500,460))
+                        screen.blit(plusOneImg,(500,370))
+                        screen.blit(plusOneImg,(500,280))
+                        screen.blit(plusOneImg,(500,190))
+                        screen.blit(plusOneImg,(500,100))
+                        screen.blit(plusOneImg,(10,640))
+                        screen.blit(plusOneImg,(10,460))
+                        screen.blit(plusOneImg,(10,370))
+                        screen.blit(plusOneImg,(10,280))
+                        screen.blit(plusOneImg,(10,190))
+                        screen.blit(plusOneImg,(10,100))
+                        square = pygame.Rect(10,550,80,80)
+                        pygame.display.update(square)
+                    
+                    elif plusOneButton7.draw() == True:
+                        goatDictionary["healthyGoat"] += 1 
+                        screen.fill(navy)
+                        screen.blit(plusOneDownImg,(10,640))
+                        screen.blit(plusOneImg,(500,460))
+                        screen.blit(plusOneImg,(500,370))
+                        screen.blit(plusOneImg,(500,280))
+                        screen.blit(plusOneImg,(500,190))
+                        screen.blit(plusOneImg,(500,100))
+                        screen.blit(plusOneImg,(10,550))
+                        screen.blit(plusOneImg,(10,460))
+                        screen.blit(plusOneImg,(10,370))
+                        screen.blit(plusOneImg,(10,280))
+                        screen.blit(plusOneImg,(10,190))
+                        screen.blit(plusOneImg,(10,100))
+                        square = pygame.Rect(10,640,80,80)
+                        pygame.display.update(square)
+                    
+                    elif plusOneButton8.draw() == True:
+                        goatDictionary["spiderGoat"] += 1 
+                        screen.fill(navy)
+                        screen.blit(plusOneDownImg,(500,100))
+                        screen.blit(plusOneImg,(500,460))
+                        screen.blit(plusOneImg,(500,370))
+                        screen.blit(plusOneImg,(500,280))
+                        screen.blit(plusOneImg,(500,190))
+                        screen.blit(plusOneImg,(10,640))
+                        screen.blit(plusOneImg,(10,550))
+                        screen.blit(plusOneImg,(10,460))
+                        screen.blit(plusOneImg,(10,370))
+                        screen.blit(plusOneImg,(10,280))
+                        screen.blit(plusOneImg,(10,190))
+                        screen.blit(plusOneImg,(10,100))
+                        square = pygame.Rect(500,100,80,80)
+                        pygame.display.update(square)
+                    
+                    elif plusOneButton9.draw() == True:
+                        goatDictionary["nomadGoat"] += 1 
+                        screen.fill(navy)
+                        screen.blit(plusOneDownImg,(500,190))
+                        screen.blit(plusOneImg,(500,460))
+                        screen.blit(plusOneImg,(500,370))
+                        screen.blit(plusOneImg,(500,280))
+                        screen.blit(plusOneImg,(500,100))
+                        screen.blit(plusOneImg,(10,640))
+                        screen.blit(plusOneImg,(10,550))
+                        screen.blit(plusOneImg,(10,460))
+                        screen.blit(plusOneImg,(10,370))
+                        screen.blit(plusOneImg,(10,280))
+                        screen.blit(plusOneImg,(10,190))
+                        screen.blit(plusOneImg,(10,100))
+                        square = pygame.Rect(500,190,80,80)
+                        pygame.display.update(square)
+                        
+                    elif plusOneButton10.draw() == True:
+                        goatDictionary["armyGoat"] += 1 
+                        screen.fill(navy)
+                        screen.blit(plusOneDownImg,(500,280))
+                        screen.blit(plusOneImg,(500,460))
+                        screen.blit(plusOneImg,(500,370))
+                        screen.blit(plusOneImg,(500,190))
+                        screen.blit(plusOneImg,(500,100))
+                        screen.blit(plusOneImg,(10,640))
+                        screen.blit(plusOneImg,(10,550))
+                        screen.blit(plusOneImg,(10,460))
+                        screen.blit(plusOneImg,(10,370))
+                        screen.blit(plusOneImg,(10,280))
+                        screen.blit(plusOneImg,(10,190))
+                        screen.blit(plusOneImg,(10,100))
+                        square = pygame.Rect(500,280,80,80)
+                        pygame.display.update(square)
+                    
+                    elif plusOneButton11.draw() == True:
+                        goatDictionary["musicalGoat"] += 1 
+                        screen.fill(navy)
+                        screen.blit(plusOneDownImg,(500,370))
+                        screen.blit(plusOneImg,(500,460))
+                        screen.blit(plusOneImg,(500,280))
+                        screen.blit(plusOneImg,(500,190))
+                        screen.blit(plusOneImg,(500,100))
+                        screen.blit(plusOneImg,(10,640))
+                        screen.blit(plusOneImg,(10,550))
+                        screen.blit(plusOneImg,(10,460))
+                        screen.blit(plusOneImg,(10,370))
+                        screen.blit(plusOneImg,(10,280))
+                        screen.blit(plusOneImg,(10,190))
+                        screen.blit(plusOneImg,(10,100))
+                        square = pygame.Rect(500,370,80,80)
+                        pygame.display.update(square)
+                    elif plusOneButton12.draw() == True:
+                        goatDictionary["boxerGoat"] += 1 
+                        screen.fill(navy)
+                        screen.blit(plusOneDownImg,(500,460))
+                        screen.blit(plusOneImg,(500,370))
+                        screen.blit(plusOneImg,(500,280))
+                        screen.blit(plusOneImg,(500,190))
+                        screen.blit(plusOneImg,(500,100))
+                        screen.blit(plusOneImg,(10,640))
+                        screen.blit(plusOneImg,(10,550))
+                        screen.blit(plusOneImg,(10,460))
+                        screen.blit(plusOneImg,(10,370))
+                        screen.blit(plusOneImg,(10,280))
+                        screen.blit(plusOneImg,(10,190))
+                        screen.blit(plusOneImg,(10,100))
+                        square = pygame.Rect(500,460,80,80)
+                        pygame.display.update(square)
+                    
+                
+                
+                    #Drawing text next to buttons
+                    plusOneText1 = defFont.render("Happy", True, white)
+                    screen.blit(plusOneText1,(100,100))
+                    
+                    plusOneText2 = defFont.render("Sad", True, white)
+                    screen.blit(plusOneText2,(100,190))
+                    
+                    plusOneText3 = defFont.render("Tropical", True, white)
+                    screen.blit(plusOneText3,(100,280))
+                    
+                    plusOneText4 = defFont.render("Anxious", True, white)
+                    screen.blit(plusOneText4,(100,370))
+                    
+                    plusOneText5 = defFont.render("Gamer", True, white)
+                    screen.blit(plusOneText5,(100,460))
+                    
+                    plusOneText6 = defFont.render("Angry", True, white)
+                    screen.blit(plusOneText6,(100,550))
+                    
+                    plusOneText7 = defFont.render("Healthy", True, white)
+                    screen.blit(plusOneText7,(100,640))
+                    
+                    plusOneText8 = defFont.render("Spider", True, white)
+                    screen.blit(plusOneText8,(590,100))
+                    
+                    plusOneText9 = defFont.render("Nomad", True, white)
+                    screen.blit(plusOneText9,(590,190))
+                    
+                    plusOneText10 = defFont.render("Army", True, white)
+                    screen.blit(plusOneText10,(590,280))
+                    
+                    plusOneText11 = defFont.render("Musical", True, white)
+                    screen.blit(plusOneText11,(590,370))
+                    
+                    plusOneText12 = defFont.render("Boxer", True, white)
+                    screen.blit(plusOneText12,(590,460))
+                    
+                    if backButton.draw() == True:
+                        screen.fill(navy)
+                        screen.blit(backButtonDownImg,(10,10))
+                        pygame.display.flip()
+                        sleep(.1)
+                        screen.blit(backButtonImg,(10,10))
+                        sleep(.1)
+                        break
+                    
+                    pygame.display.flip()
+                
+        if titleButtonCounter == 1:
+            while loopOnce <= 45:
                 
                 screen.fill(navy)
+                screen.blit(startButtonImg,(384,570))
+                screen.blit(goatQuizTitle,(240, 64))
                 
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:  
                         False
                         
-                goatQuizSlide += 8
-                screen.blit(goatQuizTitle,(goatQuizSlide, 64))
+                goatGuySlide += 3
+                screen.blit(goatGuyNormal,(goatGuySlide, 483))
                 
-                startButtonSlide = startButtonSlide - 8
-                screen.blit(startButtonImg,(startButtonSlide, 570))
-                
-                if showCheatPressed == True:
-                    cheatButtonSlide = cheatButtonSlide - 1
-                    screen.blit(cheatButtonImg,(cheatButtonSlide, 746))
-                
-                if goatQuizSlide > 1050:
-                    mainMenu = False
+                if goatGuySlide > -70:
                     break
                 
                 clock.tick(60)
                 pygame.display.flip()
-    
-    pygame.display.flip()
+                loopOnce += 1
+            screen.blit(goatGuyNormal,(-70,483))
+            goatGuy1Text = defFont.render("Hey dont press that!", True, white)
+            screen.blit(goatGuy1Text,(150,483))
 
-running = True
-while running == True:
-    
-    clock.tick(60)
-    
-    screen.fill(navy)
-    
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:  
-            running = False
-    
-    # Question 1
-    createQuestion("1. Describe Your Personality With a Food", "Steak", "BoxerGoat", "Lucky Charms", "HappyGoat", "Pineapple", "TropicalGoat", "Coffee", "AnxiousGoat", "Hot Dogs", "SpiderGoat", "McDonalds", "ArmyGoat")
-    
-    # Question 2
-    createQuestion("2. Favourite Type of Drink", "G-Fuel", gamerGoatString, "Pop", happyGoatString, "Water", healthyGoatString, "Tea", anxiousGoatString, "Energy Drink", boxerGoatString, "Milk", armyGoatString)
+        elif titleButtonCounter == 2:
+            screen.blit(goatGuyNormal,(-70,483))
+            goatGuy2Text = defFont.render("Im warning you, dont press it!", True, white)
+            screen.blit(goatGuy2Text,(150,483))
 
-    # Question 3
-    createQuestion("3. Favourite School Subject", "Math", happyGoatString, "Gym", boxerGoatString, "English", anxiousGoatString, "Lunch", gamerGoatString, "Science", spiderGoatString, "History", nomadGoatString)
-    
-    # Question 4
-    createQuestion("4. What is Your State of Mind?", "Crazy", angryGoatString, "Tired", anxiousGoatString, "Bored", nomadGoatString, "Social", healthyGoatString, "Fear", armyGoatString, "Depressed", sadGoatString)
-    
-    # Question 5
-    createQuestion("5. What's Your Dream Holiday?", "Disney", happyGoatString, "Cuba", angryGoatString, "Nowhere", nomadGoatString, "Japan", musicalGoatString, "Dominican Republic", tropicalGoatString, "Ohio", sadGoatString)
-    
-    # Question 6
-    createQuestion("6. Where Would Your Dream House be?", "Mountains", armyGoatString, "City", spiderGoatString, "Forest", musicalGoatString, "Desert", nomadGoatString, "Beach House", tropicalGoatString, "Space", gamerGoatString)
-    
-    # Question 7
-    createQuestion("7. What's Your Favourite Movie Genre?", "Action", boxerGoatString, "Rom-Com", angryGoatString, "Sci-Fi", sadGoatString, "Thriller", tropicalGoatString, "Comedy", gamerGoatString, "Musical", musicalGoatString)
-    
-    # Question 8
-    createQuestion("8. What's Your Favourite Music Genre?", "Rap", sadGoatString, "Rock", spiderGoatString, "Hip-Hop", healthyGoatString, "EDM", anxiousGoatString, "Country", angryGoatString, "Classical", tropicalGoatString)
-    
-    # Question 9
-    createQuestion("9. Which Superpower Would You Want?", "Strength", boxerGoatString, "Super Speed", happyGoatString, "Teleportation", nomadGoatString, "Telekinesis", gamerGoatString, "Mind Reading", musicalGoatString, "Invisibility", armyGoatString)
-    
-    # Question 10
-    createQuestion("10. Pick a Movie Series", "Marvel", spiderGoatString, "Harry Potter", anxiousGoatString, "Star Wars", healthyGoatString, "Hunger Games", tropicalGoatString, "Dark Knight", armyGoatString, "Other", sadGoatString)
-    
-    # Question 11
-    createQuestion("11. What's Your Favourite Animal?", "Goat", healthyGoatString, "GOAT", gamerGoatString, "gOAt", spiderGoatString, "goaT", musicalGoatString, "goat", nomadGoatString, "I don't like goats", sadGoatString)
-    
-    # Question 12
-    createQuestion("12. What's Your Favourite Colour?", "Blue", happyGoatString, "Green", armyGoatString, "Pink", tropicalGoatString, "Red", angryGoatString, "Yellow", anxiousGoatString, "Transparent", sadGoatString)
-        
-    # Question 13
-    createQuestion("13. Pick a Social Media Platform", "Facebook", boxerGoatString, "Snapchat", healthyGoatString, "Tiktok", gamerGoatString, "Instagram", spiderGoatString, "Tinder", musicalGoatString, "WhatsApp", nomadGoatString)
-    
-    # Question 14
-    createQuestion("14. How Do You Spend Your Free Time?", "Outside", healthyGoatString, "Listening to Music", musicalGoatString, "Watching Movies/Tv", angryGoatString, "Family", happyGoatString, "Gaming", gamerGoatString, "Sports", boxerGoatString)
-    
-    # Question 15
-    createQuestion("15. Favourite Video Game Platform?", "Playstation", angryGoatString, "Mobile", happyGoatString, "Computer", armyGoatString, "Virtual Reality", sadGoatString, "Xbox", tropicalGoatString, "None/Other", healthyGoatString)
-    
-    # Question 16
-    createQuestion("16. What is Your Dream Job?", "Superhero", spiderGoatString, "Government", armyGoatString, "Trades", boxerGoatString, "Homeless", nomadGoatString, "Musician", musicalGoatString, "None", sadGoatString)
-    
-    # Question 17
-    createQuestion("17. Favourite Kind of Media?", "Movies", tropicalGoatString, "Tv Shows", healthyGoatString, "Comics", gamerGoatString, "Youtube", angryGoatString, "Anime", anxiousGoatString, "Other", boxerGoatString)
-    
-    # Question 18
-    createQuestion("18. What is The Best Star Wars Media?", "The Prequels", sadGoatString, "The Originals", happyGoatString, "The Sequels", nomadGoatString, "Tv Shows", anxiousGoatString, "The Books", spiderGoatString, "None", boxerGoatString)
-        
-    # Question 19
-    createQuestion("19. What is Your Favourite Vegetable?", "Potato", spiderGoatString, "Tomato", angryGoatString, "Onions", musicalGoatString, "Carrots", tropicalGoatString, "Cucumber", gamerGoatString, "Other", healthyGoatString)
-    
-    # Question 20
-    createQuestion("20. Are Goats Cool?", "Yes", armyGoatString, "No", anxiousGoatString, "Sometimes", happyGoatString, "They Are Annoying", angryGoatString, "What is a Goat?", nomadGoatString, "They Sound Cool", musicalGoatString)
-        
-    print(goatDictionary)
-    
-    winningGoat = max(goatDictionary, key=goatDictionary.get)
+        elif titleButtonCounter == 3:
+            screen.blit(goatGuyNormal,(-70,483))
+            goatGuy3Text = defFont.render("You better stop that right now!", True, white)
+            screen.blit(goatGuy3Text,(150,483))
 
-    print(winningGoat)
-    
-    if winningGoat == "happyGoat":
-        newWinningGoat = "Happy Goat"
+        elif titleButtonCounter == 4:
+            screen.blit(goatGuyAngry,(-70,483))
+            goatGuy4Text = defFont.render("ENOUGH IS ENOUGH STOP RIGHT NOW!", True, white)
+            screen.blit(goatGuy4Text,(150,483))
 
-        happyGoatVideo = VideoSprite(pygame.Rect(center-254,320,507,380), (os.path.join(sys.path[0], r"Videos\HappyGoat.mp4")))
-        sprite_group = pygame.sprite.Group()
-        sprite_group.add(happyGoatVideo)
-        if soundsOn == True:
-            videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\happygoat.wav"))
-        border = pygame.Rect((center-264,310,527,400))
-        
-    elif winningGoat == "sadGoat":
-        newWinningGoat = "Sad Goat"
-        
-        sadGoatVideo = VideoSprite(pygame.Rect(center-254,320,507,380), (os.path.join(sys.path[0], r"Videos\SadGoat.mp4")))
-        sprite_group = pygame.sprite.Group()
-        sprite_group.add(sadGoatVideo)
-        videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\sadgoat.wav"))
-        border = pygame.Rect((center-264,310,527,400))
-        
-    elif winningGoat == "tropicalGoat":
-        newWinningGoat = "Tropical Goat"
-        
-        tropicalGoatVideo = VideoSprite(pygame.Rect(center-338,320,676,380), (os.path.join(sys.path[0], r"Videos\TropicalGoat.mp4")))
-        sprite_group = pygame.sprite.Group()
-        sprite_group.add(tropicalGoatVideo)
-        videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\tropicalgoat.wav"))
-        border = pygame.Rect((center-348,310,696,400))
-        
-    elif winningGoat == "anxiousGoat":
-        newWinningGoat = "Anxious Goat"
-        
-        anxiousGoatVideo = VideoSprite(pygame.Rect(center-338,320,676,380), (os.path.join(sys.path[0], r"Videos\AnxiousGoat.mp4")))
-        sprite_group = pygame.sprite.Group()
-        sprite_group.add(anxiousGoatVideo)
-        videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\anxiousgoat.wav"))
-        border = pygame.Rect((center-348,310,696,400))
-        
-    elif winningGoat == "gamerGoat":
-        newWinningGoat = "Gamer Goat"
-        
-        gamerGoatVideo = VideoSprite(pygame.Rect(center-187,320,374,380), (os.path.join(sys.path[0], r"Videos\GamerGoat.mp4")))
-        sprite_group = pygame.sprite.Group()
-        sprite_group.add(gamerGoatVideo)
-        if soundsOn == True:
-            videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\gamergoat.wav"))
-        border = pygame.Rect((center-197,310,394,400))
-        
-    elif winningGoat == "angryGoat":
-        newWinningGoat = "Angry Goat"
-        
-        angryGoatVideo = VideoSprite(pygame.Rect(center-338,320,676,380), (os.path.join(sys.path[0], r"Videos\AngryGoat.mp4")))
-        sprite_group = pygame.sprite.Group()
-        sprite_group.add(angryGoatVideo)
-        videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\angrygoat.wav"))
-        border = pygame.Rect((center-348,310,696,400))
-        
-    elif winningGoat == "healthyGoat":
-        newWinningGoat = "Healthy Goat"
-        
-        healthyGoatVideo = VideoSprite(pygame.Rect(center-338,320,676,380), (os.path.join(sys.path[0], r"Videos\HealthyGoat.mp4")))
-        sprite_group = pygame.sprite.Group()
-        sprite_group.add(healthyGoatVideo)
-        if soundsOn == True:
-            videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\healthygoat.wav"))
-        border = pygame.Rect((center-348,310,696,400))
-        
-    elif winningGoat == "spiderGoat":
-        newWinningGoat = "Spider Goat"
+        elif titleButtonCounter == 5:
+            screen.blit(goatGuyAngry,(-70,483))
+            goatGuy5Text = defFont.render("ALRIGHT THAT'S.....", True, white)
+            screen.blit(goatGuy5Text,(150,483))
+            screen.blit(goatQuizTitle,(240, 64))
+            screen.blit(startButtonImg,(384,570))
+            pygame.display.flip()
+            sleep(.8)
+            titleButtonCounter += 1
+            
+        elif titleButtonCounter == 6:
+            screen.blit(goatGuyNormal,(-70,483))
+            goatGuy6Text = defFont.render("Wait...something's wrong...", True, white)
+            screen.fill(navy)
+            screen.blit(goatGuyNormal,(-70,483))
+            screen.blit(goatGuy6Text,(150,483))
+            screen.blit(goatQuizTitle,(240, 64))
+            screen.blit(startButtonImg,(384,570))
+            pygame.display.flip()
+            sleep(3)
+            titleButtonCounter += 1
 
-        spiderGoatVideo = VideoSprite(pygame.Rect(center-152,320,304,380), (os.path.join(sys.path[0], r"Videos\SpiderGoat.mp4")))
-        sprite_group = pygame.sprite.Group()
-        sprite_group.add(spiderGoatVideo)
-        if soundsOn == True:
-            videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\spidergoat.wav"))
-        border = pygame.Rect((center-162,310,324,400))
-        
-    elif winningGoat == "nomadGoat":
-        newWinningGoat = "Nomad Goat"
-        
-        nomadGoatVideo = VideoSprite(pygame.Rect(center-338,320,676,380), (os.path.join(sys.path[0], r"Videos\NomadGoat.mp4")))
-        sprite_group = pygame.sprite.Group()
-        sprite_group.add(nomadGoatVideo)
-        videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\nomadgoat.wav"))
-        border = pygame.Rect((center-348,310,696,400))
-        
-    elif winningGoat == "armyGoat":
-        newWinningGoat = "Army Goat"
-        
-        armyGoatVideo = VideoSprite(pygame.Rect(center-254,320,507,380), (os.path.join(sys.path[0], r"Videos\ArmyGoat.mp4")))
-        sprite_group = pygame.sprite.Group()
-        sprite_group.add(armyGoatVideo)
-        if soundsOn == True:
-            videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\armygoat.wav"))
-        border = pygame.Rect((center-264,310,527,400))
-        
-    elif winningGoat == "musicalGoat":
-        newWinningGoat = "Musical Goat"
-        
-        musicalGoatVideo = VideoSprite(pygame.Rect(center-190,320,380,380), (os.path.join(sys.path[0], r"Videos\MusicalGoat.mp4")))
-        sprite_group = pygame.sprite.Group()
-        sprite_group.add(musicalGoatVideo)
-        videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\musicalgoat.wav"))
-        border = pygame.Rect((center-200,310,400,400))
-        
-    elif winningGoat == "boxerGoat":
-        newWinningGoat = "Boxer Goat"
-        
-        boxerGoatVideo = VideoSprite(pygame.Rect(center-338,320,676,380), (os.path.join(sys.path[0], r"Videos\BoxerGoat.mp4")))
-        sprite_group = pygame.sprite.Group()
-        sprite_group.add(boxerGoatVideo)
-        if soundsOn == True:
-            videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\boxergoat.wav"))
-        border = pygame.Rect((center-348,310,696,400))
-    break
+        elif titleButtonCounter == 7:
+            goatGuy7Text = defFont.render("I'm really serious this time", True, white)
+            screen.fill(navy)
+            screen.blit(goatGuyNormal,(-70,483))
+            screen.blit(goatGuy7Text,(150,483))
+            screen.blit(goatQuizTitle,(240, 64))
+            screen.blit(startButtonImg,(384,570))
+            pygame.display.flip()
+            sleep(2)
+            titleButtonCounter += 1
 
-stopCalculating = time() + randint(1,3) # Determines random amount of "calculating time"
-stoppedCalculating = False
-refreshOnce = False
-endScreen = True
-playOnce = False
+        elif titleButtonCounter == 8:
+            goatGuy8Text = defFont.render("DO NOT PRESS THAT BUTTON AGAIN", True, white)
+            screen.fill(navy)
+            screen.blit(goatGuyAngry,(-70,483))
+            screen.blit(goatGuy8Text,(150,483))
+            screen.blit(goatQuizTitle,(240, 64))
+            screen.blit(startButtonImg,(384,570))
+            pygame.display.flip()
 
-while endScreen == True:
-    
-    screen.fill(navy)
-    
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:  
-            endScreen = False
-    
-    if(refreshOnce == True):
-        if time() < stopCalculating:
-            loading(580,350)
-        if time() > stopCalculating:
-            stoppedCalculating = True
-    
-    if stoppedCalculating == True:
-        winningGoatText = defFontLoading.render(newWinningGoat, True, white)
-        screen.blit(winningGoatText,(320,194))
-        screen.blit(youGot,(212,64))
+        elif titleButtonCounter == 9:
+            goatGuy9Text = defFont.render("What have you done...", True, white)
+            screen.fill(navy)
+            screen.blit(goatGuyNormal,(-70,483))
+            screen.blit(goatGuy9Text,(150,483))
+            screen.blit(goatQuizTitle,(240, 64))
+            screen.blit(startButtonImg,(384,570))
+            pygame.display.flip()
+            sleep(2)
+            pygame.mixer.Sound.play(demolitionSound)
+            while True:
+                    
+                screen.fill(navy)
+                screen.blit(goatGuyShocked,(-70,483))
+                
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:  
+                        False
+                        
+                goatQuizSlide2 += 4
+                screen.blit(goatQuizTitle,(240, goatQuizSlide2))
+                
+                if goatQuizSlide2 > 200:
+                    startButtonSlide2 += 4
+                    screen.blit(startButtonImg,(384, startButtonSlide2))
+                else:
+                    screen.blit(startButtonImg,(384,570))
+                
+                if goatQuizSlide2 > 1050:
+                    break
+                
+                clock.tick(60)
+                pygame.display.flip()
+            titleButtonCounter += 1
+
+        elif titleButtonCounter == 10:  # Quiz cannot be started at this point
+            goatGuy10Text = defFont.render("LOOK WHAT YOU DID! YOU BROKE IT!", True, white)
+            screen.fill(navy)
+            screen.blit(goatGuyAngry,(-70,483))
+            screen.blit(goatGuy10Text,(150,483))
+            pygame.display.flip()
+            sleep(3)
+            titleButtonCounter += 1
+
+        elif titleButtonCounter == 11:
+            goatGuy11Text = defFont.render("THIS IS WHY WE CANT HAVE NICE THINGS!", True, white)
+            screen.fill(navy)
+            screen.blit(goatGuyAngry,(-70,483))
+            screen.blit(goatGuy11Text,(130,483))
+            pygame.display.flip()
+            sleep(2.5)
+            titleButtonCounter += 1
+
+        elif titleButtonCounter == 12:
+            goatGuy12Text = defFont.render("Whatever your fun's over", True, white)
+            screen.fill(navy)
+            screen.blit(goatGuyAngry,(-70,483))
+            screen.blit(goatGuy12Text,(150,483))
+            pygame.display.flip()
+            sleep(2)
+            titleButtonCounter += 1
+
+        elif titleButtonCounter == 13:
+            goatGuy13Text = defFont.render("You ruined my quiz, Goodbye", True, white)
+            screen.fill(navy)
+            screen.blit(goatGuyNormal,(-70,483))
+            screen.blit(goatGuy13Text,(150,483))
+            pygame.display.flip()
+            sleep(3)
+            pygame.quit()
+            exit()
         
-        pygame.draw.rect(screen,lightBlue,border)
-        sprite_group.update()
-        sprite_group.draw(screen)
+        if titleButtonCounter < 10:
+            if startButton.draw() == True:
+                print("Starting Quiz")
+                pygame.mixer.Sound.play(clickSound)
+                pygame.mixer.Sound.play(startSound)
+                screen.fill(navy)
+                screen.blit(goatQuizTitle,(240, 64))
+                screen.blit(startButtonDownImg,(384,570))
+                pygame.display.flip()
+                sleep(.1)
+                screen.blit(startButtonImg,(384,570))
+                pygame.display.flip()
+                sleep(.1)
+                goatQuizSlide = 240
+                startButtonSlide = 384
+                cheatButtonSlide = 10
+                while True:
+                    
+                    screen.fill(navy)
+                    
+                    for event in pygame.event.get():
+                        if event.type == pygame.QUIT:  
+                            False
+                            
+                    goatQuizSlide += 8
+                    screen.blit(goatQuizTitle,(goatQuizSlide, 64))
+                    
+                    startButtonSlide = startButtonSlide - 8
+                    screen.blit(startButtonImg,(startButtonSlide, 570))
+                    
+                    if showCheatPressed == True:
+                        cheatButtonSlide = cheatButtonSlide - 1
+                        screen.blit(cheatButtonImg,(cheatButtonSlide, 746))
+                    
+                    if goatQuizSlide > 1050:
+                        mainMenu = False
+                        break
+                    
+                    clock.tick(60)
+                    pygame.display.flip()
+        
         pygame.display.flip()
-        
-        if playOnce == False:
-            try:
-                pygame.mixer.Sound.play(videoSound)
-                playOnce = True
-            except:
-                print("Exception: No Sound For Video")
-                playOnce = True
-    
-    refreshOnce = True
-    
-    pygame.display.flip()
 
-print("Quiz Finished")
-pygame.quit()
+    running = True
+    while running == True:
+        
+        clock.tick(60)
+        
+        screen.fill(navy)
+        
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:  
+                running = False
+        
+        # Question 1
+        createQuestion("1. Describe Your Personality With a Food", "Steak", "BoxerGoat", "Lucky Charms", "HappyGoat", "Pineapple", "TropicalGoat", "Coffee", "AnxiousGoat", "Hot Dogs", "SpiderGoat", "McDonalds", "ArmyGoat")
+        if arrowButtonPressed == True:
+            break
+        
+        # Question 2
+        createQuestion("2. Favourite Type of Drink", "G-Fuel", gamerGoatString, "Pop", happyGoatString, "Water", healthyGoatString, "Tea", anxiousGoatString, "Energy Drink", boxerGoatString, "Milk", armyGoatString)
+        if arrowButtonPressed == True:
+            break
+        
+        # Question 3
+        createQuestion("3. Favourite School Subject", "Math", happyGoatString, "Gym", boxerGoatString, "English", anxiousGoatString, "Lunch", gamerGoatString, "Science", spiderGoatString, "History", nomadGoatString)
+        if arrowButtonPressed == True:
+            break
+        
+        # Question 4
+        createQuestion("4. What is Your State of Mind?", "Crazy", angryGoatString, "Tired", anxiousGoatString, "Bored", nomadGoatString, "Social", healthyGoatString, "Fear", armyGoatString, "Depressed", sadGoatString)
+        if arrowButtonPressed == True:
+            break
+        
+        # Question 5
+        createQuestion("5. What's Your Dream Holiday?", "Disney", happyGoatString, "Cuba", angryGoatString, "Nowhere", nomadGoatString, "Japan", musicalGoatString, "Dominican Republic", tropicalGoatString, "Ohio", sadGoatString)
+        if arrowButtonPressed == True:
+            break
+        
+        # Question 6
+        createQuestion("6. Where Would Your Dream House be?", "Mountains", armyGoatString, "City", spiderGoatString, "Forest", musicalGoatString, "Desert", nomadGoatString, "Beach House", tropicalGoatString, "Space", gamerGoatString)
+        if arrowButtonPressed == True:
+            break
+        
+        # Question 7
+        createQuestion("7. What's Your Favourite Movie Genre?", "Action", boxerGoatString, "Rom-Com", angryGoatString, "Sci-Fi", sadGoatString, "Thriller", tropicalGoatString, "Comedy", gamerGoatString, "Musical", musicalGoatString)
+        if arrowButtonPressed == True:
+            break
+        
+        # Question 8
+        createQuestion("8. What's Your Favourite Music Genre?", "Rap", sadGoatString, "Rock", spiderGoatString, "Hip-Hop", healthyGoatString, "EDM", anxiousGoatString, "Country", angryGoatString, "Classical", tropicalGoatString)
+        if arrowButtonPressed == True:
+            break
+        
+        # Question 9
+        createQuestion("9. Which Superpower Would You Want?", "Strength", boxerGoatString, "Super Speed", happyGoatString, "Teleportation", nomadGoatString, "Telekinesis", gamerGoatString, "Mind Reading", musicalGoatString, "Invisibility", armyGoatString)
+        if arrowButtonPressed == True:
+            break
+        
+        # Question 10
+        createQuestion("10. Pick a Movie Series", "Marvel", spiderGoatString, "Harry Potter", anxiousGoatString, "Star Wars", healthyGoatString, "Hunger Games", tropicalGoatString, "Dark Knight", armyGoatString, "Other", sadGoatString)
+        if arrowButtonPressed == True:
+            break
+        
+        # Question 11
+        createQuestion("11. What's Your Favourite Animal?", "Goat", healthyGoatString, "GOAT", gamerGoatString, "gOAt", spiderGoatString, "goaT", musicalGoatString, "goat", nomadGoatString, "I don't like goats", sadGoatString)
+        if arrowButtonPressed == True:
+            break
+        
+        # Question 12
+        createQuestion("12. What's Your Favourite Colour?", "Blue", happyGoatString, "Green", armyGoatString, "Pink", tropicalGoatString, "Red", angryGoatString, "Yellow", anxiousGoatString, "Transparent", sadGoatString)
+        if arrowButtonPressed == True:
+            break
+        
+        # Question 13
+        createQuestion("13. Pick a Social Media Platform", "Facebook", boxerGoatString, "Snapchat", healthyGoatString, "Tiktok", gamerGoatString, "Instagram", spiderGoatString, "Tinder", musicalGoatString, "WhatsApp", nomadGoatString)
+        if arrowButtonPressed == True:
+            break
+        
+        # Question 14
+        createQuestion("14. How Do You Spend Your Free Time?", "Outside", healthyGoatString, "Listening to Music", musicalGoatString, "Watching Movies/Tv", angryGoatString, "Family", happyGoatString, "Gaming", gamerGoatString, "Sports", boxerGoatString)
+        if arrowButtonPressed == True:
+            break
+        
+        # Question 15
+        createQuestion("15. Favourite Video Game Platform?", "Playstation", angryGoatString, "Mobile", happyGoatString, "Computer", armyGoatString, "Virtual Reality", sadGoatString, "Xbox", tropicalGoatString, "None/Other", healthyGoatString)
+        if arrowButtonPressed == True:
+            break
+        
+        # Question 16
+        createQuestion("16. What is Your Dream Job?", "Superhero", spiderGoatString, "Government", armyGoatString, "Trades", boxerGoatString, "Homeless", nomadGoatString, "Musician", musicalGoatString, "None", sadGoatString)
+        if arrowButtonPressed == True:
+            break
+        
+        # Question 17
+        createQuestion("17. Favourite Kind of Media?", "Movies", tropicalGoatString, "Tv Shows", healthyGoatString, "Comics", gamerGoatString, "Youtube", angryGoatString, "Anime", anxiousGoatString, "Other", boxerGoatString)
+        if arrowButtonPressed == True:
+            break
+        
+        # Question 18
+        createQuestion("18. What is The Best Star Wars Media?", "The Prequels", sadGoatString, "The Originals", happyGoatString, "The Sequels", nomadGoatString, "Tv Shows", anxiousGoatString, "The Books", spiderGoatString, "None", boxerGoatString)
+        if arrowButtonPressed == True:
+            break
+        
+        # Question 19
+        createQuestion("19. What is Your Favourite Vegetable?", "Potato", spiderGoatString, "Tomato", angryGoatString, "Onions", musicalGoatString, "Carrots", tropicalGoatString, "Cucumber", gamerGoatString, "Other", healthyGoatString)
+        if arrowButtonPressed == True:
+            break
+        
+        # Question 20
+        createQuestion("20. Are Goats Cool?", "Yes", armyGoatString, "No", anxiousGoatString, "Sometimes", happyGoatString, "They Are Annoying", angryGoatString, "What is a Goat?", nomadGoatString, "They Sound Cool", musicalGoatString)
+        if arrowButtonPressed == True:
+            break
+        
+        print(goatDictionary)
+        
+        #Shuffle dictionary and get the maximum value
+        tempList = list(goatDictionary.items())
+        random.shuffle(tempList)
+        goatDictionary = dict(tempList)
+        
+        winningGoat = max(goatDictionary, key=goatDictionary.get)
+
+        print(winningGoat)
+        
+        if winningGoat == "happyGoat":
+            newWinningGoat = "Happy Goat"
+
+            happyGoatVideo = VideoSprite(pygame.Rect(center-254,320,507,380), (os.path.join(sys.path[0], r"Videos\HappyGoat.mp4")))
+            sprite_group = pygame.sprite.Group()
+            sprite_group.add(happyGoatVideo)
+            if soundsOn == True:
+                videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\happygoat.wav"))
+            border = pygame.Rect((center-264,310,527,400))
+            
+        elif winningGoat == "sadGoat":
+            newWinningGoat = "Sad Goat"
+            
+            sadGoatVideo = VideoSprite(pygame.Rect(center-254,320,507,380), (os.path.join(sys.path[0], r"Videos\SadGoat.mp4")))
+            sprite_group = pygame.sprite.Group()
+            sprite_group.add(sadGoatVideo)
+            videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\sadgoat.wav"))
+            border = pygame.Rect((center-264,310,527,400))
+            
+        elif winningGoat == "tropicalGoat":
+            newWinningGoat = "Tropical Goat"
+            
+            tropicalGoatVideo = VideoSprite(pygame.Rect(center-338,320,676,380), (os.path.join(sys.path[0], r"Videos\TropicalGoat.mp4")))
+            sprite_group = pygame.sprite.Group()
+            sprite_group.add(tropicalGoatVideo)
+            videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\tropicalgoat.wav"))
+            border = pygame.Rect((center-348,310,696,400))
+            
+        elif winningGoat == "anxiousGoat":
+            newWinningGoat = "Anxious Goat"
+            
+            anxiousGoatVideo = VideoSprite(pygame.Rect(center-338,320,676,380), (os.path.join(sys.path[0], r"Videos\AnxiousGoat.mp4")))
+            sprite_group = pygame.sprite.Group()
+            sprite_group.add(anxiousGoatVideo)
+            videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\anxiousgoat.wav"))
+            border = pygame.Rect((center-348,310,696,400))
+            
+        elif winningGoat == "gamerGoat":
+            newWinningGoat = "Gamer Goat"
+            
+            gamerGoatVideo = VideoSprite(pygame.Rect(center-187,320,374,380), (os.path.join(sys.path[0], r"Videos\GamerGoat.mp4")))
+            sprite_group = pygame.sprite.Group()
+            sprite_group.add(gamerGoatVideo)
+            if soundsOn == True:
+                videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\gamergoat.wav"))
+            border = pygame.Rect((center-197,310,394,400))
+            
+        elif winningGoat == "angryGoat":
+            newWinningGoat = "Angry Goat"
+            
+            angryGoatVideo = VideoSprite(pygame.Rect(center-338,320,676,380), (os.path.join(sys.path[0], r"Videos\AngryGoat.mp4")))
+            sprite_group = pygame.sprite.Group()
+            sprite_group.add(angryGoatVideo)
+            videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\angrygoat.wav"))
+            border = pygame.Rect((center-348,310,696,400))
+            
+        elif winningGoat == "healthyGoat":
+            newWinningGoat = "Healthy Goat"
+            
+            healthyGoatVideo = VideoSprite(pygame.Rect(center-338,320,676,380), (os.path.join(sys.path[0], r"Videos\HealthyGoat.mp4")))
+            sprite_group = pygame.sprite.Group()
+            sprite_group.add(healthyGoatVideo)
+            if soundsOn == True:
+                videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\healthygoat.wav"))
+            border = pygame.Rect((center-348,310,696,400))
+            
+        elif winningGoat == "spiderGoat":
+            newWinningGoat = "Spider Goat"
+
+            spiderGoatVideo = VideoSprite(pygame.Rect(center-152,320,304,380), (os.path.join(sys.path[0], r"Videos\SpiderGoat.mp4")))
+            sprite_group = pygame.sprite.Group()
+            sprite_group.add(spiderGoatVideo)
+            if soundsOn == True:
+                videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\spidergoat.wav"))
+            border = pygame.Rect((center-162,310,324,400))
+            
+        elif winningGoat == "nomadGoat":
+            newWinningGoat = "Nomad Goat"
+            
+            nomadGoatVideo = VideoSprite(pygame.Rect(center-338,320,676,380), (os.path.join(sys.path[0], r"Videos\NomadGoat.mp4")))
+            sprite_group = pygame.sprite.Group()
+            sprite_group.add(nomadGoatVideo)
+            videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\nomadgoat.wav"))
+            border = pygame.Rect((center-348,310,696,400))
+            
+        elif winningGoat == "armyGoat":
+            newWinningGoat = "Army Goat"
+            
+            armyGoatVideo = VideoSprite(pygame.Rect(center-254,320,507,380), (os.path.join(sys.path[0], r"Videos\ArmyGoat.mp4")))
+            sprite_group = pygame.sprite.Group()
+            sprite_group.add(armyGoatVideo)
+            if soundsOn == True:
+                videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\armygoat.wav"))
+            border = pygame.Rect((center-264,310,527,400))
+            
+        elif winningGoat == "musicalGoat":
+            newWinningGoat = "Musical Goat"
+            
+            musicalGoatVideo = VideoSprite(pygame.Rect(center-190,320,380,380), (os.path.join(sys.path[0], r"Videos\MusicalGoat.mp4")))
+            sprite_group = pygame.sprite.Group()
+            sprite_group.add(musicalGoatVideo)
+            videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\musicalgoat.wav"))
+            border = pygame.Rect((center-200,310,400,400))
+            
+        elif winningGoat == "boxerGoat":
+            newWinningGoat = "Boxer Goat"
+            
+            boxerGoatVideo = VideoSprite(pygame.Rect(center-338,320,676,380), (os.path.join(sys.path[0], r"Videos\BoxerGoat.mp4")))
+            sprite_group = pygame.sprite.Group()
+            sprite_group.add(boxerGoatVideo)
+            if soundsOn == True:
+                videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\boxergoat.wav"))
+            border = pygame.Rect((center-348,310,696,400))
+        break
+
+    stopCalculating = time() + random.randint(1,3) # Determines random amount of "calculating time"
+    stoppedCalculating = False
+    refreshOnce = False
+    endScreen = True
+    playOnce = False
+    
+    if arrowButtonPressed == True:
+        continue
+
+    while endScreen == True:
+        
+        screen.fill(navy)
+        
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:  
+                endScreen = False
+        
+        if(refreshOnce == True):
+            if time() < stopCalculating:
+                loading(580,350)
+            if time() > stopCalculating:
+                stoppedCalculating = True
+        
+        if stoppedCalculating == True:
+            winningGoatText = defFontLoading.render(newWinningGoat, True, white)
+            screen.blit(winningGoatText,(320,194))
+            screen.blit(youGot,(212,64))
+            
+            pygame.draw.rect(screen,lightBlue,border)
+            sprite_group.update()
+            sprite_group.draw(screen)
+               
+            retryRefresh = pygame.Rect(10,204,204,72)
+            exitRefresh = pygame.Rect(840,204,174,72)
+            
+            if retryButton.draw() == True:
+                pygame.draw.rect(screen,navy,retryRefresh)
+                screen.blit(retryButtonDownImg,(10,204))
+                pygame.display.update(retryRefresh)
+                sleep(.1)
+                screen.blit(retryButtonImg,(10,204))
+                pygame.display.update(retryRefresh)
+                sleep(.1)
+                print("Retry")
+                break
+            if exitButton.draw() == True:
+                pygame.draw.rect(screen,navy,exitRefresh)
+                screen.blit(exitButtonDownImg,(840,204))
+                pygame.display.update(exitRefresh)
+                sleep(.1)
+                screen.blit(exitButtonImg,(840,204))
+                pygame.display.update(exitRefresh)
+                sleep(.1)
+                pygame.quit()
+            
+            pygame.display.flip()
+            
+            if playOnce == False:
+                try:
+                    pygame.mixer.Sound.play(videoSound)
+                    playOnce = True
+                except:
+                    print("Exception: No Sound For Video")
+                    playOnce = True
+        
+        refreshOnce = True
+        
+        pygame.display.flip()

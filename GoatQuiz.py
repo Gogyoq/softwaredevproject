@@ -4,11 +4,11 @@
 # Description: A personality quiz that assigns you one of twelve goats at the end
 # Prerequesites: pygame
 
-import os, sys, subprocess
+import os, sys, subprocess, tkinter
 from random import randint
 from time import time, sleep
 
-try:
+try:               # Since pygame is not a preinstalled library, error checking added on initialization
     import pygame
 except:
     print("pygame Not Installed! Please run 'Install Pygame' batch file to install.")
@@ -16,16 +16,19 @@ except:
 
 pygame.init()
 
-# Enables all goat video sounds
-soundsOn = False
-
-# Various variables used for the pygame window are declared here
+soundsOn = False   # Enables sound for all goat videos
+ 
+# Pygame variable initialization:
 size = width, height = 1024, 768
 center = 512
 white = (255,255,255)
 lightBlue = (99,155,255)
 navy = (21,76,121)
 
+root = tkinter.Tk() # Checks if monitor resolution is too small to display quiz
+if root.winfo_screenwidth() < width or root.winfo_screenheight() < height: 
+    print("Monitor resolution is too small to properly proceed with quiz. Please be aware before proceeding.")
+    
 # Pygame window loading with width height and mouse variables
 clock = pygame.time.Clock()
 screen = pygame.display.set_mode(size)
@@ -33,8 +36,7 @@ width = screen.get_width()
 height = screen.get_height()
 pygame.display.set_caption("Goat Quiz")
 
-# Video Display Class
-# Credit to Kingsley for method
+# Video Display Class, credit to Kingsley for method
 # https://stackoverflow.com/questions/62870381/how-to-play-video-in-pygame-currently
 class VideoSprite( pygame.sprite.Sprite ):
     FFMPEG_BIN = (os.path.join(sys.path[0], r"ffmpeg\bin\ffmpeg"))  # Full path to ffmpeg executable
@@ -76,12 +78,11 @@ class VideoSprite( pygame.sprite.Sprite ):
 
 # <-- Main menu assets loading -->
 
-startSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\scream.wav")) # Used on quiz start
-clickSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\button.wav")) # Used whenever quiz button is clicked
+startSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\scream.wav"))          # Used on quiz start
+clickSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\button.wav"))          # Used whenever quiz button is clicked
 demolitionSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\demolition.wav")) # Used in easter egg
 
 defFont = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
-defFontQuestion = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 60)
 defFontLoading = pygame.font.Font(os.path.join(sys.path[0], r"Fonts\munro.ttf"), 80)
 
 startButtonImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\StartButton.png"), "r")
@@ -96,7 +97,7 @@ goatQuizTitle = pygame.transform.scale(goatQuizTitle, (544, 512))
 goatQuizTitleDown = pygame.image.load(os.path.join(sys.path[0], r"Sprites\GoatQuizTitleDown.png"), "r")
 goatQuizTitleDown = pygame.transform.scale(goatQuizTitleDown,(544,512))
 
-# Quiz buttons images initializatio
+# Quiz buttons images initializatiom
 button1 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button1.png"), "r")
 button1 = pygame.transform.scale(button1,(80,80))
 button2 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Button2.png"), "r")
@@ -140,31 +141,22 @@ loopOnce = 1
 #Loading icon images
 loading1 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading1.png"), "r")
 loading1 = pygame.transform.scale(loading1,(192,64))
-
 loading2 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading2.png"), "r")
 loading2 = pygame.transform.scale(loading2,(192,64))
-
 loading3 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading3.png"), "r")
 loading3 = pygame.transform.scale(loading3,(192,64))
-
 loading4 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading4.png"), "r")
 loading4 = pygame.transform.scale(loading4,(192,64))
-
 loading5 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading5.png"), "r")
 loading5 = pygame.transform.scale(loading5,(192,64))
-
 loading6 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading6.png"), "r")
 loading6 = pygame.transform.scale(loading6,(192,64))
-
 loading7 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading7.png"), "r")
 loading7 = pygame.transform.scale(loading7,(192,64))
-
 loading8 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading8.png"), "r")
 loading8 = pygame.transform.scale(loading8,(192,64))
-
 loading9 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading9.png"), "r")
 loading9 = pygame.transform.scale(loading9,(192,64))
-
 loading10 = pygame.image.load(os.path.join(sys.path[0], r"Sprites\Loading\loading10.png"), "r")
 loading10 = pygame.transform.scale(loading10,(192,64))
 
@@ -174,7 +166,6 @@ youGot = pygame.transform.scale(youGot,(600,120))
 
 # Cheat Menu Buttons
 cheatButtonImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\CheatButton.png"), "r")
-
 cheatButtonDownImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\CheatButtonDown.png"), "r")
 
 backButtonImg = pygame.image.load(os.path.join(sys.path[0], r"Sprites\BackButton.png"), "r")
@@ -273,7 +264,8 @@ ansbutton4 = Button(50,470,button4)
 ansbutton5 = Button(50,560,button5)
 ansbutton6 = Button(50,650,button6)
 titleButton = Button(240,64,goatQuizTitle)
-#Cheat Menu Buttons
+
+# Cheat menu buttons
 showCheat = Button(10,746,blank)
 cheatButton = Button(10,746,cheatButtonImg)
 backButton = Button(10,10,backButtonImg)
@@ -1204,7 +1196,6 @@ while running == True:
         
     print(goatDictionary)
     
-    # max_value = max(variables.values())
     winningGoat = max(goatDictionary, key=goatDictionary.get)
 
     print(winningGoat)

@@ -16,26 +16,22 @@ except:
 
 pygame.init()
 
-#TURN ALL GOAT VIDEO SOUNDS ON HERE BY CHANGING BOOLEAN TO TRUE
-soundsON = False
+# Enables all goat video sounds
+soundsOn = False
 
 # Various variables used for the pygame window are declared here
 size = width, height = 1024, 768
 center = 512
 white = (255,255,255)
-gray = (211,211,211)
-darkGray = (105,105,105)
-blue = (0,0,255)
 lightBlue = (99,155,255)
-black = (0,0,0)
 navy = (21,76,121)
 
 # Pygame window loading with width height and mouse variables
-screen = pygame.display.set_mode(size)
 clock = pygame.time.Clock()
-pygame.display.set_caption("Goat Quiz")
+screen = pygame.display.set_mode(size)
 width = screen.get_width()
 height = screen.get_height()
+pygame.display.set_caption("Goat Quiz")
 
 # Video Display Class
 # Credit to Kingsley for method
@@ -1219,7 +1215,7 @@ while running == True:
         happyGoatVideo = VideoSprite(pygame.Rect(center-254,320,507,380), (os.path.join(sys.path[0], r"Videos\HappyGoat.mp4")))
         sprite_group = pygame.sprite.Group()
         sprite_group.add(happyGoatVideo)
-        if soundsON == True:
+        if soundsOn == True:
             videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\happygoat.wav"))
         border = pygame.Rect((center-264,310,527,400))
         
@@ -1256,7 +1252,7 @@ while running == True:
         gamerGoatVideo = VideoSprite(pygame.Rect(center-187,320,374,380), (os.path.join(sys.path[0], r"Videos\GamerGoat.mp4")))
         sprite_group = pygame.sprite.Group()
         sprite_group.add(gamerGoatVideo)
-        if soundsON == True:
+        if soundsOn == True:
             videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\gamergoat.wav"))
         border = pygame.Rect((center-197,310,394,400))
         
@@ -1275,7 +1271,7 @@ while running == True:
         healthyGoatVideo = VideoSprite(pygame.Rect(center-338,320,676,380), (os.path.join(sys.path[0], r"Videos\HealthyGoat.mp4")))
         sprite_group = pygame.sprite.Group()
         sprite_group.add(healthyGoatVideo)
-        if soundsON == True:
+        if soundsOn == True:
             videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\healthygoat.wav"))
         border = pygame.Rect((center-348,310,696,400))
         
@@ -1285,7 +1281,7 @@ while running == True:
         spiderGoatVideo = VideoSprite(pygame.Rect(center-152,320,304,380), (os.path.join(sys.path[0], r"Videos\SpiderGoat.mp4")))
         sprite_group = pygame.sprite.Group()
         sprite_group.add(spiderGoatVideo)
-        if soundsON == True:
+        if soundsOn == True:
             videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\spidergoat.wav"))
         border = pygame.Rect((center-162,310,324,400))
         
@@ -1304,7 +1300,7 @@ while running == True:
         armyGoatVideo = VideoSprite(pygame.Rect(center-254,320,507,380), (os.path.join(sys.path[0], r"Videos\ArmyGoat.mp4")))
         sprite_group = pygame.sprite.Group()
         sprite_group.add(armyGoatVideo)
-        if soundsON == True:
+        if soundsOn == True:
             videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\armygoat.wav"))
         border = pygame.Rect((center-264,310,527,400))
         
@@ -1323,7 +1319,7 @@ while running == True:
         boxerGoatVideo = VideoSprite(pygame.Rect(center-338,320,676,380), (os.path.join(sys.path[0], r"Videos\BoxerGoat.mp4")))
         sprite_group = pygame.sprite.Group()
         sprite_group.add(boxerGoatVideo)
-        if soundsON == True:
+        if soundsOn == True:
             videoSound = pygame.mixer.Sound(os.path.join(sys.path[0], r"Sounds\VideoSounds\boxergoat.wav"))
         border = pygame.Rect((center-348,310,696,400))
     break
